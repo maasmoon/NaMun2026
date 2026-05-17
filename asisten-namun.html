@@ -269,13 +269,43 @@ function sendChip(btn) {
 }
 
 function formatResponse(text) {
+  // 1. Amankan karakter HTML khusus terlebih dahulu (XSS protection)
   let escaped = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
+  const savedLinks = [];
+
+  // 2. Ekstrak tag link <a> buatan AI yang sudah ter-escape (&lt;a ... &gt;) agar tidak rusak
+  escaped = escaped.replace(/&lt;a\s+[^&]*href=["']([^"']+)["'][^&]*&gt;([\s\S]*?)&lt;\/a&gt;/gi, function(match, url, linkText) {
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`);
+    return placeholder;
+  });
+
+  // 3. Ekstrak format markdown link [Text](URL) yang umum dikeluarkan AI
+  escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+    return placeholder;
+  });
+
+  // 4. Ekstrak link text URL biasa yang mandiri agar otomatis clickable
+  escaped = escaped.replace(/(https?:\/\/[^\s\)\],;]+)/g, function(match, url) {
+    if (url.startsWith('___LINK_PH_')) return match; // Lewati jika itu placeholder
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
+    return placeholder;
+  });
+
+  // 5. Ubah format tulisan tebal **text** menjadi <strong>
   escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
+  // 6. Kelola spasi, baris baru, dan list bullet
   const lines = escaped.split('\n');
   let inList = false;
   let formattedHtml = '';
@@ -304,10 +334,10 @@ function formatResponse(text) {
     formattedHtml += '</ul>';
   }
 
-  const urlRegex = /(https?:\/\/[^\s<]+)/g;
-  formattedHtml = formattedHtml.replace(urlRegex, function(url) {
-    return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
-  });
+  // 7. Kembalikan placeholder link menjadi elemen HTML asli yang aman
+  for (let i = 0; i < savedLinks.length; i++) {
+    formattedHtml = formattedHtml.replace(`___LINK_PH_${i}___`, savedLinks[i]);
+  }
 
   return formattedHtml;
 }
