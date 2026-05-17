@@ -871,7 +871,22 @@
 
   /* ── Gallery placeholders ── */
   (function(){
-    const grid=document.getElementById('gallery-grid');
+    const galleryImages = [
+      const galleryImages = [
+        "gallery/gallery-01.heic",
+        "gallery/gallery-02.JPG",
+        "gallery/gallery-03.JPG",
+        "gallery/gallery-04.JPG",
+        "gallery/gallery-05.jpg",
+        "gallery/gallery-06.JPG",
+        "gallery/gallery-07.heic",
+        "gallery/gallery-08.jpg",
+        "gallery/gallery-09.heic",
+        "gallery/gallery-10.jpg",
+        "gallery/gallery-11.jpg",
+        "gallery/gallery-12.jpg"
+    ];
+      const grid=document.getElementById('gallery-grid');
     for(let i=1;i<=12;i++){
       const n=String(i).padStart(2,'0'),src=`./assets/gallery-${n}.jpg`;
       const item=document.createElement('div');
@@ -879,13 +894,7 @@
       item.onclick=()=>openLightbox(src);
       item.innerHTML=`
         <img src="${src}" alt="Foto galeri ${n}" onerror="this.style.display='none'">
-        <div class="gallery-ph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          gallery-${n}.jpg
-        </div>`;
+      `;
       grid.appendChild(item);
     }
   })();
