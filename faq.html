@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — #NaMun2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F0F5FF;--surface:#E4EDFF;--surface-2:#D0DEFF;--white:#fff;
+      --blue:#4A6080;--blue-deep:#2D4060;--blue-darkest:#18273F;
+      --blue-pale:#A8BCCE;--blue-light:#7B9BB8;
+      --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#FDF6DF;
+      --green:#3D7A50;--green-pale:#E8F5EE;
+      --text:#0F1E30;--text-muted:#3A5068;--text-faint:#7B9BB8;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost','Helvetica Neue',sans-serif;
+      --r-sm:4px;--r-md:8px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
+      --ease:280ms cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100dvh}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .page-header{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      color:white;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.75rem;
+      position:sticky;top:0;z-index:100;
+    }
+    .back-link{
+      color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;
+      display:flex;align-items:center;gap:.3rem;transition:color var(--ease);
+      white-space:nowrap;
+    }
+    .back-link:hover{color:white}
+    .page-header-title{
+      font-family:var(--font-display);font-size:1.35rem;font-weight:300;
+      flex:1;text-align:center;
+    }
+    .page-header-spacer{width:60px;flex-shrink:0}
+
+    .container{max-width:720px;margin-inline:auto;padding:2rem 1rem 4rem}
+    .section-intro{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;text-align:center;max-width:540px;margin-inline:auto}
+
+    .section-head{
+      display:flex;align-items:center;gap:.6rem;
+      font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--blue);margin:2.5rem 0 1rem;font-family:var(--font-body);
+    }
+    .section-head::after{content:'';flex:1;height:1px;background:var(--blue-pale)}
+
+    .btn-map{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border:1.5px solid var(--blue);
+      border-radius:var(--r-full);color:var(--blue);
+      font-size:.7rem;font-weight:500;transition:all var(--ease);
+      text-decoration:none;flex-shrink:0;
+    }
+    .btn-map:hover{background:var(--blue);color:white}
+    .btn-map svg{width:12px;height:12px}
+
+    footer{
+      text-align:center;padding:1.5rem 1rem;
+      font-size:.68rem;color:var(--text-faint);
+      border-top:1px solid var(--blue-pale);margin-top:2rem;
+    }
+    footer a{color:var(--blue);text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="page-header">
+  <a class="back-link" href="./index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Undangan
+  </a>
+  <h1 class="page-header-title">❓ FAQ</h1>
+  <div class="page-header-spacer"></div>
+</div>
+
+<style>
+  .faq-item{
+    background:var(--white);border-radius:var(--r-lg);margin-bottom:.7rem;
+    border:1.5px solid transparent;overflow:hidden;
+    box-shadow:0 2px 8px rgba(15,30,60,.05);
+    transition:border-color var(--ease);
+  }
+  .faq-item.open{border-color:var(--blue-pale)}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;
+    padding:1rem 1.25rem;cursor:pointer;
+    display:flex;align-items:flex-start;gap:.75rem;
+    font-family:var(--font-body);font-size:.9rem;font-weight:500;
+    color:var(--text);transition:color var(--ease);line-height:1.5;
+  }
+  .faq-q:hover{color:var(--blue-deep)}
+  .faq-icon{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--surface);flex-shrink:0;margin-top:.1rem;
+    display:flex;align-items:center;justify-content:center;font-size:.8rem;
+  }
+  .faq-item.open .faq-icon{background:var(--blue-deep);color:white}
+  .faq-chevron{
+    margin-left:auto;flex-shrink:0;transition:transform var(--ease);
+    color:var(--text-faint);
+  }
+  .faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--blue)}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .25s ease;
+    font-size:.85rem;color:var(--text-muted);line-height:1.8;padding:0 1.25rem 0 3.3rem;
+  }
+  .faq-item.open .faq-a{max-height:400px;padding:0 1.25rem 1rem 3.3rem}
+</style>
+
+<div class="container">
+  <p style="font-size:.88rem;color:var(--text-muted);line-height:1.8;text-align:center;max-width:500px;margin:1.5rem auto 2rem">
+    Ada yang ingin kamu pastikan sebelum hari H? Cek dulu daftarnya di bawah — atau tanya langsung ke Asisten NaMun ya! 💙
+  </p>
+
+  <div class="section-head">🎪 Acara</div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">🌿</span>
+      Apa tema acara pernikahan ini?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Temanya adalah <strong>Garden Party Outdoor</strong> — baik akad maupun resepsi diselenggarakan di luar ruangan. Akan tersedia area semi-outdoor untuk berteduh dari terik matahari, serta ruang indoor dari Café Rumah Gelati.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">🕐</span>
+      Jam berapa sebaiknya saya datang?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Kami mengundangmu hadir sejak <strong>Akad pukul 08.00 WIB</strong> agar bisa menyaksikan momen penting kami dengan khidmat. Jika melewatkan sesi akad, kami sarankan hadir dari awal Resepsi pukul <strong>09.30 WIB</strong> hingga 11.30 WIB.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">💍</span>
+      Bolehkah saya menghadiri acara Akad?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Boleh banget! Kami mengundangmu untuk hadir di kedua acara — akad dan resepsi. Semakin ramai semakin meriah 💙</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">👨‍👩‍👧</span>
+      Bolehkah saya membawa pasangan dan keluarga?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Boleh banget! Silakan konfirmasi jumlah orang dewasa dan anak-anak yang akan kamu ajak di halaman depan undangan digital ya.</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">🧒</span>
+      Apakah ada area bermain untuk anak-anak?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Ada! Kami menyediakan <strong>mini playground</strong> di area venue selama acara berlangsung — jadi si kecil juga bisa menikmati hari istimewa ini.</div>
+  </div>
+
+  <div class="section-head">👗 Dress Code &amp; Parkir</div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">👔</span>
+      Pakaian warna apa yang disarankan?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Kami menyarankan pakaian yang <strong>nyaman untuk kegiatan outdoor</strong> dengan warna pilihan kamu sendiri. Sebagai referensi, warna dekorasi tematik kami adalah <strong>biru muda dan royal blue</strong>, sementara pengantin mengenakan putih. Yang terpenting: kamu nyaman beraktivitas di luar ruangan!</div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">🚗</span>
+      Apakah ada tempat parkir?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Tersedia tempat parkir yang cukup luas dari pihak Rumah Gelati. Kamu akan dibantu oleh petugas keamanan untuk pengaturan parkir — jadi nggak perlu khawatir.</div>
+  </div>
+
+  <div class="section-head">🎵 Lain-Lain</div>
+
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">
+      <span class="faq-icon">🎤</span>
+      Bisakah saya membawakan persembahan lagu?
+      <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-a">Dengan senang hati! Namun mohon <strong>informasikan terlebih dahulu</strong> kepada kami sebelum hari H agar bisa dipersiapkan dengan baik — mulai dari sound system hingga slot waktu penampilan.</div>
+  </div>
+
+  <div style="margin-top:2rem;background:var(--surface);border-radius:var(--r-lg);padding:1.25rem;text-align:center">
+    <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:.75rem">Masih ada pertanyaan lain?</p>
+    <a href="./asisten-namun.html" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;background:var(--blue-deep);color:white;border-radius:var(--r-full);font-size:.82rem;font-weight:500;text-decoration:none;transition:background 280ms">
+      ✨ Tanya Asisten NaMun
+    </a>
+  </div>
+</div>
+
+<script>
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html">#NaMun2026</a>
+</footer>
+</body>
+</html>
