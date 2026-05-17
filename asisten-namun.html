@@ -369,7 +369,7 @@ async function sendMessage() {
 
   // Decide endpoint: uses proxy function '/api/chat' if apiKey is empty
   const apiEndpoint = apiKey 
-    ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`
+    ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`
     : '/api/chat';
 
   // Request payload structure formatted correctly for Gemini
@@ -383,6 +383,7 @@ async function sendMessage() {
   let retries = 0;
   let success = false;
   let responseData;
+  let lastError = null;
 
   while (retries < 5 && !success) {
     try {
@@ -396,10 +397,13 @@ async function sendMessage() {
         responseData = await response.json();
         success = true;
       } else {
+        const errorText = await response.text();
+        lastError = `Status ${response.status}: ${errorText || 'No error details provided'}`;
         retries++;
         await new Promise(r => setTimeout(r, Math.pow(2, retries) * 1000));
       }
     } catch (e) {
+      lastError = e.message;
       retries++;
       await new Promise(r => setTimeout(r, Math.pow(2, retries) * 1000));
     }
@@ -414,7 +418,7 @@ async function sendMessage() {
     conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
     addBotMessage(reply);
   } else {
-    addBotMessage('Maaf, sepertinya koneksi kita sedang terputus atau terjadi gangguan jaringan. Silakan coba kirim pesanmu lagi ya! 🙏');
+    addBotMessage(`Maaf, sepertinya asisten mengalami masalah koneksi saat menghubungi server.<br><br><small style="opacity: 0.6; font-size: 0.75rem; display: block; border-top: 1px dashed rgba(0,0,0,0.15); padding-top: 0.5rem; margin-top: 0.5rem;"><strong>Debug info:</strong> ${lastError || 'Unknown connection error'}</small>`);
   }
 }
 </script>
