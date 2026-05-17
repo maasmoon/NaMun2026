@@ -73,39 +73,46 @@
     ================================================================ */
     #opening-screen{
       position:fixed;inset:0;z-index:1000;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      padding:var(--sp-8);text-align:center;
+      display:flex;
+      flex-direction:row;
+      padding:0;
       background:linear-gradient(160deg,#101C2E 0%,#18273F 28%,#2D4060 60%,#4A6080 100%);
       transition:opacity .9s ease,visibility .9s ease;overflow:hidden;
     }
     #opening-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
 
-    /* animated blobs */
+    .opening-left {
+      flex:1;
+      min-height:100%;
+      overflow:hidden;
+      display:flex;
+    }
+    .opening-left img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+
+    .opening-right {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:var(--sp-8);
+      text-align:center;
+      position: relative;
+      background:linear-gradient(160deg,#101C2E 0%,#18273F 28%,#2D4060 60%,#4A6080 100%);
+    }
+
+    /* animated blobs on cover */
     .ob{position:absolute;border-radius:50% 40% 60% 40%;opacity:.10;background:var(--white);pointer-events:none}
     .ob1{width:320px;height:320px;top:-70px;left:-90px;animation:drift 18s ease-in-out infinite}
     .ob2{width:220px;height:220px;bottom:30px;right:-60px;animation:drift 14s ease-in-out infinite reverse}
     .ob3{width:140px;height:140px;top:42%;left:4%;animation:drift 22s ease-in-out infinite 4s}
     @keyframes drift{0%,100%{transform:translate(0,0) rotate(0deg)}50%{transform:translate(18px,-14px) rotate(14deg)}}
-
-    /* Print-style corner ornament — double-line arabesque inspired */
-    .oc{position:absolute;width:200px;height:200px;pointer-events:none;opacity:.38}
-    .oc.tl{top:0;left:0}
-    .oc.tr{top:0;right:0;transform:scaleX(-1)}
-    .oc.bl{bottom:0;left:0;transform:scaleY(-1)}
-    .oc.br{bottom:0;right:0;transform:scale(-1)}
-
-    /* DOODLE IMAGE PLACEHOLDER (opening) */
-    .doodle-wrap{
-      width:200px;height:220px;margin:0 auto var(--sp-6);
-      border-radius:var(--r-lg);overflow:hidden;
-      background:rgba(255,255,255,.08);
-      border:1.5px dashed rgba(255,255,255,.3);
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      position:relative;z-index:1;
-    }
-    .doodle-wrap img{width:100%;height:100%;object-fit:contain}
-    .doodle-ph{color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:.05em;text-align:center;padding:var(--sp-4)}
-    .doodle-ph svg{width:44px;height:44px;margin:0 auto var(--sp-2);display:block;opacity:.5}
 
     .opening-sup{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:var(--sp-4);font-family:var(--font-body)}
     .opening-names{font-family:var(--font-display);font-size:clamp(2.8rem,9vw,5.5rem);font-weight:300;color:var(--white);line-height:1;position:relative;z-index:1}
@@ -119,9 +126,40 @@
       border-radius:var(--r-full);color:var(--white);
       font-size:.73rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
       transition:all var(--ease);background:rgba(255,255,255,.07);position:relative;z-index:1;
+      box-shadow: 0 4px 12px rgba(30, 59, 138, 0.08);
     }
     .btn-open:hover{background:rgba(255,255,255,.95);color:var(--blue-darkest);border-color:transparent}
     .btn-open svg{width:15px;height:15px}
+
+    /* Cover page two-column split responsive bottom-sheet slide up */
+    @media(max-width:600px){
+      #opening-screen { 
+        flex-direction: column !important; 
+        overflow-y: auto !important;
+        scroll-behavior: smooth;
+        display: block !important;
+      }
+      .opening-left { 
+        height: 50vh !important; 
+        width: 100% !important; 
+        position: sticky !important;
+        top: 0;
+        z-index: 1;
+        flex: none !important;
+      }
+      .opening-right { 
+        min-height: 55vh !important;
+        width: 100% !important; 
+        background: linear-gradient(160deg,#101C2E 0%,#18273F 28%,#2D4060 60%,#4A6080 100%) !important;
+        border-radius: 24px 24px 0 0 !important;
+        margin-top: -30px !important;
+        position: relative !important;
+        z-index: 2;
+        box-shadow: 0 -12px 30px rgba(15, 30, 48, 0.15);
+        padding: var(--sp-8) var(--sp-4) var(--sp-12) !important;
+        flex: none !important;
+      }
+    }
 
     /* ================================================================
        MAIN CONTENT
@@ -540,9 +578,285 @@
   
     /* Cover page two-column split responsive */
     @media(max-width:600px){
-      #opening-screen { flex-direction: column !important; }
-      #opening-screen > div:first-child { max-height: 45vh; min-height: 0; flex: none !important; width: 100%; }
-      #opening-screen > div:last-child { flex: 1 !important; width: 100%; }
+      #opening-screen { 
+        flex-direction: column !important; 
+        overflow-y: auto !important;
+        scroll-behavior: smooth;
+        display: block !important;
+      }
+      .opening-left { 
+        height: 50vh !important; 
+        width: 100% !important; 
+        position: sticky !important;
+        top: 0;
+        z-index: 1;
+        flex: none !important;
+      }
+      .opening-right { 
+        min-height: 55vh !important;
+        width: 100% !important; 
+        background: linear-gradient(160deg,#101C2E 0%,#18273F 28%,#2D4060 60%,#4A6080 100%) !important;
+        border-radius: 24px 24px 0 0 !important;
+        margin-top: -30px !important;
+        position: relative !important;
+        z-index: 2;
+        box-shadow: 0 -12px 30px rgba(15, 30, 48, 0.15);
+        padding: var(--sp-8) var(--sp-4) var(--sp-12) !important;
+        flex: none !important;
+      }
+    }
+
+    /* ================================================================
+       FLOATING CHATBOT AI WIDGET
+    ================================================================ */
+    #namun-chatbot-container {
+      position: fixed;
+      bottom: var(--sp-6);
+      right: var(--sp-6);
+      z-index: 999;
+      font-family: var(--font-body);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .chatbot-toggle-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--r-full);
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(15, 30, 48, 0.3);
+      transition: transform var(--ease), background var(--ease);
+      position: relative;
+      z-index: 999;
+    }
+    .chatbot-toggle-btn:hover {
+      transform: scale(1.08);
+      background: var(--blue-darkest);
+    }
+    .chatbot-toggle-btn .badge-dot {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border: 2px solid var(--white);
+      border-radius: 50%;
+      animation: pulse-gold 2s infinite;
+    }
+    @keyframes pulse-gold {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(201, 168, 76, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+    }
+    .chatbot-toggle-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+    .chatbot-window {
+      position: absolute;
+      bottom: 65px;
+      right: 0;
+      width: 350px;
+      max-width: calc(100vw - 40px);
+      height: 480px;
+      max-height: calc(100vh - 120px);
+      background: var(--white);
+      border-radius: var(--r-lg);
+      box-shadow: 0 8px 32px rgba(15, 30, 48, 0.25);
+      border: 1.5px solid rgba(184, 208, 248, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      pointer-events: none;
+      transition: opacity var(--ease), transform var(--ease);
+      z-index: 1000;
+    }
+    .chatbot-window.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    .chatbot-header {
+      background: linear-gradient(135deg, var(--blue-darkest), var(--blue-deep));
+      color: var(--white);
+      padding: var(--sp-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .chatbot-header-info {
+      text-align: left;
+    }
+    .chatbot-header-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .chatbot-header-subtitle {
+      font-size: 0.68rem;
+      color: var(--blue-pale);
+      letter-spacing: 0.05em;
+    }
+    .chatbot-close-btn {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.5rem;
+      line-height: 1;
+      transition: color var(--ease);
+    }
+    .chatbot-close-btn:hover {
+      color: var(--white);
+    }
+    .chatbot-messages {
+      flex: 1;
+      padding: var(--sp-4);
+      overflow-y: auto;
+      background: #F7FAFF;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .chat-msg {
+      max-width: 80%;
+      padding: var(--sp-3) var(--sp-4);
+      border-radius: var(--r-md);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      text-align: left;
+      word-break: break-word;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: var(--surface);
+      color: var(--blue-darkest);
+      border-bottom-left-radius: var(--r-sm);
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--blue-deep);
+      color: var(--white);
+      border-bottom-right-radius: var(--r-sm);
+    }
+    .chat-typing-indicator {
+      align-self: flex-start;
+      background: var(--surface);
+      padding: var(--sp-3) var(--sp-4);
+      border-radius: var(--r-md);
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    .chat-typing-indicator span {
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: typing-bubble 1.4s infinite ease-in-out;
+    }
+    .chat-typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-bubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .chatbot-input-area {
+      padding: var(--sp-3);
+      background: var(--white);
+      border-top: 1.5px solid rgba(184, 208, 248, 0.4);
+      display: flex;
+      gap: var(--sp-2);
+    }
+    .chatbot-input {
+      flex: 1;
+      border: 1.5px solid rgba(184, 208, 248, 0.6);
+      border-radius: var(--r-md);
+      padding: var(--sp-2) var(--sp-3);
+      font-size: 0.85rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--ease);
+    }
+    .chatbot-input:focus {
+      border-color: var(--blue);
+    }
+    .chatbot-send-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--ease);
+    }
+    .chatbot-send-btn:hover {
+      background: var(--blue-deep);
+    }
+    .chatbot-send-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Proactive Greeting Bubble Styles */
+    .chatbot-proactive-bubble {
+      position: absolute;
+      right: 64px;
+      top: 50%;
+      width: 220px;
+      background: var(--white);
+      border: 1.5px solid rgba(184, 208, 248, 0.8);
+      border-radius: var(--r-md);
+      box-shadow: 0 4px 15px rgba(15, 30, 48, 0.15);
+      padding: 10px 28px 10px 12px;
+      font-size: 0.78rem;
+      color: var(--blue-darkest);
+      line-height: 1.4;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-50%) scale(0.8) translateX(15px);
+      transform-origin: right center;
+      transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 998;
+      white-space: normal;
+      text-align: left;
+    }
+    .chatbot-proactive-bubble.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%) scale(1) translateX(0);
+    }
+    .proactive-close {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-faint);
+      font-size: 1.15rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color var(--ease);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .proactive-close:hover {
+      color: var(--blue-deep);
     }
   </style>
 </head>
@@ -554,14 +868,18 @@
 <div id="opening-screen" role="dialog" aria-modal="true" aria-label="Wedding Invitation Cover" style="flex-direction:row;padding:0;overflow:hidden;">
 
   <!-- Left column: full cover sketch image -->
-  <div style="flex:1;min-height:100%;overflow:hidden;display:flex;">
+  <div class="opening-left">
     <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/CoverSketch.png"
-         alt="Cover illustration"
-         style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+         alt="Cover illustration">
   </div>
 
   <!-- Right column: invitation text (no ornaments) -->
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--sp-8);text-align:center;">
+  <div class="opening-right">
+    <!-- Animated background bubbles -->
+    <div class="ob ob1" aria-hidden="true"></div>
+    <div class="ob ob2" aria-hidden="true"></div>
+    <div class="ob ob3" aria-hidden="true"></div>
+
     <p class="opening-sup">— Undangan Pernikahan —</p>
     <div class="opening-names">
       Nadia
@@ -1036,7 +1354,7 @@
     <!-- Messages Body -->
     <div class="chatbot-messages" id="chatbot-messages">
       <!-- Greeting Message -->
-      <div class="chat-msg bot">
+      <div class="chat-msg bot" id="chat-greeting-msg">
         Apa Anda ada pertanyaan terkait acara pernikahan NaMun?
       </div>
     </div>
@@ -1066,35 +1384,78 @@
      JAVASCRIPT
 ================================================================ -->
 <script>
-  /* ── Guest name from ?to= ── */
+  /* ── Safe Storage Wrapper (Prevents sandboxed iframe localStorage SecurityErrors) ── */
+  const SafeStorage = {
+    getItem(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch (e) {
+        return null;
+      }
+    },
+    setItem(key, value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {}
+    }
+  };
+
+  /* ── Guest name parsing from ?to= ── */
+  let guestName = "Tamu Undangan";
   (function(){
     const p=new URLSearchParams(window.location.search),name=p.get('to');
     const el=document.getElementById('guest-name-cover');
-    if(el&&name)el.textContent=decodeURIComponent(name);
+    if(name) {
+      guestName = decodeURIComponent(name);
+      if(el) el.textContent = guestName;
+    }
   })();
 
   /* ── Open invitation ── */
   function openInvitation(){
     document.getElementById('opening-screen').classList.add('hidden');
     document.getElementById('main-content').classList.add('visible');
+    
+    // Reset view position straight to the absolute top of the main page
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
     setTimeout(checkReveals,120);
-    document.getElementById('bg-music').play()
-      .then(()=>{
+
+    // Play HTML5 background music safely with modern browser promise support checks
+    const bgMusic = document.getElementById('bg-music');
+    if (bgMusic) {
+      const playPromise = bgMusic.play();
+      if (playPromise !== undefined && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          document.getElementById('music-btn').classList.add('playing');
+          updateMusicIcon(true);
+        }).catch(() => {});
+      } else {
         document.getElementById('music-btn').classList.add('playing');
         updateMusicIcon(true);
-      })
-      .catch(()=>{});
+      }
+    }
 
-    // Proactively greet users after 3.5 seconds
+    // Proactively greet users after exactly 5 seconds
     setTimeout(() => {
       const chatWindow = document.getElementById('chatbot-window');
       const proactiveBubble = document.getElementById('chatbot-proactive-bubble');
-      if (chatWindow && !chatWindow.classList.contains('open') && !localStorage.getItem('namun_proactive_dismissed')) {
+      if (chatWindow && !chatWindow.classList.contains('open') && !SafeStorage.getItem('namun_proactive_dismissed')) {
+        const bubbleSpan = proactiveBubble.querySelector('span');
+        if (bubbleSpan) {
+          bubbleSpan.textContent = `Hi ${guestName}, apa kamu ada pertanyaan mengenai acara pernikahan Nadia & Munjin?`;
+        }
+        const greetingMsg = document.getElementById('chat-greeting-msg');
+        if (greetingMsg) {
+          greetingMsg.textContent = `Hi ${guestName}, apa kamu ada pertanyaan mengenai acara pernikahan Nadia & Munjin?`;
+        }
         if (proactiveBubble) {
           proactiveBubble.classList.add('show');
         }
       }
-    }, 3500);
+    }, 5000);
   }
 
   /* ── Scroll reveal ── */
@@ -1194,7 +1555,7 @@
         if (res.status === 'ok') renderWishes(res.data);
       })
       .catch(() => {
-        const local = JSON.parse(localStorage.getItem('namun_wishes') || '[]');
+        const local = JSON.parse(SafeStorage.getItem('namun_wishes') || '[]');
         renderWishes([...local].reverse());
       });
   }
@@ -1262,10 +1623,16 @@
   function toggleMusic(){
     const audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');
     if(audio.paused){
-      audio.play().then(()=>{
+      const playPromise = audio.play();
+      if (playPromise !== undefined && typeof playPromise.then === 'function') {
+        playPromise.then(()=>{
+          btn.classList.add('playing');
+          updateMusicIcon(true);
+        }).catch(()=>{});
+      } else {
         btn.classList.add('playing');
         updateMusicIcon(true);
-      }).catch(()=>{});
+      }
     }
     else{
       audio.pause();
@@ -1308,7 +1675,7 @@
     - Mempelai Pria: Ahmad Munjin, putra dari Bapak Nur Wachid & Ibu Siti Rofiah.
     - Tanggal Pernikahan: Minggu, 07 Juni 2026.
     - Lokasi Acara: House of Gelati, Jl. Arif Rahman Hakim No. 2B, Jagaraya III, Kec. Sukarame, Kota Bandar Lampung, Lampung 35122.
-    - Waktu Akad Nikah: Pukul 08.00 – 09.00 WIB.
+    - Waktu Akad Nikah: Pukul 08.00 – 09.30 WIB.
     - Waktu Resepsi Pernikahan: Pukul 09.30 – 11.30 WIB.
     - Batas Konfirmasi RSVP Kehadiran: Paling lambat tanggal 31 Mei 2026.
     - Dress Code / Aturan Busana: Bertema "Outdoor Garden". Silakan mengenakan pakaian yang nyaman untuk ruangan luar (outdoor) dengan pilihan warna yang bebas dan sopan.
@@ -1344,7 +1711,7 @@
     if (proactiveBubble) {
       proactiveBubble.classList.remove('show');
     }
-    localStorage.setItem('namun_proactive_dismissed', 'true');
+    SafeStorage.setItem('namun_proactive_dismissed', 'true');
   }
 
   // Helper Exponential Backoff fetch
@@ -1381,8 +1748,8 @@
     // Prepare history payload for API
     chatHistory.push({ role: "user", parts: [{ text: text }] });
 
-    const apiKey = ""; // Runtime automatically injected by preview environment
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+    const apiKey = "AIzaSyC_6SYyAc9V3H-nZCtj_bAxsTRJsakBwo8"; 
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
     const payload = {
       contents: chatHistory,
