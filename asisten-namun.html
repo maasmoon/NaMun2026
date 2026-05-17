@@ -246,6 +246,8 @@ Aturan Tambahan:
 `;
 
 const apiKey = ""; // Disalin dari Google AI Studio jika ingin direct-request client-side, kosongkan jika menggunakan serverless proxy Option A.
+const vercelProxyUrl = ""; // OPSIONAL: Jika website di-host di GitHub Pages tapi API di Vercel, masukkan URL lengkap Vercel di sini (misal: "https://project-nama-kamu.vercel.app/api/chat")
+
 let conversationHistory = [];
 
 function handleKey(e) {
@@ -367,10 +369,13 @@ async function sendMessage() {
   // Push user state to context history
   conversationHistory.push({ role: 'user', parts: [{ text: text }] });
 
-  // Decide endpoint: uses proxy function '/api/chat' if apiKey is empty
-  const apiEndpoint = apiKey 
-    ? `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`
-    : '/api/chat';
+  // Decide endpoint
+  let apiEndpoint = '/api/chat';
+  if (apiKey) {
+    apiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  } else if (vercelProxyUrl) {
+    apiEndpoint = vercelProxyUrl;
+  }
 
   // Request payload structure formatted correctly for Gemini
   const payload = {
@@ -399,6 +404,12 @@ async function sendMessage() {
       } else {
         const errorText = await response.text();
         lastError = `Status ${response.status}: ${errorText || 'No error details provided'}`;
+        
+        // If it's a fatal setup error (like 404, 500, or 403), stop retrying immediately!
+        if (response.status === 404 || response.status === 500 || response.status === 403 || response.status === 400) {
+          break;
+        }
+        
         retries++;
         await new Promise(r => setTimeout(r, Math.pow(2, retries) * 1000));
       }
