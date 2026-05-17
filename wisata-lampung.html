@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wisata Lampung — #NaMun2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F0F5FF;--surface:#E4EDFF;--surface-2:#D0DEFF;--white:#fff;
+      --blue:#4A6080;--blue-deep:#2D4060;--blue-darkest:#18273F;
+      --blue-pale:#A8BCCE;--blue-light:#7B9BB8;
+      --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#FDF6DF;
+      --green:#3D7A50;--green-pale:#E8F5EE;
+      --text:#0F1E30;--text-muted:#3A5068;--text-faint:#7B9BB8;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost','Helvetica Neue',sans-serif;
+      --r-sm:4px;--r-md:8px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
+      --ease:280ms cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100dvh}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .page-header{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      color:white;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.75rem;
+      position:sticky;top:0;z-index:100;
+    }
+    .back-link{
+      color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;
+      display:flex;align-items:center;gap:.3rem;transition:color var(--ease);
+      white-space:nowrap;
+    }
+    .back-link:hover{color:white}
+    .page-header-title{
+      font-family:var(--font-display);font-size:1.35rem;font-weight:300;
+      flex:1;text-align:center;
+    }
+    .page-header-spacer{width:60px;flex-shrink:0}
+
+    .container{max-width:720px;margin-inline:auto;padding:2rem 1rem 4rem}
+    .section-intro{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;text-align:center;max-width:540px;margin-inline:auto}
+
+    .section-head{
+      display:flex;align-items:center;gap:.6rem;
+      font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--blue);margin:2.5rem 0 1rem;font-family:var(--font-body);
+    }
+    .section-head::after{content:'';flex:1;height:1px;background:var(--blue-pale)}
+
+    .btn-map{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border:1.5px solid var(--blue);
+      border-radius:var(--r-full);color:var(--blue);
+      font-size:.7rem;font-weight:500;transition:all var(--ease);
+      text-decoration:none;flex-shrink:0;
+    }
+    .btn-map:hover{background:var(--blue);color:white}
+    .btn-map svg{width:12px;height:12px}
+
+    footer{
+      text-align:center;padding:1.5rem 1rem;
+      font-size:.68rem;color:var(--text-faint);
+      border-top:1px solid var(--blue-pale);margin-top:2rem;
+    }
+    footer a{color:var(--blue);text-decoration:underline}
+
+    /* ── Quick Nav ── */
+    .quick-nav{
+      display:flex;gap:.5rem;overflow-x:auto;padding:.25rem 0 .75rem;
+      margin-bottom:.5rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+      position:sticky;top:56px;z-index:50;
+      background:var(--bg);padding-top:.6rem;padding-bottom:.6rem;
+    }
+    .quick-nav::-webkit-scrollbar{display:none}
+    .qn-btn{
+      display:inline-flex;align-items:center;gap:.3rem;white-space:nowrap;
+      padding:.4rem .9rem;border:1.5px solid var(--blue-pale);
+      border-radius:var(--r-full);font-size:.75rem;font-weight:500;
+      color:var(--blue-deep);background:var(--white);
+      text-decoration:none;transition:all var(--ease);flex-shrink:0;
+      font-family:var(--font-body);
+    }
+    .qn-btn:hover,.qn-btn.active{background:var(--blue-deep);color:white;border-color:var(--blue-deep)}
+  </style>
+</head>
+<body>
+<div class="page-header">
+  <a class="back-link" href="./index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Undangan
+  </a>
+  <h1 class="page-header-title">🌴 Wisata Lampung</h1>
+  <div class="page-header-spacer"></div>
+</div>
+
+<style>
+  /* Photo card with Google Maps embed cover */
+  .wisata-card{
+    background:var(--white);border-radius:var(--r-xl);
+    overflow:hidden;margin-bottom:1.1rem;
+    box-shadow:0 2px 12px rgba(15,30,60,.07);
+    transition:transform var(--ease),box-shadow var(--ease);
+  }
+  .wisata-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(15,30,60,.12)}
+
+  .wisata-cover{
+    width:100%;height:160px;object-fit:cover;
+    background:var(--surface);display:block;
+  }
+  .wisata-cover-ph{
+    width:100%;height:160px;background:linear-gradient(135deg,var(--surface),var(--surface-2));
+    display:flex;align-items:center;justify-content:center;font-size:2.5rem;
+  }
+
+  /* Embed via Google Maps static photo */
+  .gmap-cover{
+    width:100%;height:160px;border:none;display:block;
+    pointer-events:none;
+  }
+
+  .wisata-body{padding:1rem 1.25rem 1.1rem}
+  .wisata-name{font-family:var(--font-display);font-size:1.1rem;font-weight:500;margin-bottom:.25rem}
+  .wisata-tag{
+    display:inline-block;font-size:.62rem;letter-spacing:.15em;
+    text-transform:uppercase;padding:.18rem .55rem;border-radius:var(--r-full);
+    margin-bottom:.5rem;font-weight:500;
+  }
+  .tag--alam{background:#E8F5EE;color:#2E6B42}
+  .tag--kuliner{background:#FFF5E0;color:#8B5E1A}
+  .tag--sejarah{background:#F0EAF8;color:#5A3578}
+  .tag--foto{background:#FFE8EF;color:#8B2252}
+  .tag--religi{background:#EAF0FA;color:#2A4C8A}
+  .tag--cafe{background:#E8F5F8;color:#1A5C6A}
+  .tag--oleh{background:#FFF3E8;color:#8B4A1A}
+
+  .wisata-desc{font-size:.83rem;color:var(--text-muted);line-height:1.7;margin-bottom:.75rem}
+  .wisata-links{display:flex;gap:.5rem;flex-wrap:wrap}
+
+  .btn-gmaps{
+    display:inline-flex;align-items:center;gap:.3rem;
+    padding:.3rem .7rem;background:var(--blue-deep);color:white;
+    border-radius:var(--r-full);font-size:.7rem;font-weight:500;
+    text-decoration:none;transition:background var(--ease);
+  }
+  .btn-gmaps:hover{background:var(--blue-darkest)}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .cards-grid--small{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+</style>
+
+<div class="container">
+
+  <!-- Quick Nav -->
+  <div class="quick-nav" id="quick-nav">
+    <a class="qn-btn" href="#kuliner">🍽️ Kuliner</a>
+    <a class="qn-btn" href="#alam">🌿 Alam</a>
+    <a class="qn-btn" href="#foto">📸 Foto &amp; Sunset</a>
+    <a class="qn-btn" href="#sejarah">🕌 Sejarah</a>
+    <a class="qn-btn" href="#cafe">☕ Café</a>
+    <a class="qn-btn" href="#oleh">🛍️ Oleh-Oleh</a>
+  </div>
+
+
+  <!-- ── KULINER ── -->
+  <div class="section-head" id="kuliner">🍽️ Kuliner Wajib Coba</div>
+  <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.75">
+    Lampung punya kekayaan kuliner yang sering luput dari radar. Jangan pulang sebelum nyobain yang satu ini.
+  </p>
+  <div class="cards-grid">
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🔥</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Kuliner Khas</span>
+        <div class="wisata-name">Sambal Seruit Bu Lin</div>
+        <p class="wisata-desc">Rasakan <em>nyeruit</em> — tradisi makan bersama ala Lampung dengan ikan bakar, terong, tempoyak, dan sambal super segar. Makannya rame-rame, rasanya nggak bisa lupa.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Sambal+Seruit+Bu+Lin+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🍲</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Kuliner Khas</span>
+        <div class="wisata-name">Seruit Bu Isah</div>
+        <p class="wisata-desc">Alternatif <em>nyeruit</em> yang nggak kalah mantap. Sambalnya kaya rasa, ikannya segar — versi favorit bagi yang ingin pengalaman yang lebih casual.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Seruit+Bu+Isah+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🍡</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Ikon Kota</span>
+        <div class="wisata-name">Bakso Sony (Bakso Sonhaji)</div>
+        <p class="wisata-desc">Ikon kuliner kebanggaan Lampung. Tekstur baksonya yang <em>sangat daging</em> dipadukan kuah kaldu gurih yang tak pernah gagal — antre panjang tapi worth it.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Bakso+Sony+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🐟</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Sumatera Vibes</span>
+        <div class="wisata-name">Pempek 123</div>
+        <p class="wisata-desc">Berbagi budaya dengan Palembang, pempek Lampung punya cuko yang pas dan tekstur kenyal yang memanjakan. Bonus: bisa dibawa pulang dalam bentuk frozen food.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pempek+123+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🍜</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Rempah Sumatera</span>
+        <div class="wisata-name">RM Pindang Meranjat Riu</div>
+        <p class="wisata-desc">Bila ingin sensasi rasa yang kaya, mampirlah ke sini. Kuah pindang segar yang memadukan gurih, asam, dan jejak rempah khas Sumatera — dijamin bikin melek.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pindang+Meranjat+Riu+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🍛</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Safe Haven</span>
+        <div class="wisata-name">Begadang Resto II</div>
+        <p class="wisata-desc">Restoran Padang ikonik Lampung — tempat yang selalu reliable untuk semua selera dan semua generasi. Lauk berlimpah, nasi pulen, dan rasa yang konsisten sejak dulu.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Begadang+Resto+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌙</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--kuliner">Sarapan Legendaris</span>
+        <div class="wisata-name">Nasi Uduk Toha</div>
+        <p class="wisata-desc">Pahlawan sarapan pagi dan penyelamat lapar malam. Nasi uduk sederhana tapi legendaris — ayam goreng kampung, sambal mantap, dan harga yang bersahabat.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Nasi+Uduk+Toha+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ALAM ── -->
+  <div class="section-head" id="alam">🌿 Destinasi Alam</div>
+  <div class="cards-grid">
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🐠</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--alam">Snorkeling</span>
+        <div class="wisata-name">Pulau Pahawang</div>
+        <p class="wisata-desc">Spot snorkeling terbaik Lampung — terumbu karang hidup, ikan nemo, dan air biru jernih yang bikin betah berlama-lama. Destinasi wajib untuk para pencinta laut.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pulau+Pahawang+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🐘</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--alam">Konservasi</span>
+        <div class="wisata-name">Taman Nasional Way Kambas</div>
+        <p class="wisata-desc">Bertemu gajah sumatera di habitat aslinya — bukan di kebun binatang, tapi di hutan yang sesungguhnya. Pengalaman yang akan dikenang seumur hidup, terutama untuk anak-anak.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Taman+Nasional+Way+Kambas+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🦷</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--alam">Eksotis</span>
+        <div class="wisata-name">Pantai Gigi Hiu</div>
+        <p class="wisata-desc">Gugusan tebing karang tajam yang mencuat dramatis dari pesisir Kelumbayan — foto di sini terasa seperti di negeri lain. Salah satu spot paling instagrammable di Lampung.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pantai+Gigi+Hiu+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🏝️</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--alam">Raja Ampat Lampung</span>
+        <div class="wisata-name">Pulau Wayang</div>
+        <p class="wisata-desc">Dijuluki "Raja Ampat-nya Lampung" — perairan bening, gugusan pulau kecil, dan pemandangan yang mematahkan napas. Kalau belum sempat ke Papua, ini dulu.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pulau+Wayang+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌴</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--alam">Maldives Vibes</span>
+        <div class="wisata-name">Pulau Tegal Mas / Andreas Resort</div>
+        <p class="wisata-desc">Cottage di atas laut dengan nuansa Maldives yang sesungguhnya. Berjemur di deck private, snorkeling di depan kamar — liburan impian tanpa harus terbang jauh.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Pulau+Tegal+Mas+Pahawang+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── FOTO & SUNSET ── -->
+  <div class="section-head" id="foto">📸 Spot Foto &amp; Sunset</div>
+  <div class="cards-grid cards-grid--small">
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌅</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--foto">Sunset Terbaik</span>
+        <div class="wisata-name">Bukit Aslan</div>
+        <p class="wisata-desc">Golden hour dengan citylight Bandar Lampung dan Teluk Lampung sebagai latar. Datang 30 menit sebelum matahari terbenam — bawa kamera, tinggalkan kekhawatiran.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Bukit+Aslan+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">⛰️</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--foto">Panorama</span>
+        <div class="wisata-name">Puncak Mas</div>
+        <p class="wisata-desc">Salah satu titik pandang terpopuler di Bandar Lampung — pemandangan 180° kota dan laut dari atas bukit. Siang hari indah, malam hari lebih memukau lagi.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Puncak+Mas+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌈</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--foto">Sky Deck</span>
+        <div class="wisata-name">Lengkung Langit</div>
+        <p class="wisata-desc">Spot foto estetik dengan jembatan kaca dan panorama langit terbuka yang jadi favorit generasi muda Lampung. Cocok untuk konten yang Instagrammable.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Lengkung+Langit+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── SEJARAH & RELIGI ── -->
+  <div class="section-head" id="sejarah">🕌 Sejarah &amp; Religi</div>
+  <div class="cards-grid">
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🏛️</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--sejarah">Museum</span>
+        <div class="wisata-name">Museum Negeri Lampung</div>
+        <p class="wisata-desc">Jendela menuju budaya lokal — koleksi keris, kain tapis, dan peninggalan adat <em>Ruwa Jurai</em> yang kaya. Satu jam di sini cukup untuk memahami jiwa Lampung.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Museum+Negeri+Lampung+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌋</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--sejarah">Monumen</span>
+        <div class="wisata-name">Monumen Krakatau</div>
+        <p class="wisata-desc">Tugu peringatan letusan dahsyat 1883 di Taman Dipangga — mengingatkan betapa kuatnya alam yang membentuk Lampung seperti sekarang. Singkat tapi berkesan.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Monumen+Krakatau+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🕌</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--religi">Masjid Ikonik</span>
+        <div class="wisata-name">Masjid Agung Al-Furqon</div>
+        <p class="wisata-desc">Ikon kota Bandar Lampung — masjid terbesar dengan menara yang menjulang tinggi dan arsitektur megah yang memukau. Sangat layak dikunjungi di waktu subuh atau magrib.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Masjid+Agung+Al+Furqon+Bandar+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wisata-card">
+      <div class="wisata-cover-ph">🌊</div>
+      <div class="wisata-body">
+        <span class="wisata-tag tag--religi">Unik</span>
+        <div class="wisata-name">Masjid Terapung Al-Aminah</div>
+        <p class="wisata-desc">Mengapung di atas laut lepas di kawasan Pantai Sari Ringgung. Sholat dengan deburan ombak di sekelilingmu — pengalaman spiritual yang benar-benar tak terlupakan.</p>
+        <div class="wisata-links">
+          <a class="btn-gmaps" href="https://maps.google.com/?q=Masjid+Terapung+Al+Aminah+Lampung" target="_blank" rel="noopener">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── CAFÉ ── -->
+  <div class="section-head" id="cafe">☕ Café Favorit</div>
+  <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.75">
+    Lampung punya café scene yang berkembang pesat — dari roastery serius sampai garden café yang estetik.
+  </p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.65rem">
+    <a href="https://maps.google.com/?q=Els+Coffee+Roastery+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">☕ El's Coffee Roastery</a>
+    <a href="https://maps.google.com/?q=Hoffmann+Lane+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🏠 Hoffmann Lane</a>
+    <a href="https://maps.google.com/?q=Dajja+Aimo+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🌿 Dajja Aimo</a>
+    <a href="https://maps.google.com/?q=House+of+Metta+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🏡 House of Metta</a>
+    <a href="https://maps.google.com/?q=Oma+Backyard+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🌻 Oma Backyard</a>
+    <a href="https://maps.google.com/?q=Nuju+Headquarter+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🎯 Nuju HQ</a>
+    <a href="https://maps.google.com/?q=Mottl+Cafe+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">✨ Mottl</a>
+    <a href="https://maps.google.com/?q=Laidback+Cafe+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">😎 Laidback</a>
+    <a href="https://maps.google.com/?q=Zozo+Garden+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🌸 Zozo Garden</a>
+    <a href="https://maps.google.com/?q=Doesoen+Kopi+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🌾 Doesoen Kopi</a>
+    <a href="https://maps.google.com/?q=There+is+Glee+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">😊 There is Glee</a>
+    <a href="https://maps.google.com/?q=Savor+Cafe+Bandar+Lampung" target="_blank" rel="noopener" class="cafe-chip">🍰 Savor</a>
+  </div>
+
+  <!-- ── OLEH-OLEH ── -->
+  <div class="section-head" id="oleh">🛍️ Oleh-Oleh Khas Lampung</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem">
+    <div class="oleh-row">🍌 <strong>Keripik Pisang</strong> — Sentra Gang PU atau Aneka Sari Rasa</div>
+    <div class="oleh-row">☕ <strong>Kopi Robusta</strong> — Els Coffee atau Aneka Sari Rasa</div>
+    <div class="oleh-row">🐟 <strong>Pempek Frozen</strong> — Pempek 123 atau Tenda Biru</div>
+    <div class="oleh-row">🦐 <strong>Kemplang &amp; Kerupuk Ikan</strong> — Aneka Sari Rasa</div>
+    <div class="oleh-row">🌶️ <strong>Sambal Khas Lampung</strong> — Aneka Sari Rasa</div>
+    <div class="oleh-row">🥧 <strong>Pie Pisang</strong> — Yussy Akmal</div>
+  </div>
+  <p style="margin-top:.75rem;font-size:.78rem;color:var(--text-faint);text-align:center">
+    <a href="https://maps.google.com/?q=Pusat+Oleh+Oleh+Aneka+Sari+Rasa+Lampung" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline">📍 Pusat Oleh-Oleh Aneka Sari Rasa</a> · 
+    <a href="https://maps.google.com/?q=Yussy+Akmal+Lampung" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:underline">📍 Yussy Akmal</a>
+  </p>
+
+</div>
+
+<style>
+  .cafe-chip{
+    display:flex;align-items:center;gap:.4rem;
+    background:var(--white);border:1.5px solid var(--blue-pale);
+    border-radius:var(--r-lg);padding:.55rem .8rem;
+    font-size:.78rem;color:var(--text-muted);
+    text-decoration:none;transition:all var(--ease);
+  }
+  .cafe-chip:hover{background:var(--blue);color:white;border-color:var(--blue)}
+  .oleh-row{
+    background:var(--white);border:1.5px solid var(--blue-pale);
+    border-radius:var(--r-md);padding:.65rem .9rem;
+    font-size:.83rem;color:var(--text-muted);line-height:1.5;
+  }
+</style>
+
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html">#NaMun2026</a>
+</footer>
+
+<script>
+  const sections = ['kuliner','alam','foto','sejarah','cafe','oleh'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.qn-btn').forEach(b => b.classList.remove('active'));
+        const id = entry.target.id;
+        const btn = document.querySelector(`.qn-btn[href="#${id}"]`);
+        if (btn) { btn.classList.add('active'); btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
+      }
+    });
+  }, {rootMargin:'-60px 0px -70% 0px', threshold:0});
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+</body>
+</html>

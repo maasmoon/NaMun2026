@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Gift — #NaMun2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F0F5FF;--surface:#E4EDFF;--surface-2:#D0DEFF;--white:#fff;
+      --blue:#4A6080;--blue-deep:#2D4060;--blue-darkest:#18273F;
+      --blue-pale:#A8BCCE;--blue-light:#7B9BB8;
+      --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#FDF6DF;
+      --green:#3D7A50;--green-pale:#E8F5EE;
+      --text:#0F1E30;--text-muted:#3A5068;--text-faint:#7B9BB8;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost','Helvetica Neue',sans-serif;
+      --r-sm:4px;--r-md:8px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
+      --ease:280ms cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100dvh}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .page-header{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      color:white;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.75rem;
+      position:sticky;top:0;z-index:100;
+    }
+    .back-link{
+      color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;
+      display:flex;align-items:center;gap:.3rem;transition:color var(--ease);
+      white-space:nowrap;
+    }
+    .back-link:hover{color:white}
+    .page-header-title{
+      font-family:var(--font-display);font-size:1.35rem;font-weight:300;
+      flex:1;text-align:center;
+    }
+    .page-header-spacer{width:60px;flex-shrink:0}
+
+    .container{max-width:720px;margin-inline:auto;padding:2rem 1rem 4rem}
+    .section-intro{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;text-align:center;max-width:540px;margin-inline:auto}
+
+    .section-head{
+      display:flex;align-items:center;gap:.6rem;
+      font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--blue);margin:2.5rem 0 1rem;font-family:var(--font-body);
+    }
+    .section-head::after{content:'';flex:1;height:1px;background:var(--blue-pale)}
+
+    .btn-map{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border:1.5px solid var(--blue);
+      border-radius:var(--r-full);color:var(--blue);
+      font-size:.7rem;font-weight:500;transition:all var(--ease);
+      text-decoration:none;flex-shrink:0;
+    }
+    .btn-map:hover{background:var(--blue);color:white}
+    .btn-map svg{width:12px;height:12px}
+
+    footer{
+      text-align:center;padding:1.5rem 1rem;
+      font-size:.68rem;color:var(--text-faint);
+      border-top:1px solid var(--blue-pale);margin-top:2rem;
+    }
+    footer a{color:var(--blue);text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="page-header">
+  <a class="back-link" href="./index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Undangan
+  </a>
+  <h1 class="page-header-title">🎁 Wedding Gift</h1>
+  <div class="page-header-spacer"></div>
+</div>
+
+<style>
+  .gift-intro{font-size:.88rem;color:var(--text-muted);line-height:1.8;text-align:center;max-width:500px;margin:1.5rem auto 0}
+  .gift-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:2rem}
+
+  /* Animated bank cards */
+  .bank-card{
+    background:var(--white);border-radius:var(--r-xl);
+    padding:1.5rem 1.75rem;position:relative;overflow:hidden;
+    box-shadow:0 4px 24px rgba(15,30,60,.08);
+    transition:transform var(--ease),box-shadow var(--ease);
+    cursor:default;
+  }
+  .bank-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(15,30,60,.14)}
+
+  .bank-card--bni{background:linear-gradient(135deg,#F5821F 0%,#E06010 55%,#C04000 100%)}
+  .bank-card--bca{background:linear-gradient(135deg,#003082 0%,#0050C0 55%,#1A6FD8 100%)}
+
+  .bank-card__glare{
+    position:absolute;top:-40%;left:-20%;width:70%;height:150%;
+    background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,0));
+    transform:rotate(-20deg);pointer-events:none;
+    animation:glare 4s ease-in-out infinite alternate;
+  }
+  @keyframes glare{from{opacity:.5;transform:rotate(-20deg) translateX(-10px)}to{opacity:1;transform:rotate(-20deg) translateX(10px)}}
+
+  .bank-logo{height:28px;margin-bottom:1rem;filter:brightness(0) invert(1)}
+  .bank-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.25rem}
+  .bank-number{font-size:1.4rem;font-weight:600;color:white;letter-spacing:.15em;font-family:monospace;margin-bottom:.15rem}
+  .bank-name{font-size:.82rem;color:rgba(255,255,255,.85);font-weight:400}
+
+  .copy-btn{
+    position:absolute;bottom:1rem;right:1rem;
+    background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);
+    color:white;border-radius:var(--r-full);padding:.25rem .6rem;
+    font-size:.65rem;cursor:pointer;transition:background var(--ease);
+    font-family:var(--font-body);
+  }
+  .copy-btn:hover{background:rgba(255,255,255,.35)}
+  .copy-btn.copied{background:rgba(255,255,255,.4)}
+
+  /* Address */
+  .address-box{
+    background:var(--white);border:1.5px solid var(--blue-pale);
+    border-radius:var(--r-lg);padding:1.25rem 1.5rem;margin-top:1.5rem;
+    display:flex;gap:1rem;align-items:flex-start;
+  }
+  .address-icon{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+  .address-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.4rem}
+  .address-text{font-size:.88rem;color:var(--text-muted);line-height:1.75}
+
+  .gift-note{
+    background:var(--gold-pale);border:1.5px solid var(--gold-light);
+    border-radius:var(--r-lg);padding:1rem 1.25rem;
+    margin-top:1.5rem;font-size:.82rem;color:#6B5020;
+    text-align:center;line-height:1.7;
+  }
+</style>
+
+<div class="container">
+  <p class="gift-intro">
+    Kehadiran dan doa kalian adalah hadiah terbesar bagi kami. Namun bagi yang ingin memberikan tanda kasih, berikut pilihannya 💙
+  </p>
+
+  <div class="section-head">💳 Transfer Bank</div>
+  <div class="gift-grid">
+    <!-- BNI Card -->
+    <div class="bank-card bank-card--bni">
+      <div class="bank-card__glare"></div>
+      <img class="bank-logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/5/55/BNI_logo.svg"
+        alt="BNI" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;color:rgba(255,255,255,.8);font-size:1rem;font-weight:600;margin-bottom:1rem;">BNI</div>
+      <div class="bank-label">No. Rekening</div>
+      <div class="bank-number" id="bni-number">9800005015</div>
+      <div class="bank-name">a.n. Nadia Putri Lingga</div>
+      <button class="copy-btn" onclick="copyAccount('bni-number',this)">Salin</button>
+    </div>
+
+    <!-- BCA Card -->
+    <div class="bank-card bank-card--bca">
+      <div class="bank-card__glare"></div>
+      <img class="bank-logo"
+        src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg"
+        alt="BCA" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <div style="display:none;color:rgba(255,255,255,.8);font-size:1rem;font-weight:600;margin-bottom:1rem;">BCA</div>
+      <div class="bank-label">No. Rekening</div>
+      <div class="bank-number" id="bca-number">1400682441</div>
+      <div class="bank-name">a.n. Ahmad Munjin</div>
+      <button class="copy-btn" onclick="copyAccount('bca-number',this)">Salin</button>
+    </div>
+  </div>
+
+  <div class="section-head">📦 Hadiah Fisik</div>
+  <div class="address-box">
+    <div class="address-icon">🏠</div>
+    <div>
+      <div class="address-label">Kirim ke Alamat</div>
+      <div class="address-text">
+        Jl. Krakatau I, No. 236<br>
+        Perumnas Way Halim,<br>
+        Bandar Lampung, 35141<br>
+        <br>
+        <em style="font-size:.78rem;color:var(--text-faint)">Mohon konfirmasi pengiriman via WhatsApp agar kami dapat memastikan penerimaan hadiah.</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="gift-note">
+    💝 Tak ada pemberian yang lebih bermakna dari doa dan senyum kehadiran kalian di hari istimewa kami.
+  </div>
+</div>
+
+<script>
+function copyAccount(id, btn) {
+  const num = document.getElementById(id).textContent.replace(/\s/g,'');
+  navigator.clipboard.writeText(num).then(() => {
+    btn.textContent = '✓ Tersalin';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+</script>
+
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html">#NaMun2026</a>
+</footer>
+</body>
+</html>

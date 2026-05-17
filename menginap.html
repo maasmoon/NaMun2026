@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Menginap — #NaMun2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F0F5FF;--surface:#E4EDFF;--surface-2:#D0DEFF;--white:#fff;
+      --blue:#4A6080;--blue-deep:#2D4060;--blue-darkest:#18273F;
+      --blue-pale:#A8BCCE;--blue-light:#7B9BB8;
+      --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#FDF6DF;
+      --green:#3D7A50;--green-pale:#E8F5EE;
+      --text:#0F1E30;--text-muted:#3A5068;--text-faint:#7B9BB8;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost','Helvetica Neue',sans-serif;
+      --r-sm:4px;--r-md:8px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
+      --ease:280ms cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100dvh}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .page-header{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      color:white;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.75rem;
+      position:sticky;top:0;z-index:100;
+    }
+    .back-link{
+      color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;
+      display:flex;align-items:center;gap:.3rem;transition:color var(--ease);
+      white-space:nowrap;
+    }
+    .back-link:hover{color:white}
+    .page-header-title{
+      font-family:var(--font-display);font-size:1.35rem;font-weight:300;
+      flex:1;text-align:center;
+    }
+    .page-header-spacer{width:60px;flex-shrink:0}
+
+    .container{max-width:720px;margin-inline:auto;padding:2rem 1rem 4rem}
+    .section-intro{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;text-align:center;max-width:540px;margin-inline:auto}
+
+    .section-head{
+      display:flex;align-items:center;gap:.6rem;
+      font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--blue);margin:2.5rem 0 1rem;font-family:var(--font-body);
+    }
+    .section-head::after{content:'';flex:1;height:1px;background:var(--blue-pale)}
+
+    .btn-map{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border:1.5px solid var(--blue);
+      border-radius:var(--r-full);color:var(--blue);
+      font-size:.7rem;font-weight:500;transition:all var(--ease);
+      text-decoration:none;flex-shrink:0;
+    }
+    .btn-map:hover{background:var(--blue);color:white}
+    .btn-map svg{width:12px;height:12px}
+
+    footer{
+      text-align:center;padding:1.5rem 1rem;
+      font-size:.68rem;color:var(--text-faint);
+      border-top:1px solid var(--blue-pale);margin-top:2rem;
+    }
+    footer a{color:var(--blue);text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="page-header">
+  <a class="back-link" href="./index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Undangan
+  </a>
+  <h1 class="page-header-title">🏨 Rekomendasi Menginap</h1>
+  <div class="page-header-spacer"></div>
+</div>
+
+<style>
+  .stay-intro{font-size:.88rem;color:var(--text-muted);line-height:1.8;text-align:center;max-width:520px;margin:1.5rem auto 0}
+
+  .hotel-card{
+    background:var(--white);border-radius:var(--r-lg);
+    padding:1.1rem 1.25rem;margin-bottom:.85rem;
+    display:grid;grid-template-columns:48px 1fr auto;gap:.9rem;align-items:start;
+    border:1.5px solid transparent;transition:all var(--ease);
+    box-shadow:0 2px 8px rgba(15,30,60,.05);
+  }
+  .hotel-card:hover{border-color:var(--blue-pale);box-shadow:0 4px 16px rgba(15,30,60,.1);transform:translateY(-2px)}
+
+  .hotel-icon{
+    width:48px;height:48px;border-radius:var(--r-md);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;flex-shrink:0;
+  }
+  .icon--walk{background:#E8F5EE;} /* closest — walking */
+  .icon--city{background:#EAE8FF;} /* city hotel */
+  .icon--villa{background:#FFF5E8;} /* villa/resort */
+
+  .hotel-num{
+    position:absolute;top:-6px;left:-6px;width:18px;height:18px;
+    background:var(--blue-deep);color:white;border-radius:50%;
+    font-size:.6rem;font-weight:600;display:flex;align-items:center;justify-content:center;
+  }
+  .hotel-icon-wrap{position:relative}
+
+  .hotel-name{font-size:.95rem;font-weight:500;color:var(--text);margin-bottom:.2rem}
+  .hotel-area{font-size:.72rem;color:var(--text-faint);margin-bottom:.35rem}
+  .hotel-dist{
+    display:inline-flex;align-items:center;gap:.3rem;
+    font-size:.72rem;font-weight:500;padding:.2rem .55rem;
+    border-radius:var(--r-full);margin-bottom:.4rem;
+  }
+  .dist--walk{background:var(--green-pale);color:var(--green)}
+  .dist--drive{background:var(--surface);color:var(--blue-deep)}
+  .dist--far{background:#FFF5E8;color:#A06020}
+  .hotel-note{font-size:.8rem;color:var(--text-muted);line-height:1.6}
+</style>
+
+<div class="container">
+  <p class="stay-intro">
+    Dari yang tinggal jalan kaki ke venue, sampai resort tepi pantai buat yang ingin sekalian liburan — pilih yang paling cocok buat kamu.
+  </p>
+
+  <div class="section-head">🚶 Langsung di Sekitar Venue</div>
+
+  <!-- 1 YES Hotel -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--walk">🏨</div>
+      <div class="hotel-num">1</div>
+    </div>
+    <div>
+      <div class="hotel-name">YES Hotel</div>
+      <div class="hotel-area">Jl. Arif Rahman Hakim No.50, Jagabaya III, Way Halim</div>
+      <span class="hotel-dist dist--walk">🚶 ~2 menit jalan kaki</span>
+      <div class="hotel-note">Jarak paling dekat dari venue — tinggal jalan beberapa nomor dari House of Gelati. Cocok banget biar nggak ribet parkir dan bisa santai dari pagi.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/1pty5VRHXAMA2ntE7" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 2 Hexton -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--walk">🏩</div>
+      <div class="hotel-num">2</div>
+    </div>
+    <div>
+      <div class="hotel-name">Hexton Hotel Lampung</div>
+      <div class="hotel-area">Jl. P. Antasari, Jagabaya III, Kedamaian</div>
+      <span class="hotel-dist dist--walk">🚶 ~5 menit berkendara (1–1.5 km)</span>
+      <div class="hotel-note">Opsi budget yang solid — cukup dekat sehingga perjalanan ke venue bisa ditempuh dengan ojek online hanya hitungan menit.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/DBjncRr37CEjhEMv7" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 3 Bamboe Inn -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--walk">🛖</div>
+      <div class="hotel-num">3</div>
+    </div>
+    <div>
+      <div class="hotel-name">Bamboe Inn 1 Homestay</div>
+      <div class="hotel-area">Jl. Griya Utama No.57A, Way Halim Permai</div>
+      <span class="hotel-dist dist--walk">🚶 ~5–7 menit berkendara (2 km)</span>
+      <div class="hotel-note">Pilihan ekonomis dengan suasana rumahan. Nyaman untuk keluarga yang ingin tinggal dekat venue tanpa merogoh kocek terlalu dalam.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/w5NainKPhrYfCdg97" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <div class="section-head">🏙️ Hotel Kota (Fasilitas Lengkap)</div>
+
+  <!-- 4 Golden Tulip -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--city">🌷</div>
+      <div class="hotel-num">4</div>
+    </div>
+    <div>
+      <div class="hotel-name">Golden Tulip Springhill Lampung</div>
+      <div class="hotel-area">Jl. Basuki Rahmat No.16, Telukbetung Selatan</div>
+      <span class="hotel-dist dist--drive">🚗 ~15–20 menit (5–6 km)</span>
+      <div class="hotel-note">Bintang empat dengan fasilitas lengkap — kolam renang, restoran, dan layanan bisnis. Pilihan solid untuk tamu yang ingin kenyamanan premium di kota.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/6GcpbeyzSdU85SLm7" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 5 Swiss-Belhotel -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--city">🌐</div>
+      <div class="hotel-num">5</div>
+    </div>
+    <div>
+      <div class="hotel-name">Swiss-Belhotel Lampung</div>
+      <div class="hotel-area">Jl. Rasuna Said No.18, Gulak Galik, Teluk Betung Utara</div>
+      <span class="hotel-dist dist--drive">🚗 ~15–20 menit (6–7 km)</span>
+      <div class="hotel-note">Nama franchise yang sudah terpercaya. Standar internasional, pelayanan konsisten, dan lokasi yang memudahkan akses ke pusat kota.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/ZKtuZ7XPcE5FemSg6" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 6 Emersia -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--city">🌊</div>
+      <div class="hotel-num">6</div>
+    </div>
+    <div>
+      <div class="hotel-name">Emersia Hotel &amp; Resort</div>
+      <div class="hotel-area">Jl. Wolter Monginsidi No.70, Teluk Betung Utara</div>
+      <span class="hotel-dist dist--drive">🚗 ~15–20 menit (6–7 km)</span>
+      <div class="hotel-note">Hotel resort di dalam kota — punya spa, gym, dan pemandangan Teluk Lampung yang memanjakan mata. Untuk tamu yang ingin sesuatu yang lebih dari sekadar menginap.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/NbxkfRL33HJC3od7A" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 7 BATIQA -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--city">🏢</div>
+      <div class="hotel-num">7</div>
+    </div>
+    <div>
+      <div class="hotel-name">BATIQA Hotel Lampung</div>
+      <div class="hotel-area">Jl. Jend. Sudirman No.140, Pahoman</div>
+      <span class="hotel-dist dist--drive">🚗 ~15 menit (5–6 km)</span>
+      <div class="hotel-note">Desain modern dan kontemporer di jantung kota. BATIQA selalu jadi favorit tamu bisnis — bersih, efisien, dan aksesibel ke berbagai penjuru Bandar Lampung.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/B5gnZH1eUeJed96i6" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <div class="section-head">🌴 Villa &amp; Resort (Sekalian Liburan!)</div>
+
+  <!-- 8 Villa Gayatri -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--villa">🏡</div>
+      <div class="hotel-num">8</div>
+    </div>
+    <div>
+      <div class="hotel-name">Villa Gayatri</div>
+      <div class="hotel-area">Jl. Wan Abdurrahman No.298, Kedaung, Kemiling</div>
+      <span class="hotel-dist dist--far">🌿 ~40 menit ke venue</span>
+      <div class="hotel-note">Staycation asri di ketinggian kota. Suasana hijau dan udara segar — sempurna bagi kamu yang ingin melepas penat sebelum atau setelah acara.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/vVCYs1UC688UdCXX9" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 9 Jakung Villa -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--villa">⛰️</div>
+      <div class="hotel-num">9</div>
+    </div>
+    <div>
+      <div class="hotel-name">Jakung Villa Lampung</div>
+      <div class="hotel-area">Jl. Teuku Cik Ditiro, Sumber Agung, Kemiling</div>
+      <span class="hotel-dist dist--far">🌿 ~38 menit ke venue</span>
+      <div class="hotel-note">Estetik dengan panorama perbukitan hijau yang alami — cocok buat konten Instagram-mu. Villa ini menawarkan pengalaman staycation yang terasa jauh dari kebisingan kota.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/DsaC3tae2jymLEDg8" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 10 Villa Dangau -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--villa">🌾</div>
+      <div class="hotel-num">10</div>
+    </div>
+    <div>
+      <div class="hotel-name">Villa Dangau Kedaung Homestay</div>
+      <div class="hotel-area">Jl. Terusan Ragom Gawi III, Kedaung, Kemiling</div>
+      <span class="hotel-dist dist--far">🌿 ~38 menit ke venue</span>
+      <div class="hotel-note">Family-friendly dengan pemandangan alam yang menyejukkan. Pilihan sempurna bagi keluarga yang mau liburan sekalian — bawa anak-anak, nikmati suasana pedesaan yang tenang.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/C1TfBDADCDgkURFt9" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+
+  <!-- 11 Marriott -->
+  <div class="hotel-card">
+    <div class="hotel-icon-wrap">
+      <div class="hotel-icon icon--villa">🏖️</div>
+      <div class="hotel-num">11</div>
+    </div>
+    <div>
+      <div class="hotel-name">Lampung Marriott Resort</div>
+      <div class="hotel-area">Hurun, Padang Cermin, Kabupaten Pesawaran</div>
+      <span class="hotel-dist dist--far">🌊 ~52 menit ke venue</span>
+      <div class="hotel-note">The ultimate staycation. Private beach, fasilitas bintang lima, dan laut Lampung tepat di depan mata. Kalau ada budget untuk memanjakanmu, ini jawabannya.</div>
+    </div>
+    <a class="btn-map" href="https://maps.app.goo.gl/snG38vbB4cGxkpRZ6" target="_blank" rel="noopener" aria-label="Lihat di Maps">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Maps
+    </a>
+  </div>
+</div>
+
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html">#NaMun2026</a>
+</footer>
+</body>
+</html>

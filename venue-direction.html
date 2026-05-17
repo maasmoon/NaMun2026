@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cara Menuju Venue — #NaMun2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F0F5FF;--surface:#E4EDFF;--surface-2:#D0DEFF;--white:#fff;
+      --blue:#4A6080;--blue-deep:#2D4060;--blue-darkest:#18273F;
+      --blue-pale:#A8BCCE;--blue-light:#7B9BB8;
+      --gold:#C9A84C;--gold-light:#E2C97E;--gold-pale:#FDF6DF;
+      --green:#3D7A50;--green-pale:#E8F5EE;
+      --text:#0F1E30;--text-muted:#3A5068;--text-faint:#7B9BB8;
+      --font-display:'Cormorant Garamond',Georgia,serif;
+      --font-body:'Jost','Helvetica Neue',sans-serif;
+      --r-sm:4px;--r-md:8px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
+      --ease:280ms cubic-bezier(0.16,1,0.3,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100dvh}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    .page-header{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      color:white;padding:1rem 1.25rem;
+      display:flex;align-items:center;gap:.75rem;
+      position:sticky;top:0;z-index:100;
+    }
+    .back-link{
+      color:rgba(255,255,255,.6);font-size:.78rem;text-decoration:none;
+      display:flex;align-items:center;gap:.3rem;transition:color var(--ease);
+      white-space:nowrap;
+    }
+    .back-link:hover{color:white}
+    .page-header-title{
+      font-family:var(--font-display);font-size:1.35rem;font-weight:300;
+      flex:1;text-align:center;
+    }
+    .page-header-spacer{width:60px;flex-shrink:0}
+
+    .container{max-width:720px;margin-inline:auto;padding:2rem 1rem 4rem}
+    .section-intro{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:2rem;text-align:center;max-width:540px;margin-inline:auto}
+
+    .section-head{
+      display:flex;align-items:center;gap:.6rem;
+      font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--blue);margin:2.5rem 0 1rem;font-family:var(--font-body);
+    }
+    .section-head::after{content:'';flex:1;height:1px;background:var(--blue-pale)}
+
+    .btn-map{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.3rem .7rem;border:1.5px solid var(--blue);
+      border-radius:var(--r-full);color:var(--blue);
+      font-size:.7rem;font-weight:500;transition:all var(--ease);
+      text-decoration:none;flex-shrink:0;
+    }
+    .btn-map:hover{background:var(--blue);color:white}
+    .btn-map svg{width:12px;height:12px}
+
+    footer{
+      text-align:center;padding:1.5rem 1rem;
+      font-size:.68rem;color:var(--text-faint);
+      border-top:1px solid var(--blue-pale);margin-top:2rem;
+    }
+    footer a{color:var(--blue);text-decoration:underline}
+  </style>
+</head>
+<body>
+<div class="page-header">
+  <a class="back-link" href="./index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Undangan
+  </a>
+  <h1 class="page-header-title">🗺️ Cara Menuju Venue</h1>
+  <div class="page-header-spacer"></div>
+</div>
+
+<style>
+  /* ── Hero ── */
+  .venue-hero{
+    background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+    border-radius:var(--r-xl);color:white;
+    padding:1.75rem 1.5rem 1.5rem;text-align:center;margin-bottom:2rem;
+  }
+  .venue-hero-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.4rem}
+  .venue-hero-name{font-family:var(--font-display);font-size:1.6rem;font-weight:300;margin-bottom:.4rem}
+  .venue-hero-addr{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:1rem}
+  .venue-hero-btn{
+    display:inline-flex;align-items:center;gap:.4rem;
+    padding:.5rem 1.2rem;background:var(--gold);color:var(--blue-darkest);
+    border-radius:var(--r-full);font-size:.8rem;font-weight:600;
+    text-decoration:none;transition:background var(--ease);
+  }
+  .venue-hero-btn:hover{background:var(--gold-light)}
+
+  /* ── Route tabs ── */
+  .route-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:.25rem;scrollbar-width:none}
+  .route-tabs::-webkit-scrollbar{display:none}
+  .rtab{
+    display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;
+    padding:.45rem 1rem;border-radius:var(--r-full);font-size:.8rem;font-weight:500;
+    cursor:pointer;border:1.5px solid var(--blue-pale);background:var(--white);
+    color:var(--text-muted);transition:all var(--ease);font-family:var(--font-body);flex-shrink:0;
+  }
+  .rtab.active,.rtab:hover{background:var(--blue-deep);color:white;border-color:var(--blue-deep)}
+
+  /* ── Route panels ── */
+  .route-panel{display:none}
+  .route-panel.active{display:block}
+
+  /* ── Journey timeline ── */
+  .journey{position:relative;padding-left:2.5rem;margin:1rem 0}
+  .journey::before{
+    content:'';position:absolute;left:11px;top:0;bottom:0;
+    width:2px;background:linear-gradient(to bottom,var(--blue-deep),var(--blue-pale));
+    border-radius:2px;
+  }
+
+  .jstep{
+    position:relative;margin-bottom:1.25rem;
+  }
+  .jstep-dot{
+    position:absolute;left:-2.5rem;width:24px;height:24px;
+    border-radius:50%;background:var(--blue-deep);color:white;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.65rem;font-weight:700;top:.05rem;
+    box-shadow:0 0 0 3px var(--bg);
+  }
+  .jstep-dot--start{background:var(--green);font-size:.7rem}
+  .jstep-dot--end{background:var(--gold);color:var(--blue-darkest);font-size:.7rem}
+
+  .jstep-card{
+    background:var(--white);border-radius:var(--r-lg);
+    padding:.85rem 1rem;border:1.5px solid var(--blue-pale);
+  }
+  .jstep-place{font-weight:600;font-size:.88rem;color:var(--text);margin-bottom:.2rem}
+  .jstep-detail{font-size:.8rem;color:var(--text-muted);line-height:1.65}
+  .jstep-badge{
+    display:inline-flex;align-items:center;gap:.3rem;
+    font-size:.68rem;font-weight:500;padding:.18rem .55rem;
+    border-radius:var(--r-full);margin-top:.35rem;
+  }
+  .badge--time{background:var(--surface);color:var(--blue-deep)}
+  .badge--tip{background:var(--gold-pale);color:#7A5B10;border:1px solid var(--gold-light)}
+
+  /* ── Summary strip ── */
+  .summary-strip{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;
+    margin-bottom:1.5rem;
+  }
+  .summary-item{
+    background:var(--white);border-radius:var(--r-lg);padding:.75rem;
+    text-align:center;border:1.5px solid var(--blue-pale);
+  }
+  .summary-icon{font-size:1.3rem;margin-bottom:.25rem}
+  .summary-label{font-size:.65rem;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase}
+  .summary-value{font-size:.85rem;font-weight:600;color:var(--blue-deep)}
+
+  /* ── Maps CTA ── */
+  .maps-cta{
+    display:flex;align-items:center;gap:.6rem;
+    background:var(--white);border:1.5px solid var(--blue-pale);
+    border-radius:var(--r-lg);padding:.85rem 1rem;margin-top:1rem;
+    text-decoration:none;transition:all var(--ease);
+  }
+  .maps-cta:hover{border-color:var(--blue);background:var(--surface)}
+  .maps-cta-icon{width:36px;height:36px;border-radius:var(--r-md);background:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .maps-cta-text{flex:1}
+  .maps-cta-label{font-size:.85rem;font-weight:600;color:var(--text)}
+  .maps-cta-sub{font-size:.72rem;color:var(--text-faint)}
+  .maps-cta-arrow{color:var(--blue);font-size:1rem}
+</style>
+
+<div class="container">
+
+  <!-- Venue Hero -->
+  <div class="venue-hero">
+    <div class="venue-hero-label">Lokasi Acara</div>
+    <div class="venue-hero-name">House of Gelati</div>
+    <div class="venue-hero-addr">
+      Jl. Arif Rahman Hakim No. 2B<br>
+      Jagabaya III, Way Halim<br>
+      Bandar Lampung 35141
+    </div>
+    <a class="venue-hero-btn" href="https://maps.app.goo.gl/D6PdRJocz8xnKkds9" target="_blank" rel="noopener">
+      📍 Buka Google Maps
+    </a>
+  </div>
+
+  <!-- Route selector tabs -->
+  <div class="route-tabs" role="tablist">
+    <button class="rtab active" onclick="switchRoute('car',this)">🚗 Kendaraan Pribadi</button>
+    <button class="rtab" onclick="switchRoute('bus',this)">🚌 Bus / Travel</button>
+    <button class="rtab" onclick="switchRoute('fly',this)">✈️ Pesawat</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Kendaraan Pribadi                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="route-panel active" id="panel-car">
+    <div class="summary-strip">
+      <div class="summary-item"><div class="summary-icon">📍</div><div class="summary-label">Dari</div><div class="summary-value">Jakarta</div></div>
+      <div class="summary-item"><div class="summary-icon">⏱️</div><div class="summary-label">Estimasi</div><div class="summary-value">5–6 jam</div></div>
+      <div class="summary-item"><div class="summary-icon">⛴️</div><div class="summary-label">Via</div><div class="summary-value">Feri Merak</div></div>
+    </div>
+
+    <div class="journey">
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--start">🏁</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Jakarta — Titik Berangkat</div>
+          <div class="jstep-detail">Masuk ke <strong>Tol Jakarta – Tangerang – Merak</strong> menuju Pelabuhan Merak.</div>
+          <span class="jstep-badge badge--time">⏱ ~1,5–2 jam</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot">⛴️</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Pelabuhan Merak → Pelabuhan Bakauheni</div>
+          <div class="jstep-detail">Naik Kapal Feri menyeberangi Selat Sunda. Tersedia dua pilihan:<br>
+            • <strong>Feri Eksekutif</strong> — ~1,5 jam, lebih nyaman<br>
+            • <strong>Feri Reguler</strong> — ~2–3 jam, lebih murah</div>
+          <span class="jstep-badge badge--tip">💡 Beli tiket online di Ferizy sebelum tiba — jangan antre di lokasi!</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot">🛣️</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Tol Trans Sumatera</div>
+          <div class="jstep-detail">Dari Bakauheni, langsung masuk <strong>Tol Trans Sumatera</strong> (Bakauheni – Terbanggi Besar). Keluar di <strong>Gerbang Tol Kota Baru / ITERA</strong>.</div>
+          <span class="jstep-badge badge--time">⏱ ~1 jam dari pelabuhan</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--end">🎯</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Menuju House of Gelati</div>
+          <div class="jstep-detail">Dari pintu tol: <strong>Jl. Ryacudu → Jl. Sultan Agung → Way Halim → Jl. Arif Rahman Hakim No. 2B</strong>.<br>Ikuti petunjuk Google Maps dari gerbang tol.</div>
+          <span class="jstep-badge badge--time">⏱ ~20 menit dari pintu tol</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="maps-cta" href="https://www.google.com/maps/dir/Jakarta,+Indonesia/House+of+Gelati,+Jalan+Arif+Rahman+Hakim+No.2B,+Jagabaya+III,+Kota+Bandar+Lampung" target="_blank" rel="noopener">
+      <div class="maps-cta-icon">🗺️</div>
+      <div class="maps-cta-text">
+        <div class="maps-cta-label">Rute Jakarta → House of Gelati</div>
+        <div class="maps-cta-sub">Buka di Google Maps</div>
+      </div>
+      <div class="maps-cta-arrow">›</div>
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Bus / Travel                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="route-panel" id="panel-bus">
+    <div class="summary-strip">
+      <div class="summary-item"><div class="summary-icon">😴</div><div class="summary-label">Gaya</div><div class="summary-value">Santai</div></div>
+      <div class="summary-item"><div class="summary-icon">⏱️</div><div class="summary-label">Estimasi</div><div class="summary-value">6–7 jam</div></div>
+      <div class="summary-item"><div class="summary-icon">💰</div><div class="summary-label">Biaya</div><div class="summary-value">Ekonomis</div></div>
+    </div>
+
+    <div class="journey">
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--start">🏁</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Naik Bus Damri / Travel dari Jakarta</div>
+          <div class="jstep-detail">Titik keberangkatan favorit:<br>
+            • <strong>Stasiun Gambir</strong><br>
+            • <strong>Pool Damri Kemayoran</strong> atau <strong>Blok M</strong><br>
+            Bus langsung masuk ke dalam kapal feri — kamu bisa tidur nyenyak selama perjalanan!</div>
+          <span class="jstep-badge badge--tip">💡 Pesan tiket 3–5 hari sebelum keberangkatan, terutama akhir pekan</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot">🚌</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Tiba di Bandar Lampung</div>
+          <div class="jstep-detail">Turun di salah satu titik:<br>
+            • <strong>Pool Damri / Stasiun Tanjung Karang</strong><br>
+            • <strong>Terminal Rajabasa</strong></div>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--end">🎯</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Menuju House of Gelati</div>
+          <div class="jstep-detail">Pesan <strong>Gojek / Grab</strong> dari titik turun menuju House of Gelati. Mudah dan cepat.</div>
+          <span class="jstep-badge badge--time">⏱ ~15–20 menit dari pusat kota</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Pesawat                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="route-panel" id="panel-fly">
+    <div class="summary-strip">
+      <div class="summary-item"><div class="summary-icon">⚡</div><div class="summary-label">Gaya</div><div class="summary-value">Tercepat</div></div>
+      <div class="summary-item"><div class="summary-icon">✈️</div><div class="summary-label">Terbang</div><div class="summary-value">45–50 mnt</div></div>
+      <div class="summary-item"><div class="summary-icon">🛬</div><div class="summary-label">Bandara</div><div class="summary-value">TKG</div></div>
+    </div>
+
+    <div class="journey">
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--start">✈️</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Bandara Soekarno-Hatta (CGK) — Jakarta</div>
+          <div class="jstep-detail">Penerbangan dari <strong>CGK</strong> menuju <strong>Bandara Radin Inten II (TKG)</strong>, Lampung Selatan.<br>Tersedia dari maskapai Garuda, Lion Air, Batik Air, dan lainnya.</div>
+          <span class="jstep-badge badge--time">✈️ ~45–50 menit terbang</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot">🛬</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Bandara Radin Inten II (TKG) — Lampung</div>
+          <div class="jstep-detail">Setibanya di bandara:<br>
+            • <strong>Taksi bandara</strong> (Suzuki XL7 dan sejenisnya) — tersedia 24 jam<br>
+            • <strong>Gojek / Grab</strong> — jika tersedia di jam kedatangan kamu</div>
+          <span class="jstep-badge badge--tip">💡 Taksi bandara lebih andal untuk kedatangan malam hari</span>
+        </div>
+      </div>
+
+      <div class="jstep">
+        <div class="jstep-dot jstep-dot--end">🎯</div>
+        <div class="jstep-card">
+          <div class="jstep-place">Menuju House of Gelati</div>
+          <div class="jstep-detail">Dari bandara via <strong>By Pass Soekarno-Hatta</strong> menuju Jl. Arif Rahman Hakim No. 2B, Way Halim.</div>
+          <span class="jstep-badge badge--time">⏱ ~45 menit dari bandara</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="maps-cta" href="https://www.google.com/maps/dir/Radin+Inten+II+Airport/House+of+Gelati,+Jalan+Arif+Rahman+Hakim+No.2B,+Jagabaya+III,+Kota+Bandar+Lampung" target="_blank" rel="noopener">
+      <div class="maps-cta-icon">🗺️</div>
+      <div class="maps-cta-text">
+        <div class="maps-cta-label">Rute Bandara → House of Gelati</div>
+        <div class="maps-cta-sub">Buka di Google Maps</div>
+      </div>
+      <div class="maps-cta-arrow">›</div>
+    </a>
+  </div>
+
+</div>
+
+<script>
+function switchRoute(id, btn) {
+  document.querySelectorAll('.route-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html">#NaMun2026</a>
+</footer>
+</body>
+</html>
