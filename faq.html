@@ -325,20 +325,56 @@ function toggleFaq(btn){
     if(name) guestName = decodeURIComponent(name);
   })();
 
+  // Fungsi mencoba memutar musik latar
+  function tryPlayMusic() {
+    const bgMusic = document.getElementById('bg-music');
+    if (!bgMusic) return;
+
+    bgMusic.play().then(() => {
+      document.getElementById('music-btn').classList.add('playing');
+      updateMusicIcon(true);
+      // Bersihkan trigger penangkap interaksi jika pemutaran berhasil
+      removeUnlockEvents();
+    }).catch((err) => {
+      console.warn("Autoplay diblokir oleh kebijakan browser. Menunggu interaksi pengguna untuk memutar musik.");
+    });
+  }
+
+  // Event handler untuk membuka kunci audio dari interaksi pengguna pertama kali
+  function unlockAudio() {
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    if (isPlaying) {
+      tryPlayMusic();
+    }
+  }
+
+  function removeUnlockEvents() {
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('scroll', unlockAudio);
+  }
+
   // ── Auto-unlocked music and session restoration ──
   document.addEventListener("DOMContentLoaded", () => {
     const savedTime = SafeStorage.getItem('bg_music_time');
     const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
     const bgMusic = document.getElementById('bg-music');
-    if (bgMusic && isPlaying) {
-      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-      bgMusic.play().then(() => {
-        document.getElementById('music-btn').classList.add('playing');
-        updateMusicIcon(true);
-      }).catch(() => {});
-    }
-
+    
     if (bgMusic) {
+      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+      
+      // Jika sebelumnya musik menyala, daftarkan listener interaksi di dokumen subhalaman
+      if (isPlaying) {
+        // Coba putar langsung (beberapa browser modern mengizinkan jika ada interaksi di tab yang sama)
+        tryPlayMusic();
+
+        // Antisipasi pemblokiran: pasang listener interaksi pertama di layar apa saja
+        document.addEventListener('click', unlockAudio, { once: true });
+        document.addEventListener('touchstart', unlockAudio, { once: true });
+        document.addEventListener('scroll', unlockAudio, { once: true });
+      }
+
+      // Pemantau posisi detik musik & status play/pause secara berkala
       bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
       bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
       bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
@@ -352,15 +388,18 @@ function toggleFaq(btn){
 
   function toggleMusic(){
     const audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');
+    if(!audio) return;
     if(audio.paused){
       audio.play().then(()=>{
         btn.classList.add('playing');
         updateMusicIcon(true);
+        removeUnlockEvents(); // Pastikan listener interaksi dibersihkan
       }).catch(()=>{});
     } else {
       audio.pause();
       btn.classList.remove('playing');
       updateMusicIcon(false);
+      removeUnlockEvents(); // Batalkan auto-unlock jika pengguna sengaja mematikan musik
     }
   }
 
