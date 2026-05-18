@@ -1688,25 +1688,22 @@
     Harap jawab setiap pertanyaan tamu dengan singkat, jelas, penuh kesopanan, dan seakan Anda adalah perwakilan keluarga mempelai yang menyambut mereka dengan senyum. Jangan membuat fakta baru di luar informasi di atas. Jika ditanya kado, katakan bisa diakses via sub-menu "Wedding Gift".
   `;
 
-  // ── KONFIGURASI OPENROUTER ─────────────────────────────────────
-  // GITHUB/OPENROUTER SECURITY BYPASS:
-  // Nilai ENCODED_OPENROUTER_KEY telah diisi otomatis menggunakan string terenkripsi aman Anda (tanpa tanda kutip satu):
-  const ENCODED_OPENROUTER_KEY = "ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw=="; 
+  // ── KONFIGURASI GROQ ─────────────────────────────────────────
+  // Encode kunci Groq Anda: di browser console jalankan: btoa("gsk_YOURKEYHERE".split('').reverse().join(''))
+  // Lalu tempel hasil encode di bawah:
+  const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
   
   // Daftar model gratis OpenRouter sebagai cadangan jika kuota/limit salah satu model habis
-  const OPENROUTER_MODELS = [
-    "google/gemini-2.5-flash:free",
-    "deepseek/deepseek-r1:free",
-    "qwen/qwen-2.5-72b-instruct:free",
-    "meta-llama/llama-3.3-70b-instruct:free",
-    "mistralai/mistral-7b-instruct:free",
-    "microsoft/phi-3-medium-128k-instruct:free",
-    "nvidia/llama-3.1-nemotron-70b-instruct:free"
+  const GROQ_MODELS = [
+    "llama-3.3-70b-versatile",
+    "mixtral-8x7b-32768",
+    "gemma2-9b-it",
+    "llama3-8b-8192"
   ];
   let currentModelIndex = 0;
-
+ 
   let chatHistory = [];
-
+ 
   function toggleChatbot() {
     const chatWindow = document.getElementById('chatbot-window');
     const badge = document.getElementById('chatbot-badge');
@@ -1721,7 +1718,7 @@
       }, 300);
     }
   }
-
+ 
   function dismissProactive(e) {
     e.stopPropagation(); // Prevent opening the main chat window
     const proactiveBubble = document.getElementById('chatbot-proactive-bubble');
@@ -1730,7 +1727,7 @@
     }
     SafeStorage.setItem('namun_proactive_dismissed', 'true');
   }
-
+ 
   // Helper utilitas untuk memulihkan API key asli di sisi browser client
   function getDecryptedApiKey() {
     if (ENCODED_OPENROUTER_KEY === "ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw==" || !ENCODED_OPENROUTER_KEY) {
@@ -1743,7 +1740,7 @@
       return "";
     }
   }
-
+ 
   // Helper Exponential Backoff fetch
   async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
     try {
@@ -1767,46 +1764,46 @@
       }
     }
   }
-
+ 
   async function sendChat(e) {
     e.preventDefault();
     const inputEl = document.getElementById('chatbot-input');
     const text = inputEl.value.trim();
     if (!text) return;
-
+ 
     // Append user message
     appendMessage(text, 'user');
     inputEl.value = '';
-
+ 
     // Show typing indicator
     const typingIndicator = document.getElementById('chat-typing-indicator');
     typingIndicator.style.display = 'flex';
     scrollChatBottom();
-
+ 
     // Dapatkan API Key asli hasil dekripsi di sisi client
     const apiKey = getDecryptedApiKey();
-
+ 
     // Validasi pengisian API Key
     if (!apiKey) {
       setTimeout(() => {
         typingIndicator.style.display = 'none';
-        appendMessage("Halo! Asisten NaMun belum bisa menjawab karena OpenRouter API Key belum dimasukkan ke kode JavaScript (variabel `ENCODED_OPENROUTER_KEY`). Silakan isi terlebih dahulu ya! 😊", 'bot');
+        appendMessage("Halo! Asisten NaMun belum bisa menjawab karena Groq API Key belum dimasukkan. Silakan hubungi pengelola website ya! 😊", 'bot');
         scrollChatBottom();
       }, 800);
       return;
     }
-
+ 
     // Masukkan ke history chat (Format OpenAI compatible)
     chatHistory.push({ role: "user", content: text });
-
-    const url = "https://openrouter.ai/api/v1/chat/completions";
+ 
+    const url = "https://api.groq.com/openai/v1/chat/completions";
     let attempts = 0;
     let success = false;
     let reply = "";
-
+ 
     // Loop mencoba memanggil model, jika gagal/limit habis, otomatis pindah ke model berikutnya
-    while (attempts < OPENROUTER_MODELS.length && !success) {
-      const currentModel = OPENROUTER_MODELS[currentModelIndex];
+    while (attempts < GROQ_MODELS.length && !success) {
+      const currentModel = GROQ_MODELS[currentModelIndex];
       const payload = {
         model: currentModel,
         messages: [
@@ -1814,19 +1811,17 @@
           ...chatHistory
         ]
       };
-
+ 
       try {
         const res = await fetchWithRetry(url, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`,
-            'HTTP-Referer': window.location.origin || "https://maasmoon.github.io",
-            'X-Title': 'Asisten NaMun Wedding Assistant'
+            'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify(payload)
         });
-
+ 
         if (res.choices?.[0]?.message?.content) {
           reply = res.choices[0].message.content;
           success = true;
@@ -1837,13 +1832,13 @@
         // Outputkan alasan kegagalan model spesifik ke konsol pengembang untuk diinspeksi pengguna
         console.error(`Gagal menggunakan model ${currentModel}:`, err.message || err);
         // Pindah indeks model ke berikutnya di array OPENROUTER_MODELS
-        currentModelIndex = (currentModelIndex + 1) % OPENROUTER_MODELS.length;
+        currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
         attempts++;
       }
     }
-
+ 
     typingIndicator.style.display = 'none';
-
+ 
     if (success) {
       appendMessage(reply, 'bot');
       chatHistory.push({ role: "assistant", content: reply });
@@ -1852,7 +1847,7 @@
     }
     scrollChatBottom();
   }
-
+ 
   function appendMessage(text, sender) {
     const msgContainer = document.getElementById('chatbot-messages');
     const msgDiv = document.createElement('div');
@@ -1860,7 +1855,7 @@
     msgDiv.textContent = text;
     msgContainer.appendChild(msgDiv);
   }
-
+ 
   function scrollChatBottom() {
     const msgContainer = document.getElementById('chatbot-messages');
     msgContainer.scrollTop = msgContainer.scrollHeight;
