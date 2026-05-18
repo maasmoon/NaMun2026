@@ -55,7 +55,7 @@
     }
     .chat-header-info h1 { font-family:var(--font-display);font-size:1.05rem;font-weight:400;line-height:1.2 }
     .chat-header-info p { font-size:.68rem;color:rgba(255,255,255,.55);letter-spacing:.08em }
-    .chat-status { display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:rgba(255,255,255,.55) }
+    .chat-status { display:flex;align-items:center;gap:.35rem;font-size:.68rem;color:rgba(255,255,255,.55); }
     .chat-status-dot { width:7px;height:7px;border-radius:50%;background:#6EE7B7;animation:pulse 2s ease infinite }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
@@ -146,14 +146,14 @@
 
 <!-- Header -->
 <div class="chat-header">
-  <a class="chat-header-back" href="./index.html" id="back-to-invitation" aria-label="Kembali ke undangan">
+  <a class="chat-header-back" href="./index-10.html" id="back-to-invitation" aria-label="Kembali ke undangan">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Undangan
   </a>
   <div class="chat-header-avatar">✨</div>
   <div class="chat-header-info">
     <h1>Asisten NaMun</h1>
-    <div class="chat-status"><span class="chat-status-dot"></span>Siap membantu</div>
+    <div class="chat-status" id="kb-status"><span class="chat-status-dot"></span>Siap membantu</div>
   </div>
 </div>
 
@@ -179,6 +179,7 @@
   <button class="chip" onclick="sendChip(this)">🌴 Wisata hits di Lampung?</button>
   <button class="chip" onclick="sendChip(this)">🍲 Kuliner enak Lampung?</button>
   <button class="chip" onclick="sendChip(this)">📖 Cerita Nadia & Munjin?</button>
+  <button class="chip" onclick="sendChip(this)">✍️ Buatkan pantun pernikahan!</button>
 </div>
 
 <!-- Input bar -->
@@ -225,74 +226,52 @@ let guestName = "Tamu Undangan";
   const name = p.get('to');
   if (name) {
     guestName = decodeURIComponent(name);
-    // Sync back button link to carry the name query parameters
     const backBtn = document.getElementById('back-to-invitation');
     if (backBtn) {
-      backBtn.href = `./index.html?to=${encodeURIComponent(guestName)}`;
+      backBtn.href = `./index-10.html?to=${encodeURIComponent(guestName)}`;
     }
   }
 })();
 
-/* ── SYSTEM INSTRUCTIONS WITH COMPLETE KNOWLEDGE BASE ── */
-const SYSTEM_INSTRUCTION = `
+/* ── CONFIGURASI LINK BASIS PENGETAHUAN EKSTERNAL (GITHUB RAW) ── */
+const GITHUB_KB_RAW_URL = "https://raw.githubusercontent.com/maasmoon/NaMun2026/main/wedding_kb.md";
+
+/* ── LOCAL FALLBACK SYSTEM INSTRUCTIONS ── */
+const FALLBACK_SYSTEM_INSTRUCTION = `
 Kamu adalah Asisten NaMun, chatbot AI ramah yang bertugas memandu tamu undangan pada pernikahan Nadia Putri Lingga dan Ahmad Munjin.
 Tugas Kamu adalah melayani dan menjawab pertanyaan tamu undangan secara ramah, sopan, hangat, santun, dan informatif menggunakan bahasa Indonesia.
 Jawab HANYA pertanyaan yang berkaitan dengan pernikahan ini, wisata, hotel, dan kuliner di Bandar Lampung.
 Jika ditanya di luar topik, sampaikan dengan sopan dan ramah bahwa kamu hanya bisa membantu hal-hal seputar pernikahan #NaMun2026 dan info terkait.
-
-=== DATA PERNIKAHAN ===
-- Mempelai Wanita: Nadia Putri Lingga (Putri dari Bapak Wahidin Ahmad & Ibu Wazriati)
-- Mempelai Pria: Ahmad Munjin (Putra dari Bapak Nur Wachid & Ibu Siti Rofiah)
-- Hashtag Acara: #NaMun2026 atau #BrideGroom2025 (berdasarkan adaptasi digital)
-- Tanggal Acara: Minggu, 07 Juni 2026
-- Akad Nikah: 08.00 – 09.30 WIB
-- Resepsi Pernikahan: 09.30 – 11.30 WIB
-- Lokasi / Venue: House of Gelati
-- Alamat Lengkap: Jl. Arif Rahman Hakim No. 2B, Jagabaya III, Kec. Sukabumi (atau Sukarame), Kota Bandar Lampung, Lampung 35122
-- Link Google Maps: https://maps.app.goo.gl/D6PdRJocz8xnKkds9
-- Dress Code: Nuansa Pastel atau Earth Tone yang nyaman untuk garden wedding / taman luar ruangan. Contoh warna rekomendasi: Putih, Biru Muda (Baby Blue), Sage Green, atau Warm Wood / Cream.
-- Batas Konfirmasi RSVP Kehadiran: Paling lambat tanggal 31 Mei 2026.
-
-=== CERITA CINTA (OUR STORY) ===
-- Tahun 2020: Pertama kali berjumpa di kantor program yang sama (Prisma). Di sanalah perkenalan bersemi di antara tugas kantor.
-- Tahun 2024: Jalur karir sempat terpisah setelah resign. Nadia berkelana hingga ke Korea, China, & luar negeri, sedangkan Munjin fokus mengembangkan greenhouse farming (rumah kaca) di Yogyakarta. Jarak sempat membuat komunikasi mereda.
-- Tahun 2025: Mereka terkoneksi kembali lewat sebuah pesan tak terduga di Kalitalang. Hubungan terjalin erat kembali, hingga bertani bersama.
-- Tahun 2026: Memantapkan diri untuk melangkah ke jenjang pelaminan pada 7 Juni 2026.
-
-=== INFO AKOMODASI (MENGINAP DI LAMPUNG) ===
-Beberapa hotel strategis dekat venue di pusat kota Bandar Lampung:
-1. Novotel Lampung (Pemandangan laut yang indah, modern)
-2. Emersia Hotel & Resort (Sangat dekat perbukitan dengan pemandangan perbukitan dan Teluk Lampung)
-3. Whiz Prime Hotel Ahmad Yani Lampung (Terjangkau, minimalis, di pusat kota)
-4. Aston Lampung City Hotel (Nyaman dengan fasilitas rooftop bar)
-5. Swiss-Belhotel Lampung (Pilihan premium dengan area kolam renang luas)
-
-=== INFO WISATA BANDAR LAMPUNG ===
-1. Pulau Pahawang: Destinasi snorkeling legendaris dengan pasir putih menakjubkan (jarak tempuh sekitar 1 jam berkendara menuju Dermaga Ketapang lalu naik kapal).
-2. Puncak Mas: Taman wisata selfie dengan pemandangan kota Bandar Lampung yang indah dari perbukitan.
-3. Lembah Hijau: Wisata satwa, waterboom, dan taman rekreasi keluarga di kaki bukit.
-4. Taman Kupu-Kupu Gita Persada: Tempat konservasi ratusan spesies kupu-kupu indah di kawasan hutan sejuk.
-
-=== WISATA KULINER LAMPUNG ===
-1. Bakso Son Haji SONY (Bakso Sony): Sangat ikonik dan legendaris dengan cita rasa daging sapi yang sangat terasa kenyal dan gurih. Wajib dikunjungi saat di Lampung!
-2. Seruit: Makanan khas Lampung berupa ikan bakar yang dipadukan dengan sambal terasi mentah, lalapan, tempoyak (durian fermentasi), dan mangga muda.
-3. Keripik Pisang Kepok Khas Lampung: Pilihan rasa cokelat, susu, atau keju yang melimpah (lokasi di sentra industri keripik Jl. Pagar Alam / Gang PU).
-4. Kopi Robusta Lampung: Kopi Lampung yang terkenal pekat dan harum, dapat dibeli di berbagai toko oleh-oleh atau dinikmati di kedai kopi lokal.
-
-=== PEMBERIAN HADIAH (WEDDING GIFT) ===
-Doa restu adalah hadiah terindah. Namun, jika ingin memberikan tanda kasih berupa hadiah digital, tamu dapat mentransfer melalui rekening pengantin:
-- Bank BCA
-- No. Rekening: 1234567890
-- Atas Nama: Nadia Putri Lingga
-Fitur "Salin Rekening" tersedia di menu Wedding Gift di website utama.
-
-=== ATURAN TAMBAHAN ===
-- Berikan respon yang terstruktur rapi. Gunakan bullet points bila memberikan daftar informasi agar mudah dibaca di layar HP.
-- Jika ada link, buat link tersebut dalam tag anchor HTML yang bersih: <a href="LNK" target="_blank" rel="noopener noreferrer">TEXT</a>.
-- Harap jawab setiap pertanyaan tamu dengan singkat, jelas, penuh kesopanan, hangat, dan seakan Kamu adalah perwakilan keluarga mempelai yang menyambut mereka dengan senyum. Jangan membuat fakta baru di luar informasi di atas. Jika ditanya kado, katakan bisa diakses via sub-menu "Wedding Gift".
 `;
 
-// API CONFIGURATION FOR DECRYPTION
+let systemInstruction = FALLBACK_SYSTEM_INSTRUCTION;
+
+async function loadExternalKB() {
+  const statusEl = document.getElementById('kb-status');
+  try {
+    const response = await fetch(GITHUB_KB_RAW_URL);
+    if (response.ok) {
+      const text = await response.text();
+      if (text && text.trim().length > 0) {
+        systemInstruction = text;
+        console.log("KB berhasil dimuat secara dinamis dari GitHub.");
+        if (statusEl) {
+          statusEl.innerHTML = '<span class="chat-status-dot" style="background:#6EE7B7;"></span>KB Online';
+        }
+        return;
+      }
+    }
+    throw new Error("Gagal memuat");
+  } catch (e) {
+    console.warn("Gagal memuat KB dari GitHub, menggunakan fallback.");
+    systemInstruction = FALLBACK_SYSTEM_INSTRUCTION;
+    if (statusEl) {
+      statusEl.innerHTML = '<span class="chat-status-dot" style="background:#F59E0B;"></span>KB Lokal';
+    }
+  }
+}
+
+// API CONFIGURATION FOR DECRYPTION (GROQ CLOUD API)
 const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c=";
 
 const GROQ_MODELS = [
@@ -323,20 +302,34 @@ function tryPlayMusic() {
     bgMusic.play().then(() => {
       document.getElementById('music-btn').classList.add('playing');
       updateMusicIcon(true);
+      removeUnlockEvents();
     }).catch(err => {
       console.log("Autoplay ditahan oleh kebijakan browser, menunggu interaksi pengguna...");
     });
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function unlockAudio() {
+  const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+  if (isPlaying) tryPlayMusic();
+}
+
+function removeUnlockEvents() {
+  document.removeEventListener('click', unlockAudio);
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('scroll', unlockAudio);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadExternalKB();
+
   // Personalized greeting initialization
   const greetingEl = document.getElementById('greeting-bubble');
   if (greetingEl) {
     greetingEl.innerHTML = `
       Halo <strong>${guestName}</strong>! Aku Asisten NaMun 💙<br><br>
-      Aku siap membantumu mengetahui detail seputar pernikahan Nadia &amp; Munjin — mulai dari rute dan lokasi, tanggal &amp; waktu acara, opsi dress code, rekomendasi hotel, hingga destinasi wisata serta kuliner wajib coba di Bandar Lampung!<br><br>
-      Ada yang ingin kamu tanyakan padaku?
+      Aku siap membantumu mengetahui detail seputar pernikahan Nadia &amp; Munjin — mulai dari rute dan lokasi, rundown acara, opsi dress code, rekomendasi akomodasi, hingga destinasi liburan seru serta tempat kuliner wajib coba di Bandar Lampung!<br><br>
+      Ada yang ingin kamu tanyakan padaku? Mau coba dibuatkan pantun spesial pernikahan juga bisa, lho! ✨
     `;
   }
 
@@ -345,19 +338,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const bgMusic = document.getElementById('bg-music');
   if (bgMusic) {
     if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-    
-    // Attempt playback
     tryPlayMusic();
-
     bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
     bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
     bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
   }
 
-  // Fallback: Play on first touch/click interaction anywhere on screen
-  document.body.addEventListener('click', () => {
-    tryPlayMusic();
-  }, { once: true });
+  document.addEventListener('click', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+  document.addEventListener('scroll', unlockAudio, { once: true });
 });
 
 function toggleMusic(){
@@ -369,11 +358,13 @@ function toggleMusic(){
     audio.play().then(() => {
       btn.classList.add('playing');
       updateMusicIcon(true);
+      removeUnlockEvents();
     }).catch(() => {});
   } else {
     audio.pause();
     btn.classList.remove('playing');
     updateMusicIcon(false);
+    removeUnlockEvents();
   }
 }
 
@@ -395,6 +386,7 @@ function updateMusicIcon(isPlaying) {
     document.addEventListener("DOMContentLoaded", () => {
       const messagesContainer = document.getElementById('chat-messages');
       if (messagesContainer) {
+        messagesContainer.innerHTML = '';
         conversationHistory.forEach(msg => {
           if (msg.role === 'user') {
             addUserMessage(msg.content);
@@ -426,7 +418,6 @@ function sendChip(btn) {
 }
 
 function formatResponse(text) {
-  // 1. Escape HTML (XSS protection)
   let escaped = text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -434,7 +425,6 @@ function formatResponse(text) {
 
   const savedLinks = [];
 
-  // 2. Decode back explicitly rendered system anchors (&lt;a href...&gt;)
   escaped = escaped.replace(/&lt;a\s+[^&]*href=["']([^"']+)["'][^&]*&gt;([\s\S]*?)&lt;\/a&gt;/gi, function(match, url, linkText) {
     const cleanUrl = url.replace(/&amp;/g, "&");
     const placeholder = `___LINK_PH_${savedLinks.length}___`;
@@ -442,7 +432,6 @@ function formatResponse(text) {
     return placeholder;
   });
 
-  // 3. Match Markdown Style [Text](URL)
   escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
     const cleanUrl = url.replace(/&amp;/g, "&");
     const placeholder = `___LINK_PH_${savedLinks.length}___`;
@@ -450,7 +439,6 @@ function formatResponse(text) {
     return placeholder;
   });
 
-  // 4. Standalone http link parsing
   escaped = escaped.replace(/(https?:\/\/[^\s\)\],;]+)/g, function(match, url) {
     if (url.startsWith('___LINK_PH_')) return match;
     const cleanUrl = url.replace(/&amp;/g, "&");
@@ -459,10 +447,8 @@ function formatResponse(text) {
     return placeholder;
   });
 
-  // 5. Bold text parsing (**text**)
   escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
-  // 6. Splitting and processing list bullets
   const lines = escaped.split('\n');
   let inList = false;
   let formattedHtml = '';
@@ -491,7 +477,6 @@ function formatResponse(text) {
     formattedHtml += '</ul>';
   }
 
-  // 7. Inject placeholders back
   for (let i = 0; i < savedLinks.length; i++) {
     formattedHtml = formattedHtml.replace(`___LINK_PH_${i}___`, savedLinks[i]);
   }
@@ -554,7 +539,7 @@ async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
     return await response.json();
   } catch (error) {
     if (error.message.includes("429") || error.message.includes("402") || error.message.includes("403") || error.message.includes("401")) {
-      throw error; // Propagate quota or rate limit errors instantly to switch models
+      throw error; 
     }
     if (retries > 1) {
       await new Promise(resolve => setTimeout(resolve, delay));
@@ -574,11 +559,9 @@ async function sendMessage() {
   input.style.height = 'auto';
   document.getElementById('btn-send').disabled = true;
 
-  // Render User Message & Typing Indicator
   addUserMessage(text);
   showTyping();
 
-  // Push user state to context history (OpenAI-compatible format for Groq)
   conversationHistory.push({ role: 'user', content: text });
   SafeStorage.setItem('namun_fullpage_chat_history', JSON.stringify(conversationHistory));
 
@@ -596,13 +579,12 @@ async function sendMessage() {
   let success = false;
   let replyText = "";
 
-  // Dynamic model fallback matching the main page logic
   while (attempts < GROQ_MODELS.length && !success) {
     const currentModel = GROQ_MODELS[currentModelIndex];
     const payload = {
       model: currentModel,
       messages: [
-        { role: "system", content: SYSTEM_INSTRUCTION },
+        { role: "system", content: systemInstruction },
         ...conversationHistory
       ]
     };
@@ -625,7 +607,6 @@ async function sendMessage() {
       }
     } catch (err) {
       console.warn(`Gagal menggunakan model ${currentModel}:`, err.message || err);
-      // Fallback to next model
       currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
       attempts++;
     }
@@ -635,7 +616,6 @@ async function sendMessage() {
   document.getElementById('btn-send').disabled = false;
 
   if (success && replyText) {
-    // Save to model context log
     conversationHistory.push({ role: 'assistant', content: replyText });
     SafeStorage.setItem('namun_fullpage_chat_history', JSON.stringify(conversationHistory));
     addBotMessage(replyText);
