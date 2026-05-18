@@ -255,7 +255,7 @@
     .dresscode-note{font-size:.83rem;color:var(--text-muted);line-height:1.75}
 
     /* ================================================================
-       OUR STORY (Timeline Alternating & Split Photos Sejajar)
+       OUR STORY
     ================================================================ */
     #our-story{background:var(--white)}
     .story-timeline {
@@ -264,7 +264,6 @@
       position: relative;
       padding: var(--sp-6) 0;
     }
-    
     .story-item {
       display: grid;
       grid-template-columns: 1fr 44px 1fr;
@@ -273,58 +272,46 @@
       margin-bottom: var(--sp-12);
       position: relative;
     }
-
-    /* Beautiful robust modular line segment connecting each step */
     .story-item::after {
       content: '';
       position: absolute;
       left: 50%;
       top: 0;
-      height: calc(100% + var(--sp-12)); /* Extends down to touch the next step */
+      height: calc(100% + var(--sp-12));
       width: 1.5px;
       background: var(--blue-pale);
       transform: translateX(-50%);
       z-index: 1;
       pointer-events: none;
     }
-
-    .story-col {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    /* Alternating text alignments */
+    .story-col { display: flex; flex-direction: column; }
     .story-text-cell {
       grid-row: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    
     .story-item:nth-child(odd) .story-text-cell {
       grid-column: 1;
       text-align: right;
       align-items: flex-end;
       padding-right: var(--sp-4);
     }
-    
     .story-item:nth-child(even) .story-text-cell {
       grid-column: 3;
       text-align: left;
       align-items: flex-start;
       padding-left: var(--sp-4);
     }
-    
     .story-col-middle {
-      grid-row: 1 / span 2; /* Span both rows so dot sits perfectly centered */
+      grid-row: 1 / span 2;
       grid-column: 2;
       display: flex;
       justify-content: center;
       align-self: start;
-      padding-top: 10px; /* Align precisely with first line of text */
+      padding-top: 10px;
       z-index: 3;
     }
-    
     .story-dot {
       width: 36px;
       height: 36px;
@@ -341,8 +328,6 @@
       z-index: 4;
       position: relative;
     }
-    
-    /* Left and Right Photo Cells forced to the exact same vertical level */
     .story-photo-left-cell {
       grid-row: 2;
       grid-column: 1;
@@ -351,7 +336,6 @@
       padding-right: var(--sp-4);
       z-index: 2;
     }
-
     .story-photo-right-cell {
       grid-row: 2;
       grid-column: 3;
@@ -360,7 +344,6 @@
       padding-left: var(--sp-4);
       z-index: 2;
     }
-
     .story-year {
       font-family: var(--font-display);
       font-size: 1.4rem;
@@ -369,7 +352,6 @@
       display: block;
       margin-bottom: var(--sp-1);
     }
-    
     .story-title {
       font-family: var(--font-display);
       font-size: 1.1rem;
@@ -377,15 +359,12 @@
       color: var(--text);
       margin-bottom: var(--sp-2);
     }
-    
     .story-desc {
       font-size: .83rem;
       color: var(--text-muted);
       line-height: 1.75;
       margin-bottom: var(--sp-2);
     }
-    
-    /* Standard timeline photo dimensions (following 2024 proportion) */
     .timeline-photo {
       width: 100%;
       max-width: 160px;
@@ -397,11 +376,8 @@
       background: var(--surface-2);
       transition: transform 0.4s ease;
     }
-    .timeline-photo:hover {
-      transform: scale(1.03);
-    }
+    .timeline-photo:hover { transform: scale(1.03); }
     
-    /* Centered Layout for 2026 phase */
     .story-item-centered {
       display: flex;
       flex-direction: column;
@@ -411,14 +387,11 @@
       position: relative;
       z-index: 3;
     }
-    
     .story-item-centered .story-text {
       max-width: 480px;
       margin-top: var(--sp-3);
       margin-bottom: var(--sp-5);
     }
-    
-    /* Beautiful floating ring icon where the vertical line ends */
     .timeline-end-ring {
       width: 44px;
       height: 44px;
@@ -433,71 +406,40 @@
       position: relative;
       z-index: 5;
     }
-
-    /* The last centered photo size made 1.5x bigger */
     .timeline-photo.last-photo {
-      max-width: 240px; /* 1.5x larger than 160px */
+      max-width: 240px;
       aspect-ratio: 3/4;
       box-shadow: 0 8px 24px rgba(30,59,138,0.18);
     }
     
-    /* Mobile responsive overrides */
     @media(max-width: 559px) {
-      .story-timeline {
-        padding-inline: var(--sp-1);
-      }
+      .story-timeline { padding-inline: var(--sp-1); }
       .story-item {
         grid-template-columns: 1fr 34px 1fr;
         margin-bottom: var(--sp-8);
         row-gap: var(--sp-3);
       }
-      .story-item::after {
-        height: calc(100% + var(--sp-8));
-      }
-      .story-dot {
-        width: 28px;
-        height: 28px;
-        font-size: .75rem;
-      }
-      .story-year {
-        font-size: 1.2rem;
-      }
-      .story-title {
-        font-size: 0.95rem;
-      }
-      .story-desc {
-        font-size: 0.76rem;
-        line-height: 1.6;
-      }
-      .story-text-cell {
-        padding-left: 2px !important;
-        padding-right: 2px !important;
-      }
-      .story-photo-left-cell {
-        padding-right: var(--sp-2);
-      }
-      .story-photo-right-cell {
-        padding-left: var(--sp-2);
-      }
-      .timeline-photo {
-        max-width: 100%;
-        border-width: 2px;
-      }
-      .timeline-photo.last-photo {
-        max-width: 190px;
-      }
+      .story-item::after { height: calc(100% + var(--sp-8)); }
+      .story-dot { width: 28px; height: 28px; font-size: .75rem; }
+      .story-year { font-size: 1.2rem; }
+      .story-title { font-size: 0.95rem; }
+      .story-desc { font-size: 0.76rem; line-height: 1.6; }
+      .story-text-cell { padding-left: 2px !important; padding-right: 2px !important; }
+      .story-photo-left-cell { padding-right: var(--sp-2); }
+      .story-photo-right-cell { padding-left: var(--sp-2); }
+      .timeline-photo { max-width: 100%; border-width: 2px; }
+      .timeline-photo.last-photo { max-width: 190px; }
     }
-
     .story-hashtag{font-family:var(--font-display);font-style:italic;font-size:1.5rem;color:var(--blue-deep);margin-top:var(--sp-10)}
 
     /* ================================================================
-       GALLERY (Forced exactly to 3 pictures in a row always)
+       GALLERY
     ================================================================ */
     #gallery{background:var(--bg);padding-block:0;padding-inline:0}
     #gallery .container{padding:clamp(var(--sp-12),9vw,var(--sp-20)) var(--sp-4) var(--sp-8)}
     .gallery-grid{
       display:grid;
-      grid-template-columns:repeat(3, 1fr) !important; /* Forces 3 column display on all resolutions */
+      grid-template-columns:repeat(3, 1fr) !important;
       gap: 3px;
     }
     .gallery-item{aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--surface-2);position:relative}
@@ -564,47 +506,14 @@
     .sub-link-sub{font-size:.68rem;color:var(--text-faint)}
 
     /* ================================================================
-       FLOATING MUSIC BTN (Moved to Left Side to make room for Chatbot)
+       FLOATING MUSIC BTN
     ================================================================ */
     #music-player{position:fixed;bottom:var(--sp-6);left:var(--sp-6);right:auto;z-index:300}
-    .music-btn{width:46px;height:46px;border-radius:var(--r-full);background:var(--blue);color:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform var(--ease),background var(--ease);animation:rotateDisk 8s linear infinite;animation-play-state:paused}
+    .music-btn{width:46px;height:46px;border-radius:var(--r-full);background:var(--blue);color:var(--white);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform var(--ease),background var(--ease);animation:rotateDisk 8s linear infinite;animation-play-state:paused;border:none;cursor:pointer}
     .music-btn.playing{animation-play-state:running;background:var(--blue-deep)}
     .music-btn:hover{transform:scale(1.1)}
     .music-btn svg{width:18px;height:18px}
     @keyframes rotateDisk{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-    /* SVG corner ornament (print-invitation style) */
-    .corner-svg{position:absolute;width:160px;height:160px;pointer-events:none}
-  
-    /* Cover page two-column split responsive */
-    @media(max-width:600px){
-      #opening-screen { 
-        flex-direction: column !important; 
-        overflow-y: auto !important;
-        scroll-behavior: smooth;
-        display: block !important;
-      }
-      .opening-left { 
-        height: 50vh !important; 
-        width: 100% !important; 
-        position: sticky !important;
-        top: 0;
-        z-index: 1;
-        flex: none !important;
-      }
-      .opening-right { 
-        min-height: 55vh !important;
-        width: 100% !important; 
-        background: linear-gradient(160deg,#101C2E 0%,#18273F 28%,#2D4060 60%,#4A6080 100%) !important;
-        border-radius: 24px 24px 0 0 !important;
-        margin-top: -30px !important;
-        position: relative !important;
-        z-index: 2;
-        box-shadow: 0 -12px 30px rgba(15, 30, 48, 0.15);
-        padding: var(--sp-8) var(--sp-4) var(--sp-12) !important;
-        flex: none !important;
-      }
-    }
 
     /* ================================================================
        FLOATING CHATBOT AI WIDGET
@@ -632,6 +541,8 @@
       transition: transform var(--ease), background var(--ease);
       position: relative;
       z-index: 999;
+      border:none;
+      cursor:pointer;
     }
     .chatbot-toggle-btn:hover {
       transform: scale(1.08);
@@ -653,10 +564,8 @@
       70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(201, 168, 76, 0); }
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
     }
-    .chatbot-toggle-btn svg {
-      width: 24px;
-      height: 24px;
-    }
+    .chatbot-toggle-btn svg { width: 24px; height: 24px; }
+    
     .chatbot-window {
       position: absolute;
       bottom: 65px;
@@ -692,9 +601,7 @@
       justify-content: space-between;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    .chatbot-header-info {
-      text-align: left;
-    }
+    .chatbot-header-info { text-align: left; }
     .chatbot-header-title {
       font-family: var(--font-display);
       font-size: 1.15rem;
@@ -714,10 +621,11 @@
       font-size: 1.5rem;
       line-height: 1;
       transition: color var(--ease);
+      border:none;
+      background:none;
+      cursor:pointer;
     }
-    .chatbot-close-btn:hover {
-      color: var(--white);
-    }
+    .chatbot-close-btn:hover { color: var(--white); }
     .chatbot-messages {
       flex: 1;
       padding: var(--sp-4);
@@ -742,6 +650,9 @@
       color: var(--blue-darkest);
       border-bottom-left-radius: var(--r-sm);
     }
+    .chat-msg.bot ul { padding-left: 1rem; margin-top: var(--sp-2); }
+    .chat-msg.bot strong { font-weight: 600; }
+    .chat-msg.bot a { color: var(--blue); font-weight: 500; text-decoration: underline; }
     .chat-msg.user {
       align-self: flex-end;
       background: var(--blue-deep);
@@ -787,9 +698,7 @@
       outline: none;
       transition: border-color var(--ease);
     }
-    .chatbot-input:focus {
-      border-color: var(--blue);
-    }
+    .chatbot-input:focus { border-color: var(--blue); }
     .chatbot-send-btn {
       width: 36px;
       height: 36px;
@@ -800,14 +709,11 @@
       align-items: center;
       justify-content: center;
       transition: background var(--ease);
+      border:none;
+      cursor:pointer;
     }
-    .chatbot-send-btn:hover {
-      background: var(--blue-deep);
-    }
-    .chatbot-send-btn svg {
-      width: 18px;
-      height: 18px;
-    }
+    .chatbot-send-btn:hover { background: var(--blue-deep); }
+    .chatbot-send-btn svg { width: 18px; height: 18px; }
 
     /* Proactive Greeting Bubble Styles */
     .chatbot-proactive-bubble {
@@ -855,9 +761,7 @@
       align-items: center;
       justify-content: center;
     }
-    .proactive-close:hover {
-      color: var(--blue-deep);
-    }
+    .proactive-close:hover { color: var(--blue-deep); }
   </style>
 </head>
 <body>
@@ -865,17 +769,12 @@
 <!-- ================================================================
      OPENING SCREEN
 ================================================================ -->
-<div id="opening-screen" role="dialog" aria-modal="true" aria-label="Wedding Invitation Cover" style="flex-direction:row;padding:0;overflow:hidden;">
-
-  <!-- Left column: full cover sketch image -->
+<div id="opening-screen" role="dialog" aria-modal="true" aria-label="Wedding Invitation Cover">
   <div class="opening-left">
-    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/CoverSketch.png"
-         alt="Cover illustration">
+    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/CoverSketch.png" alt="Cover illustration">
   </div>
 
-  <!-- Right column: invitation text (no ornaments) -->
   <div class="opening-right">
-    <!-- Animated background bubbles -->
     <div class="ob ob1" aria-hidden="true"></div>
     <div class="ob ob2" aria-hidden="true"></div>
     <div class="ob ob3" aria-hidden="true"></div>
@@ -897,24 +796,17 @@
   </div>
 </div>
 
-
 <!-- ================================================================
      MAIN CONTENT
 ================================================================ -->
 <div id="main-content" aria-live="polite">
-
-  <!-- ── HERO ────────────────────────────────────────────────── -->
   <section id="hero" aria-label="Hero">
     <div class="hero-bg" role="img" aria-label="Cover photo"></div>
 
-    <!-- Border ornament bottom-left -->
-    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border%20left.png"
-         alt="" aria-hidden="true"
+    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border%20left.png" alt="" aria-hidden="true"
          style="position:absolute;bottom:0;left:0;width:clamp(160px,22vw,280px);z-index:2;pointer-events:none;">
 
-    <!-- Border ornament top-right -->
-    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border%20right.png"
-         alt="" aria-hidden="true"
+    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border%20right.png" alt="" aria-hidden="true"
          style="position:absolute;top:0;right:0;width:clamp(160px,22vw,280px);z-index:2;pointer-events:none;">
 
     <div class="hero-content reveal">
@@ -930,7 +822,6 @@
     </div>
   </section>
 
-  <!-- ── QUOTE ─────────────────────────────────────────────────── -->
   <section id="quote">
     <div class="container reveal">
       <div class="quote-wrap">
@@ -942,7 +833,6 @@
     </div>
   </section>
 
-  <!-- ── COUPLE ────────────────────────────────────────────────── -->
   <section id="couple" aria-label="The Couple">
     <div class="container">
       <p class="section-label reveal">The Couple</p>
@@ -951,7 +841,6 @@
       </div>
     </div>
     <div class="couple-grid container">
-      <!-- Bride -->
       <div class="person reveal rd1">
         <div class="person-photo">
          <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/Foto_Wanita.png" alt="Nadia Putri Lingga">
@@ -964,12 +853,10 @@
         </div>
       </div>
 
-      <!-- Separator -->
       <div class="couple-sep reveal" aria-hidden="true">
         <span class="couple-sep-amp">&amp;</span>
       </div>
 
-      <!-- Groom -->
       <div class="person reveal rd2">
         <div class="person-photo">
           <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/Foto_Pria.png" alt="Ahmad Munjin">
@@ -984,7 +871,6 @@
     </div>
   </section>
 
-  <!-- ── SAVE THE DATE ──────────────────────────────────────────── -->
   <section id="save-date" aria-label="Save the Date">
     <div class="container">
       <p class="section-label reveal">Save The Date</p>
@@ -1002,7 +888,6 @@
     </div>
   </section>
 
-  <!-- ── EVENTS ────────────────────────────────────────────────── -->
   <section id="events" aria-label="Acara">
     <div class="container">
       <p class="section-label reveal">Rangkaian Acara</p>
@@ -1011,24 +896,21 @@
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="3.5" fill="#2563EB"/><circle cx="11" cy="3" r="2.5" fill="#7BA7EC"/><circle cx="11" cy="19" r="2.5" fill="#7BA7EC"/><circle cx="3" cy="11" r="2.5" fill="#7BA7EC"/><circle cx="19" cy="11" r="2.5" fill="#7BA7EC"/></svg>
       </div>
       <div class="events-grid">
-        <!-- Akad Nikah -->
         <div class="event-card reveal rd1">
           <p class="event-type">Akad Nikah</p>
           <p class="event-day" style="font-size:clamp(1.6rem,4.5vw,2.5rem);letter-spacing:.02em;line-height:1.2;">08.00 – 09.30 WIB</p>
         </div>
 
-        <!-- Resepsi -->
         <div class="event-card reveal rd2">
           <p class="event-type">Resepsi</p>
           <p class="event-day" style="font-size:clamp(1.6rem,4.5vw,2.5rem);letter-spacing:.02em;line-height:1.2;">09.30 – 11.30 WIB</p>
         </div>
       </div>
 
-      <!-- Shared venue info -->
       <div class="venue-shared reveal" style="margin-top:var(--sp-8);max-width:480px;margin-inline:auto;text-align:center;">
         <p class="event-venue" style="font-family:var(--font-display);font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:var(--sp-2);">House of Gelati</p>
         <p class="event-address" style="font-size:.82rem;color:var(--text-muted);line-height:1.75;margin-bottom:var(--sp-5);">
-          Jl. Arif Rahman Hakim No. 2B, Jagaraya III,<br>Kec. Sukarame, Kota Bandar Lampung, Lampung 35122
+          Jl. Arif Rahman Hakim No. 2B, Jagabaya III,<br>Kec. Sukarame, Kota Bandar Lampung, Lampung 35122
         </p>
         <a class="btn-maps" href="https://maps.app.goo.gl/D6PdRJocz8xnKkds9" target="_blank" rel="noopener" aria-label="Lihat di Google Maps">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -1038,7 +920,6 @@
         </a>
       </div>
 
-      <!-- Dress Code -->
       <div class="dresscode-box reveal">
         <p class="dresscode-label">Dress Code</p>
         <p class="dresscode-name">Outdoor Garden</p>
@@ -1049,7 +930,6 @@
     </div>
   </section>
 
-  <!-- ── OUR STORY ─────────────────────────────────────────────── -->
   <section id="our-story" aria-label="Our Story">
     <div class="container">
       <p class="section-label reveal">Our Story</p>
@@ -1060,22 +940,18 @@
     </div>
 
     <div class="story-timeline container">
-
       <!-- 2020: Awal Pertemuan -->
       <div class="story-item reveal rd1">
-        <!-- Left: Alternating Text -->
         <div class="story-col story-text-cell">
           <span class="story-year">2020</span>
           <p class="story-title">Awal Pertemuan</p>
           <p class="story-desc">Kami pertama kali bertemu di kantor program yang sama — dua orang dengan semangat yang sejalan, mulai saling mengenal dalam kesibukan kerja masing-masing.</p>
         </div>
         
-        <!-- Middle: Dot -->
         <div class="story-col story-col-middle">
           <div class="story-dot" aria-hidden="true">🤝</div>
         </div>
         
-        <!-- Left Photo (Nadia) & Right Photo (Munjin) perfectly aligned horizontally -->
         <div class="story-photo-left-cell">
           <img class="timeline-photo" src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/Nadia2020.png" alt="Nadia 2020">
         </div>
@@ -1086,19 +962,16 @@
 
       <!-- 2024: Jalan yang Berbeda -->
       <div class="story-item reveal rd2">
-        <!-- Right: Alternating Text -->
         <div class="story-col story-text-cell">
           <span class="story-year">2024</span>
           <p class="story-title">Jalan yang Berbeda</p>
           <p class="story-desc">Kantor program tutup, dan kami melanjutkan perjalanan masing-masing. Nadia bertualang ke China dan berbagai penjuru dunia, sementara Munjin bertani di rumah kaca Yogyakarta.</p>
         </div>
         
-        <!-- Middle: Dot -->
         <div class="story-col story-col-middle">
           <div class="story-dot" aria-hidden="true">🌍</div>
         </div>
         
-        <!-- Left Photo (Nadia) & Right Photo (Munjin) perfectly aligned horizontally -->
         <div class="story-photo-left-cell">
           <img class="timeline-photo" src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/NadiaKorea2024.png" alt="Nadia Korea 2024">
         </div>
@@ -1109,19 +982,16 @@
 
       <!-- 2025: Bertemu Kembali -->
       <div class="story-item reveal rd3">
-        <!-- Left: Alternating Text -->
         <div class="story-col story-text-cell">
           <span class="story-year">2025</span>
           <p class="story-title">Bertemu Kembali</p>
           <p class="story-desc">Takdir mempertemukan kami kembali di 2025. Obrolan ringan berubah jadi hubungan yang lebih dalam — dan kami pun mulai menjalani keseharian bersama, termasuk bertani berdua.</p>
         </div>
         
-        <!-- Middle: Dot -->
         <div class="story-col story-col-middle">
           <div class="story-dot" aria-hidden="true">💚</div>
         </div>
         
-        <!-- Left Photo (Kalitalang) & Right Photo (Dinner) perfectly aligned horizontally -->
         <div class="story-photo-left-cell">
           <img class="timeline-photo" src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/Kalitalang2025.png" alt="Pertemuan Kalitalang 2025">
         </div>
@@ -1130,9 +1000,8 @@
         </div>
       </div>
 
-      <!-- 2026: Menuju Pernikahan (Centered, Single Photo, 1.5x Bigger, Fading Line ending on Ring) -->
+      <!-- 2026: Menuju Pernikahan -->
       <div class="story-item-centered reveal rd4">
-        <!-- Line ends precisely at this golden Ring badge -->
         <div class="timeline-end-ring" aria-hidden="true">💍</div>
         <div class="story-text">
           <span class="story-year">2026</span>
@@ -1146,7 +1015,6 @@
     </div>
   </section>
 
-  <!-- ── GALLERY ────────────────────────────────────────────────── -->
   <section id="gallery" aria-label="Photo Gallery">
     <div class="container">
       <p class="section-label reveal">Galeri</p>
@@ -1162,7 +1030,6 @@
     <img id="lb-img" src="" alt="Foto diperbesar">
   </div>
 
-  <!-- ── RSVP ──────────────────────────────────────────────────── -->
   <section id="rsvp" aria-label="RSVP">
     <div class="container">
       <p class="section-label reveal">Konfirmasi Kehadiran</p>
@@ -1209,7 +1076,6 @@
     </div>
   </section>
 
-  <!-- ── UCAPAN & DOA ──────────────────────────────────────────── -->
   <section id="wishes" aria-label="Ucapan dan Doa">
     <div class="container">
       <p class="section-label reveal">Ucapan &amp; Doa</p>
@@ -1238,7 +1104,6 @@
     </div>
   </section>
 
-  <!-- ── CLOSING ───────────────────────────────────────────────── -->
   <section id="closing" aria-label="Penutup">
     <div class="closing-bg" aria-hidden="true"></div>
     <div class="closing-inner">
@@ -1264,38 +1129,35 @@
     </div>
   </section>
 
-  <!-- ── SUB-PAGE LINKS ────────────────────────────────────────── -->
   <section id="sub-links" aria-label="Informasi Tambahan">
     <p class="sub-links-title">Ada yang ingin kamu ketahui lebih lanjut?</p>
     <div class="sub-links-grid">
-      <a class="sub-link-card reveal rd1" href="faq.html" aria-label="FAQ">
+      <a class="sub-link-card reveal rd1" href="faq-2.html" aria-label="FAQ">
         <div class="sub-link-icon">❓</div>
         <span class="sub-link-label">FAQ</span>
         <span class="sub-link-sub">Pertanyaan Umum</span>
       </a>
-      <a class="sub-link-card reveal rd2" href="venue-direction.html" aria-label="Cara Menuju Venue">
+      <a class="sub-link-card reveal rd2" href="venue-direction-2.html" aria-label="Cara Menuju Venue">
         <div class="sub-link-icon">🗺️</div>
         <span class="sub-link-label">Menuju Venue</span>
         <span class="sub-link-sub">Petunjuk Arah</span>
       </a>
-      <a class="sub-link-card reveal rd3" href="wisata-lampung.html" aria-label="Wisata di Lampung">
+      <a class="sub-link-card reveal rd3" href="wisata-lampung-2.html" aria-label="Wisata di Lampung">
         <div class="sub-link-icon">🌴</div>
         <span class="sub-link-label">Wisata Lampung</span>
         <span class="sub-link-sub">Rekomendasi Destinasi</span>
       </a>
-      <!-- NaMun AI Assistant -->
-      <a class="sub-link-card sub-link-card--ai reveal rd1" href="asisten-namun.html" aria-label="Tanya Asisten NaMun">
+      <a class="sub-link-card sub-link-card--ai reveal rd1" href="asisten-namun-2.html" aria-label="Tanya Asisten NaMun">
         <div class="sub-link-icon" style="background:linear-gradient(135deg,#2D4060,#4A6080);color:white;font-size:1.2rem;">✨</div>
         <span class="sub-link-label" style="color:var(--blue-deep);">Tanya Asisten NaMun</span>
         <span class="sub-link-sub">Chatbot AI seputar pernikahan kami</span>
       </a>
-      <!-- Hotel & Menginap -->
-      <a class="sub-link-card reveal rd2" href="menginap.html" aria-label="Rekomendasi Menginap">
+      <a class="sub-link-card reveal rd2" href="menginap-2.html" aria-label="Rekomendasi Menginap">
         <div class="sub-link-icon">🏨</div>
         <span class="sub-link-label">Menginap</span>
         <span class="sub-link-sub">Hotel &amp; Penginapan di Lampung</span>
       </a>
-      <a class="sub-link-card reveal rd3" href="wedding-gift.html" aria-label="Wedding Gift">
+      <a class="sub-link-card reveal rd3" href="wedding-gift-2.html" aria-label="Wedding Gift">
         <div class="sub-link-icon">🎁</div>
         <span class="sub-link-label">Wedding Gift</span>
         <span class="sub-link-sub">Tanda Kasih</span>
@@ -1306,10 +1168,9 @@
   <footer>
     <p>Made with ♡ &middot; #NaMun2026 &middot; 07 Juni 2026</p>
   </footer>
-</div><!-- /#main-content -->
+</div>
 
-
-<!-- ── MUSIC PLAYER (Left aligned) ────────────────────────────── -->
+<!-- MUSIC PLAYER ELEMENT -->
 <div id="music-player">
   <audio id="bg-music" loop>
     <source src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/music/music.mp3" type="audio/mpeg">
@@ -1324,16 +1185,13 @@
   </button>
 </div>
 
-
-<!-- ── ASISTEN NAMUN FLYING CHATBOT WIDGET ─────────────────────── -->
+<!-- CHATBOT LAYANG WIDGET (Ditenagai Groq + KB Dinamis) -->
 <div id="namun-chatbot-container">
-  <!-- Proactive Greeting Bubble -->
   <div class="chatbot-proactive-bubble" id="chatbot-proactive-bubble" onclick="toggleChatbot()">
     <span>Apa Anda ada pertanyaan terkait acara pernikahan NaMun?</span>
     <button class="proactive-close" onclick="dismissProactive(event)" aria-label="Tutup sapaan">&times;</button>
   </div>
 
-  <!-- Bubble Button -->
   <button class="chatbot-toggle-btn" onclick="toggleChatbot()" aria-label="Tanya Asisten NaMun">
     <span class="badge-dot" id="chatbot-badge"></span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1341,7 +1199,6 @@
     </svg>
   </button>
 
-  <!-- Chat Window -->
   <div class="chatbot-window" id="chatbot-window">
     <div class="chatbot-header">
       <div class="chatbot-header-info">
@@ -1351,22 +1208,16 @@
       <button class="chatbot-close-btn" onclick="toggleChatbot()" aria-label="Tutup Chat">&times;</button>
     </div>
     
-    <!-- Messages Body -->
     <div class="chatbot-messages" id="chatbot-messages">
-      <!-- Greeting Message -->
       <div class="chat-msg bot" id="chat-greeting-msg">
         Apa Anda ada pertanyaan terkait acara pernikahan NaMun?
       </div>
     </div>
 
-    <!-- Typing Indicator -->
     <div class="chat-typing-indicator" id="chat-typing-indicator">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
 
-    <!-- Input Field Area -->
     <form class="chatbot-input-area" onsubmit="sendChat(event)">
       <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Tanyakan lokasi, dress code, acara..." autocomplete="off">
       <button type="submit" class="chatbot-send-btn" aria-label="Kirim pesan">
@@ -1379,35 +1230,26 @@
   </div>
 </div>
 
-
-<!-- ================================================================
-     JAVASCRIPT
-================================================================ -->
 <script>
-  /* ── Safe Storage Wrapper (Prevents sandboxed iframe localStorage SecurityErrors) ── */
+  /* ── Safe Storage Wrapper ── */
   const SafeStorage = {
-    getItem(key) {
-      try {
-        return localStorage.getItem(key);
-      } catch (e) {
-        return null;
-      }
-    },
-    setItem(key, value) {
-      try {
-        localStorage.setItem(key, value);
-      } catch (e) {}
-    }
+    getItem(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
+    setItem(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
   };
 
-  /* ── Guest name parsing from ?to= ── */
+  /* ── Guest name parsing ── */
   let guestName = "Tamu Undangan";
   (function(){
-    const p=new URLSearchParams(window.location.search),name=p.get('to');
+    const p=new URLSearchParams(window.location.search), name=p.get('to');
     const el=document.getElementById('guest-name-cover');
     if(name) {
       guestName = decodeURIComponent(name);
       if(el) el.textContent = guestName;
+      document.querySelectorAll('#sub-links a').forEach(link => {
+        const url = new URL(link.href, window.location.href);
+        url.searchParams.set('to', guestName);
+        link.href = url.pathname + url.search;
+      });
     }
   })();
 
@@ -1416,29 +1258,17 @@
     document.getElementById('opening-screen').classList.add('hidden');
     document.getElementById('main-content').classList.add('visible');
     
-    // Reset view position straight to the absolute top of the main page
     window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    setTimeout(checkReveals, 120);
 
-    setTimeout(checkReveals,120);
-
-    // Play HTML5 background music safely with modern browser promise support checks
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic) {
-      const playPromise = bgMusic.play();
-      if (playPromise !== undefined && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          document.getElementById('music-btn').classList.add('playing');
-          updateMusicIcon(true);
-        }).catch(() => {});
-      } else {
+      bgMusic.play().then(() => {
         document.getElementById('music-btn').classList.add('playing');
         updateMusicIcon(true);
-      }
+      }).catch(() => {});
     }
 
-    // Proactively greet users after exactly 5 seconds
     setTimeout(() => {
       const chatWindow = document.getElementById('chatbot-window');
       const proactiveBubble = document.getElementById('chatbot-proactive-bubble');
@@ -1451,9 +1281,7 @@
         if (greetingMsg) {
           greetingMsg.textContent = `Hi ${guestName}, apa kamu ada pertanyaan mengenai acara pernikahan Nadia & Munjin?`;
         }
-        if (proactiveBubble) {
-          proactiveBubble.classList.add('show');
-        }
+        if (proactiveBubble) proactiveBubble.classList.add('show');
       }
     }, 5000);
   }
@@ -1465,10 +1293,10 @@
       if(el.getBoundingClientRect().top<thr)el.classList.add('revealed');
     });
   }
-  window.addEventListener('scroll',checkReveals,{passive:true});
-  window.addEventListener('resize',checkReveals,{passive:true});
+  window.addEventListener('scroll', checkReveals, {passive:true});
+  window.addEventListener('resize', checkReveals, {passive:true});
 
-  /* ── Countdown to 07 June 2026 08:00 WIB (UTC+7) ── */
+  /* ── Countdown to 07 June 2026 08:00 WIB ── */
   const WEDDING_DATE=new Date('2026-06-07T08:00:00+07:00');
   function tick(){
     const diff=WEDDING_DATE-Date.now();
@@ -1482,26 +1310,28 @@
     document.getElementById('cd-minutes').textContent=pad(Math.floor(diff%3600000/60000));
     document.getElementById('cd-seconds').textContent=pad(Math.floor(diff%60000/1000));
   }
-  tick();setInterval(tick,1000);
+  tick(); setInterval(tick, 1000);
 
   /* ── Gallery placeholders ── */
   (function(){
     const grid=document.getElementById('gallery-grid');
-    for(let i=1;i<=12;i++){
-      const n=String(i).padStart(2,'0'),src=`https://raw.githubusercontent.com/maasmoon/NaMun2026/main/gallery/gallery-${n}.jpg`;
-      const item=document.createElement('div');
-      item.className='gallery-item';item.dataset.src=src;
-      item.onclick=()=>openLightbox(src);
-      item.innerHTML=`
-        <img src="${src}" alt="Foto galeri ${n}" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
-        <div class="gallery-ph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-            <path d="M21 15l-5-5L5 21"/>
-          </svg>
-          gallery-${n}.jpg
-        </div>`;
-      grid.appendChild(item);
+    if (grid) {
+      for(let i=1; i<=12; i++){
+        const n=String(i).padStart(2,'0'), src=`https://raw.githubusercontent.com/maasmoon/NaMun2026/main/gallery/gallery-${n}.jpg`;
+        const item=document.createElement('div');
+        item.className='gallery-item'; item.dataset.src=src;
+        item.onclick=()=>openLightbox(src);
+        item.innerHTML=`
+          <img src="${src}" alt="Foto galeri ${n}" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+          <div class="gallery-ph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            gallery-${n}.jpg
+          </div>`;
+        grid.appendChild(item);
+      }
     }
   })();
 
@@ -1514,8 +1344,7 @@
     document.getElementById('lb-img').src='';
   }
 
-  /* ── RSVP Submit (Google Sheets / Microsoft Forms compatible) ── */
-  /* PLACEHOLDER: Replace ACTION_URL with your Google Apps Script or Power Automate webhook URL */
+  /* ── RSVP Submit ── */
   const RSVP_ACTION = 'https://script.google.com/macros/s/AKfycbyek3RO9Sx-T779iu-y7lfhQkU8z4h28Vj5FuEi7teUJNFNhaUGObWXe1ycd7maXw3A/exec';
   function submitRSVP(e){
     e.preventDefault();
@@ -1525,14 +1354,7 @@
     const children= document.getElementById('rsvp-children').value;
     if(!name){document.getElementById('rsvp-name').focus();return;}
 
-    /* Google Apps Script requires form-encoded data + no-cors mode */
-    const payload = new URLSearchParams({
-      type:     'rsvp',
-      name:     name,
-      confirm:  confirm,
-      adults:   adults,
-      children: children
-    });
+    const payload = new URLSearchParams({ type: 'rsvp', name, confirm, adults, children });
     fetch(RSVP_ACTION, {
       method: 'POST',
       mode:   'no-cors',
@@ -1544,16 +1366,12 @@
     document.getElementById('rsvp-success').classList.add('show');
   }
 
-  /* ── Wishes / Ucapan ── fetched live from Google Sheet ── */
+  /* ── Wishes ── */
   const WISH_ACTION = 'https://script.google.com/macros/s/AKfycbyek3RO9Sx-T779iu-y7lfhQkU8z4h28Vj5FuEi7teUJNFNhaUGObWXe1ycd7maXw3A/exec';
-
-  // Fetch ucapan from Google Sheet (called on page load & after submit)
   function loadWishes() {
     fetch(WISH_ACTION + '?action=get_ucapan')
       .then(r => r.json())
-      .then(res => {
-        if (res.status === 'ok') renderWishes(res.data);
-      })
+      .then(res => { if (res.status === 'ok') renderWishes(res.data); })
       .catch(() => {
         const local = JSON.parse(SafeStorage.getItem('namun_wishes') || '[]');
         renderWishes([...local].reverse());
@@ -1562,6 +1380,7 @@
 
   function renderWishes(list) {
     const el = document.getElementById('wishes-list');
+    if (!el) return;
     el.innerHTML = '';
     if (!list || list.length === 0) {
       el.innerHTML = '<p style="font-size:.82rem;color:var(--text-faint);text-align:center;padding:var(--sp-4)">Belum ada ucapan. Jadilah yang pertama! 💙</p>';
@@ -1589,7 +1408,6 @@
     btn.textContent = 'Mengirim…';
 
     const payload = new URLSearchParams({ type:'ucapan', name, message });
-
     fetch(WISH_ACTION, {
       method:  'POST',
       mode:    'no-cors',
@@ -1600,7 +1418,6 @@
       document.getElementById('wish-form').reset();
       document.getElementById('wish-success').classList.add('show');
       setTimeout(() => document.getElementById('wish-success').classList.remove('show'), 5000);
-      // Reload from sheet after a short delay so the new entry appears
       setTimeout(loadWishes, 3500);
     })
     .catch(() => {
@@ -1613,28 +1430,19 @@
     });
   }
 
-  function escHtml(t){
-    return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
+  function escHtml(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   loadWishes();
 
-  /* ── Music toggle ── */
+  /* ── Music logic ── */
   function toggleMusic(){
-    const audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');
+    const audio=document.getElementById('bg-music'), btn=document.getElementById('music-btn');
+    if(!audio) return;
     if(audio.paused){
-      const playPromise = audio.play();
-      if (playPromise !== undefined && typeof playPromise.then === 'function') {
-        playPromise.then(()=>{
-          btn.classList.add('playing');
-          updateMusicIcon(true);
-        }).catch(()=>{});
-      } else {
+      audio.play().then(()=>{
         btn.classList.add('playing');
         updateMusicIcon(true);
-      }
-    }
-    else{
+      }).catch(()=>{});
+    } else {
       audio.pause();
       btn.classList.remove('playing');
       updateMusicIcon(false);
@@ -1643,57 +1451,64 @@
 
   function updateMusicIcon(isPlaying) {
     const btn = document.getElementById('music-btn');
+    if (!btn) return;
     if (isPlaying) {
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18V5l12-2v13"></path>
-          <circle cx="6" cy="18" r="3"></circle>
-          <circle cx="18" cy="16" r="3"></circle>
-        </svg>
-      `;
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>`;
     } else {
-      btn.innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 18V5l12-2v13" opacity="0.4"></path>
-          <circle cx="6" cy="18" r="3" opacity="0.4"></circle>
-          <circle cx="18" cy="16" r="3" opacity="0.4"></circle>
-          <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"></line>
-        </svg>
-      `;
+      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13" opacity="0.4"></path><circle cx="6" cy="18" r="3" opacity="0.4"></circle><circle cx="18" cy="16" r="3" opacity="0.4"></circle><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"></line></svg>`;
     }
   }
 
-  /* ================================================================
-     FLYING CHATBOT AI LOGIC & OPENROUTER INTEGRATION
-     (Asisten NaMun — OpenRouter API Connection)
-  ================================================================ */
-  const SYSTEM_INSTRUCTION = `
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedTime = SafeStorage.getItem('bg_music_time');
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    const bgMusic = document.getElementById('bg-music');
+    if (bgMusic) {
+      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+      if (isPlaying) {
+        bgMusic.play().then(() => {
+          document.getElementById('music-btn').classList.add('playing');
+          updateMusicIcon(true);
+        }).catch(() => {});
+      }
+      bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
+      bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
+      bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
+    }
+  });
+
+  /* ── CHATBOT AI LOGIC WITH DYNAMIC KB FETCH ── */
+  const GITHUB_KB_RAW_URL = "https://raw.githubusercontent.com/maasmoon/NaMun2026/main/wedding_kb.md";
+  
+  const FALLBACK_SYSTEM_INSTRUCTION = `
     Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
     Tugas Anda adalah melayani dan menjawab pertanyaan tamu undangan secara ramah, sopan, hangat, santun, dan informatif menggunakan bahasa Indonesia.
-    Gunakan konteks lengkap berikut untuk menjawab pertanyaan:
-    - Mempelai Wanita: Nadia Putri Lingga, putri dari Bapak Wahidin Ahmad & Ibu Wazriati.
-    - Mempelai Pria: Ahmad Munjin, putra dari Bapak Nur Wachid & Ibu Siti Rofiah.
-    - Tanggal Pernikahan: Minggu, 07 Juni 2026.
-    - Lokasi Acara: House of Gelati, Jl. Arif Rahman Hakim No. 2B, Jagaraya III, Kec. Sukarame, Kota Bandar Lampung, Lampung 35122.
-    - Waktu Akad Nikah: Pukul 08.00 – 09.30 WIB.
-    - Waktu Resepsi Pernikahan: Pukul 09.30 – 11.30 WIB.
-    - Batas Konfirmasi RSVP Kehadiran: Paling lambat tanggal 31 Mei 2026.
-    - Dress Code / Aturan Busana: Bertema "Outdoor Garden". Silakan mengenakan pakaian yang nyaman untuk ruangan luar (outdoor) dengan pilihan warna yang bebas dan sopan.
-    - Perjalanan Kisah Cinta:
-      * 2020: Bertemu pertama kali di kantor program yang sama (Prisma).
-      * 2024: Menempuh jalan yang berbeda (Nadia bertualang/traveling ke Korea/China/penjuru dunia, Munjin bertani di rumah kaca Yogyakarta).
-      * 2025: Bertemu kembali di Kalitalang, mulai menjalin kedekatan yang serius, bertani bersama.
-      * 2026: Memutuskan mantap untuk menikah (#NaMun2026).
-    - Fitur sub-page yang ada di website: FAQ (Pertanyaan Umum), Menuju Venue (Petunjuk Google Maps), Wisata Lampung (Destinasi Rekomendasi), Tanya Asisten NaMun (Halaman Asisten AI), Menginap (Rekomendasi Hotel/Penginapan di Bandar Lampung), dan Wedding Gift (Tanda Kasih/Kado digital).
-    Harap jawab setiap pertanyaan tamu dengan singkat, jelas, penuh kesopanan, dan seakan Anda adalah perwakilan keluarga mempelai yang menyambut mereka dengan senyum. Jangan membuat fakta baru di luar informasi di atas. Jika ditanya kado, katakan bisa diakses via sub-menu "Wedding Gift".
+    - Lokasi: House of Gelati, Bandar Lampung.
+    - Tanggal: Minggu, 07 Juni 2026.
+    - Waktu: Akad 08.00-09.30 WIB, Resepsi 09.30-11.30 WIB.
+    - Dress Code: Outdoor Garden (nyaman, pastel/earth tone).
+    - RSVP: Paling lambat 31 Mei 2026.
+    Arahkan kado ke menu "Wedding Gift". Jawab dengan santun, hangat, dan beri emoji yang sesuai (💙, ✨, 😊).
   `;
 
-  // ── KONFIGURASI GROQ ─────────────────────────────────────────
-  // Encode kunci Groq Anda: di browser console jalankan: btoa("gsk_YOURKEYHERE".split('').reverse().join(''))
-  // Lalu tempel hasil encode di bawah:
+  let systemInstruction = FALLBACK_SYSTEM_INSTRUCTION;
+
+  async function loadExternalKB() {
+    try {
+      const response = await fetch(GITHUB_KB_RAW_URL);
+      if (response.ok) {
+        const text = await response.text();
+        if (text && text.trim().length > 0) {
+          systemInstruction = text;
+          console.log("KB Online terpusat berhasil diunduh.");
+        }
+      }
+    } catch (e) {
+      console.warn("Gagal mengunduh KB eksternal. Beralih menggunakan KB lokal.");
+    }
+  }
+
   const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
-  
-  // Daftar model gratis OpenRouter sebagai cadangan jika kuota/limit salah satu model habis
   const GROQ_MODELS = [
     "llama-3.3-70b-versatile",
     "mixtral-8x7b-32768",
@@ -1701,7 +1516,6 @@
     "llama3-8b-8192"
   ];
   let currentModelIndex = 0;
- 
   let chatHistory = [];
  
   function toggleChatbot() {
@@ -1713,35 +1527,22 @@
     if (chatWindow.classList.contains('open')) {
       if (badge) badge.style.display = 'none';
       if (proactiveBubble) proactiveBubble.classList.remove('show');
-      setTimeout(() => {
-        document.getElementById('chatbot-input').focus();
-      }, 300);
+      setTimeout(() => { document.getElementById('chatbot-input').focus(); }, 300);
     }
   }
  
   function dismissProactive(e) {
-    e.stopPropagation(); // Prevent opening the main chat window
+    e.stopPropagation();
     const proactiveBubble = document.getElementById('chatbot-proactive-bubble');
-    if (proactiveBubble) {
-      proactiveBubble.classList.remove('show');
-    }
+    if (proactiveBubble) proactiveBubble.classList.remove('show');
     SafeStorage.setItem('namun_proactive_dismissed', 'true');
   }
  
-  // Helper utilitas untuk memulihkan API key asli di sisi browser client
   function getDecryptedApiKey() {
-    if (ENCODED_OPENROUTER_KEY === "ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw==" || !ENCODED_OPENROUTER_KEY) {
-      return "";
-    }
-    try {
-      return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join('');
-    } catch (e) {
-      console.error("Gagal melakukan dekripsi API Key:", e);
-      return "";
-    }
+    if (!ENCODED_OPENROUTER_KEY) return "";
+    try { return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join(''); } catch (e) { return ""; }
   }
  
-  // Helper Exponential Backoff fetch
   async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
     try {
       const response = await fetch(url, options);
@@ -1751,17 +1552,13 @@
       }
       return await response.json();
     } catch (error) {
-      // Jika error disebabkan oleh rate limit (429) atau kuota habis (402/403)
-      // Jangan tunggu retry eksponensial terlalu lama, langsung beralih ke model fallback
       if (error.message.includes("429") || error.message.includes("402") || error.message.includes("403") || error.message.includes("401")) {
         throw error;
       }
       if (retries > 1) {
         await new Promise(resolve => setTimeout(resolve, delay));
         return fetchWithRetry(url, options, retries - 1, delay * 2);
-      } else {
-        throw error;
-      }
+      } else { throw error; }
     }
   }
  
@@ -1771,45 +1568,33 @@
     const text = inputEl.value.trim();
     if (!text) return;
  
-    // Append user message
     appendMessage(text, 'user');
     inputEl.value = '';
  
-    // Show typing indicator
     const typingIndicator = document.getElementById('chat-typing-indicator');
     typingIndicator.style.display = 'flex';
     scrollChatBottom();
  
-    // Dapatkan API Key asli hasil dekripsi di sisi client
     const apiKey = getDecryptedApiKey();
- 
-    // Validasi pengisian API Key
     if (!apiKey) {
       setTimeout(() => {
         typingIndicator.style.display = 'none';
-        appendMessage("Halo! Asisten NaMun belum bisa menjawab karena Groq API Key belum dimasukkan. Silakan hubungi pengelola website ya! 😊", 'bot');
+        appendMessage("Halo! Asisten NaMun belum terhubung karena API Key Groq belum siap.", 'bot');
         scrollChatBottom();
       }, 800);
       return;
     }
  
-    // Masukkan ke history chat (Format OpenAI compatible)
     chatHistory.push({ role: "user", content: text });
  
     const url = "https://api.groq.com/openai/v1/chat/completions";
-    let attempts = 0;
-    let success = false;
-    let reply = "";
+    let attempts = 0, success = false, reply = "";
  
-    // Loop mencoba memanggil model, jika gagal/limit habis, otomatis pindah ke model berikutnya
     while (attempts < GROQ_MODELS.length && !success) {
       const currentModel = GROQ_MODELS[currentModelIndex];
       const payload = {
         model: currentModel,
-        messages: [
-          { role: "system", content: SYSTEM_INSTRUCTION },
-          ...chatHistory
-        ]
+        messages: [{ role: "system", content: systemInstruction }, ...chatHistory]
       };
  
       try {
@@ -1825,13 +1610,9 @@
         if (res.choices?.[0]?.message?.content) {
           reply = res.choices[0].message.content;
           success = true;
-        } else {
-          throw new Error("Format respons tidak valid");
-        }
+        } else { throw new Error("Format respons tidak valid"); }
       } catch (err) {
-        // Outputkan alasan kegagalan model spesifik ke konsol pengembang untuk diinspeksi pengguna
         console.error(`Gagal menggunakan model ${currentModel}:`, err.message || err);
-        // Pindah indeks model ke berikutnya di array OPENROUTER_MODELS
         currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
         attempts++;
       }
@@ -1843,23 +1624,72 @@
       appendMessage(reply, 'bot');
       chatHistory.push({ role: "assistant", content: reply });
     } else {
-      appendMessage("Maaf, semua model AI cadangan kami sedang sibuk atau kehabisan limit saat ini. Mohon coba beberapa saat lagi ya. 🙏", 'bot');
+      appendMessage("Maaf, asisten kami sedang menerima volume pertanyaan yang tinggi. Silakan coba kembali ya Kak. 🙏", 'bot');
     }
     scrollChatBottom();
   }
  
+  function formatResponse(text) {
+    let escaped = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const savedLinks = [];
+    escaped = escaped.replace(/&lt;a\s+[^&]*href=["']([^"']+)["'][^&]*&gt;([\s\S]*?)&lt;\/a&gt;/gi, function(match, url, linkText) {
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/(https?:\/\/[^\s\)\],;]+)/g, function(match, url) {
+      if (url.startsWith('___LINK_PH_')) return match;
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    const lines = escaped.split('\n');
+    let inList = false, formattedHtml = '';
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i].trim();
+      if (line.startsWith('- ') || line.startsWith('* ')) {
+        if (!inList) { formattedHtml += '<ul>'; inList = true; }
+        formattedHtml += `<li>${line.substring(2)}</li>`;
+      } else {
+        if (inList) { formattedHtml += '</ul>'; inList = false; }
+        if (line === '') formattedHtml += '<br>';
+        else formattedHtml += `<p>${line}</p>`;
+      }
+    }
+    if (inList) formattedHtml += '</ul>';
+    for (let i = 0; i < savedLinks.length; i++) {
+      formattedHtml = formattedHtml.replace(`___LINK_PH_${i}___`, savedLinks[i]);
+    }
+    return formattedHtml;
+  }
+
   function appendMessage(text, sender) {
     const msgContainer = document.getElementById('chatbot-messages');
+    if (!msgContainer) return;
     const msgDiv = document.createElement('div');
     msgDiv.className = `chat-msg ${sender}`;
-    msgDiv.textContent = text;
+    if (sender === 'bot') msgDiv.innerHTML = formatResponse(text);
+    else msgDiv.textContent = text;
     msgContainer.appendChild(msgDiv);
   }
  
   function scrollChatBottom() {
     const msgContainer = document.getElementById('chatbot-messages');
-    msgContainer.scrollTop = msgContainer.scrollHeight;
+    if (msgContainer) msgContainer.scrollTop = msgContainer.scrollHeight;
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadExternalKB();
+  });
 </script>
 </body>
 </html>
