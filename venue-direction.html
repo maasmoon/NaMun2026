@@ -70,11 +70,145 @@
       border-top:1px solid var(--blue-pale);margin-top:2rem;
     }
     footer a{color:var(--blue);text-decoration:underline}
+
+    /* ── Hero ── */
+    .venue-hero{
+      background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
+      border-radius:var(--r-xl);color:white;
+      padding:1.75rem 1.5rem 1.5rem;text-align:center;margin-bottom:2rem;
+    }
+    .venue-hero-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.4rem}
+    .venue-hero-name{font-family:var(--font-display);font-size:1.6rem;font-weight:300;margin-bottom:.4rem}
+    .venue-hero-addr{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:1rem}
+    .venue-hero-btn{
+      display:inline-flex;align-items:center;gap:.4rem;
+      padding:.5rem 1.2rem;background:var(--gold);color:var(--blue-darkest);
+      border-radius:var(--r-full);font-size:.8rem;font-weight:600;
+      text-decoration:none;transition:background var(--ease);
+    }
+    .venue-hero-btn:hover{background:var(--gold-light)}
+
+    /* ── Route tabs ── */
+    .route-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:.25rem;scrollbar-width:none}
+    .route-tabs::-webkit-scrollbar{display:none}
+    .rtab{
+      display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;
+      padding:.45rem 1rem;border-radius:var(--r-full);font-size:.8rem;font-weight:500;
+      cursor:pointer;border:1.5px solid var(--blue-pale);background:var(--white);
+      color:var(--text-muted);transition:all var(--ease);font-family:var(--font-body);flex-shrink:0;
+    }
+    .rtab.active,.rtab:hover{background:var(--blue-deep);color:white;border-color:var(--blue-deep)}
+
+    /* ── Route panels ── */
+    .route-panel{display:none}
+    .route-panel.active{display:block}
+
+    /* ── Journey timeline ── */
+    .journey{position:relative;padding-left:2.5rem;margin:1rem 0}
+    .journey::before{
+      content:'';position:absolute;left:11px;top:0;bottom:0;
+      width:2px;background:linear-gradient(to bottom,var(--blue-deep),var(--blue-pale));
+      border-radius:2px;
+    }
+
+    .jstep{
+      position:relative;margin-bottom:1.25rem;
+    }
+    .jstep-dot{
+      position:absolute;left:-2.5rem;width:24px;height:24px;
+      border-radius:50%;background:var(--blue-deep);color:white;
+      display:flex;align-items:center;justify-content:center;
+      font-size:.65rem;font-weight:700;top:.05rem;
+      box-shadow:0 0 0 3px var(--bg);
+    }
+    .jstep-dot--start{background:var(--green);font-size:.7rem}
+    .jstep-dot--end{background:var(--gold);color:var(--blue-darkest);font-size:.7rem}
+
+    .jstep-card{
+      background:var(--white);border-radius:var(--r-lg);
+      padding:.85rem 1rem;border:1.5px solid var(--blue-pale);
+    }
+    .jstep-place{font-weight:600;font-size:.88rem;color:var(--text);margin-bottom:.2rem}
+    .jstep-detail{font-size:.8rem;color:var(--text-muted);line-height:1.65}
+    .jstep-badge{
+      display:inline-flex;align-items:center;gap:.3rem;
+      font-size:.68rem;font-weight:500;padding:.18rem .55rem;
+      border-radius:var(--r-full);margin-top:.35rem;
+    }
+    .badge--time{background:var(--surface);color:var(--blue-deep)}
+    .badge--tip{background:var(--gold-pale);color:#7A5B10;border:1px solid var(--gold-light)}
+
+    /* ── Summary strip ── */
+    .summary-strip{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;
+      margin-bottom:1.5rem;
+    }
+    .summary-item{
+      background:var(--white);border-radius:var(--r-lg);padding:.75rem;
+      text-align:center;border:1.5px solid var(--blue-pale);
+    }
+    .summary-icon{font-size:1.3rem;margin-bottom:.25rem}
+    .summary-label{font-size:.65rem;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase}
+    .summary-value{font-size:.85rem;font-weight:600;color:var(--blue-deep)}
+
+    /* ── Maps CTA ── */
+    .maps-cta{
+      display:flex;align-items:center;gap:.6rem;
+      background:var(--white);border:1.5px solid var(--blue-pale);
+      border-radius:var(--r-lg);padding:.85rem 1rem;margin-top:1rem;
+      text-decoration:none;transition:all var(--ease);
+    }
+    .maps-cta:hover{border-color:var(--blue);background:var(--surface)}
+    .maps-cta-icon{width:36px;height:36px;border-radius:var(--r-md);background:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+    .maps-cta-text{flex:1}
+    .maps-cta-label{font-size:.85rem;font-weight:600;color:var(--text)}
+    .maps-cta-sub{font-size:.72rem;color:var(--text-faint)}
+    .maps-cta-arrow{color:var(--blue);font-size:1rem}
+
+    /* PERSISTENT MUSIC & CHATBOT CODE FOR SUBPAGES */
+    #music-player{position:fixed;bottom:24px;left:24px;right:auto;z-index:300}
+    .music-btn{width:46px;height:46px;border-radius:50%;background:#4A6080;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform 300ms,background 300ms;animation:rotateDisk 8s linear infinite;animation-play-state:paused;border:none;cursor:pointer}
+    .music-btn.playing{animation-play-state:running;background:#2D4060}
+    .music-btn:hover{transform:scale(1.1)}
+    .music-btn svg{width:18px;height:18px}
+    @keyframes rotateDisk{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+    #namun-chatbot-container{position:fixed;bottom:24px;right:24px;z-index:999;font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:flex-end}
+    .chatbot-toggle-btn{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2D4060,#4A6080);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(15,30,48,.3);transition:transform 300ms,background 300ms;position:relative;z-index:999;border:none;cursor:pointer}
+    .chatbot-toggle-btn:hover{transform:scale(1.08);background:#18273F}
+    .chatbot-toggle-btn .badge-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#C9A84C;border:2px solid #FFFFFF;border-radius:50%;animation:pulse-gold 2s infinite}
+    @keyframes pulse-gold{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(201,168,76,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+    .chatbot-toggle-btn svg{width:24px;height:24px}
+    .chatbot-window{position:absolute;bottom:65px;right:0;width:350px;max-width:calc(100vw - 40px);height:480px;max-height:calc(100vh - 120px);background:#FFFFFF;border-radius:16px;box-shadow:0 8px 32px rgba(15,30,48,0.25);border:1.5px solid rgba(184,208,248,0.6);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(0.95);pointer-events:none;transition:opacity 300ms,transform 300ms;z-index:1000}
+    .chatbot-window.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+    .chatbot-header{background:linear-gradient(135deg,#18273F,#2D4060);color:#FFFFFF;padding:16px;display:flex;align-items:center;justify-content:between;border-bottom:1px solid rgba(255,255,255,0.1)}
+    .chatbot-header-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:#FFFFFF;display:flex;align-items:center;gap:8px}
+    .chatbot-header-subtitle{font-size:0.68rem;color:#A8BCCE;letter-spacing:0.05em}
+    .chatbot-close-btn{color:rgba(255,255,255,0.7);font-size:1.5rem;line-height:1;transition:color 300ms;background:none;border:none;cursor:pointer}
+    .chatbot-close-btn:hover{color:#FFFFFF}
+    .chatbot-messages{flex:1;padding:16px;overflow-y:auto;background:#F7FAFF;display:flex;flex-direction:column;gap:12px}
+    .chat-msg{max-width:80%;padding:12px 16px;border-radius:8px;font-size:0.85rem;line-height:1.5;text-align:left;word-break:break-word}
+    .chat-msg.bot{align-self:flex-start;background:#E4EDFF;color:#18273F;border-bottom-left-radius:4px}
+    .chat-msg.bot ul { padding-left: 1rem; margin-top: 8px; }
+    .chat-msg.bot strong { font-weight: 600; }
+    .chat-msg.bot a { color: var(--blue); font-weight: 500; text-decoration: underline; }
+    .chat-msg.user{align-self:flex-end;background:#2D4060;color:#FFFFFF;border-bottom-right-radius:4px}
+    .chat-typing-indicator{align-self:flex-start;background:#E4EDFF;padding:12px 16px;border-radius:8px;display:none;align-items:center;gap:4px}
+    .chat-typing-indicator span{width:6px;height:6px;background:#4A6080;border-radius:50%;animation:typing-bubble 1.4s infinite ease-in-out}
+    .chat-typing-indicator span:nth-child(2){animation-delay:0.2s}
+    .chat-typing-indicator span:nth-child(3){animation-delay:0.4s}
+    @keyframes typing-bubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .chatbot-input-area{padding:12px;background:#FFFFFF;border-top:1.5px solid rgba(184,208,248,0.4);display:flex;gap:8px}
+    .chatbot-input{flex:1;border:1.5px solid rgba(184,208,248,0.6);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none}
+    .chatbot-input:focus{border-color:#4A6080}
+    .chatbot-send-btn{width:36px;height:36px;background:#4A6080;color:#FFFFFF;border-radius:8px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
+    .chatbot-send-btn:hover{background:#2D4060}
+    .chatbot-send-btn svg{width:18px;height:18px}
   </style>
 </head>
 <body>
 <div class="page-header">
-  <a class="back-link" href="./index.html">
+  <a class="back-link" id="back-to-invitation" href="./index.html">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M19 12H5M12 5l-7 7 7 7"/>
     </svg>
@@ -83,102 +217,6 @@
   <h1 class="page-header-title">🗺️ Cara Menuju Venue</h1>
   <div class="page-header-spacer"></div>
 </div>
-
-<style>
-  /* ── Hero ── */
-  .venue-hero{
-    background:linear-gradient(135deg,var(--blue-darkest) 0%,var(--blue-deep) 60%,var(--blue) 100%);
-    border-radius:var(--r-xl);color:white;
-    padding:1.75rem 1.5rem 1.5rem;text-align:center;margin-bottom:2rem;
-  }
-  .venue-hero-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.4rem}
-  .venue-hero-name{font-family:var(--font-display);font-size:1.6rem;font-weight:300;margin-bottom:.4rem}
-  .venue-hero-addr{font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:1rem}
-  .venue-hero-btn{
-    display:inline-flex;align-items:center;gap:.4rem;
-    padding:.5rem 1.2rem;background:var(--gold);color:var(--blue-darkest);
-    border-radius:var(--r-full);font-size:.8rem;font-weight:600;
-    text-decoration:none;transition:background var(--ease);
-  }
-  .venue-hero-btn:hover{background:var(--gold-light)}
-
-  /* ── Route tabs ── */
-  .route-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:.25rem;scrollbar-width:none}
-  .route-tabs::-webkit-scrollbar{display:none}
-  .rtab{
-    display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;
-    padding:.45rem 1rem;border-radius:var(--r-full);font-size:.8rem;font-weight:500;
-    cursor:pointer;border:1.5px solid var(--blue-pale);background:var(--white);
-    color:var(--text-muted);transition:all var(--ease);font-family:var(--font-body);flex-shrink:0;
-  }
-  .rtab.active,.rtab:hover{background:var(--blue-deep);color:white;border-color:var(--blue-deep)}
-
-  /* ── Route panels ── */
-  .route-panel{display:none}
-  .route-panel.active{display:block}
-
-  /* ── Journey timeline ── */
-  .journey{position:relative;padding-left:2.5rem;margin:1rem 0}
-  .journey::before{
-    content:'';position:absolute;left:11px;top:0;bottom:0;
-    width:2px;background:linear-gradient(to bottom,var(--blue-deep),var(--blue-pale));
-    border-radius:2px;
-  }
-
-  .jstep{
-    position:relative;margin-bottom:1.25rem;
-  }
-  .jstep-dot{
-    position:absolute;left:-2.5rem;width:24px;height:24px;
-    border-radius:50%;background:var(--blue-deep);color:white;
-    display:flex;align-items:center;justify-content:center;
-    font-size:.65rem;font-weight:700;top:.05rem;
-    box-shadow:0 0 0 3px var(--bg);
-  }
-  .jstep-dot--start{background:var(--green);font-size:.7rem}
-  .jstep-dot--end{background:var(--gold);color:var(--blue-darkest);font-size:.7rem}
-
-  .jstep-card{
-    background:var(--white);border-radius:var(--r-lg);
-    padding:.85rem 1rem;border:1.5px solid var(--blue-pale);
-  }
-  .jstep-place{font-weight:600;font-size:.88rem;color:var(--text);margin-bottom:.2rem}
-  .jstep-detail{font-size:.8rem;color:var(--text-muted);line-height:1.65}
-  .jstep-badge{
-    display:inline-flex;align-items:center;gap:.3rem;
-    font-size:.68rem;font-weight:500;padding:.18rem .55rem;
-    border-radius:var(--r-full);margin-top:.35rem;
-  }
-  .badge--time{background:var(--surface);color:var(--blue-deep)}
-  .badge--tip{background:var(--gold-pale);color:#7A5B10;border:1px solid var(--gold-light)}
-
-  /* ── Summary strip ── */
-  .summary-strip{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;
-    margin-bottom:1.5rem;
-  }
-  .summary-item{
-    background:var(--white);border-radius:var(--r-lg);padding:.75rem;
-    text-align:center;border:1.5px solid var(--blue-pale);
-  }
-  .summary-icon{font-size:1.3rem;margin-bottom:.25rem}
-  .summary-label{font-size:.65rem;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase}
-  .summary-value{font-size:.85rem;font-weight:600;color:var(--blue-deep)}
-
-  /* ── Maps CTA ── */
-  .maps-cta{
-    display:flex;align-items:center;gap:.6rem;
-    background:var(--white);border:1.5px solid var(--blue-pale);
-    border-radius:var(--r-lg);padding:.85rem 1rem;margin-top:1rem;
-    text-decoration:none;transition:all var(--ease);
-  }
-  .maps-cta:hover{border-color:var(--blue);background:var(--surface)}
-  .maps-cta-icon{width:36px;height:36px;border-radius:var(--r-md);background:var(--blue-deep);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-  .maps-cta-text{flex:1}
-  .maps-cta-label{font-size:.85rem;font-weight:600;color:var(--text)}
-  .maps-cta-sub{font-size:.72rem;color:var(--text-faint)}
-  .maps-cta-arrow{color:var(--blue);font-size:1rem}
-</style>
 
 <div class="container">
 
@@ -192,7 +230,7 @@
       Bandar Lampung 35141
     </div>
     <a class="venue-hero-btn" href="https://maps.app.goo.gl/D6PdRJocz8xnKkds9" target="_blank" rel="noopener">
-      📍 Buka Google Maps
+      Buka Google Maps
     </a>
   </div>
 
@@ -203,9 +241,7 @@
     <button class="rtab" onclick="switchRoute('fly',this)">✈️ Pesawat</button>
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Panel: Kendaraan Pribadi                   -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Kendaraan Pribadi -->
   <div class="route-panel active" id="panel-car">
     <div class="summary-strip">
       <div class="summary-item"><div class="summary-icon">📍</div><div class="summary-label">Dari</div><div class="summary-value">Jakarta</div></div>
@@ -263,9 +299,7 @@
     </a>
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Panel: Bus / Travel                        -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Bus / Travel -->
   <div class="route-panel" id="panel-bus">
     <div class="summary-strip">
       <div class="summary-item"><div class="summary-icon">😴</div><div class="summary-label">Gaya</div><div class="summary-value">Santai</div></div>
@@ -307,9 +341,7 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- Panel: Pesawat                             -->
-  <!-- ═══════════════════════════════════════════ -->
+  <!-- Panel: Pesawat -->
   <div class="route-panel" id="panel-fly">
     <div class="summary-strip">
       <div class="summary-item"><div class="summary-icon">⚡</div><div class="summary-label">Gaya</div><div class="summary-value">Tercepat</div></div>
@@ -359,60 +391,6 @@
   </div>
 
 </div>
-
-<script>
-function switchRoute(id, btn) {
-  document.querySelectorAll('.route-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
-  btn.classList.add('active');
-}
-</script>
-
-<footer>
-  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
-  <a href="./index.html">#NaMun2026</a>
-</footer>
-  <!-- PERSISTENT MUSIC & CHATBOT CODE FOR SUBPAGES -->
-<style>
-  /* FLOATING MUSIC BTN (Left Aligned) */
-  #music-player{position:fixed;bottom:24px;left:24px;right:auto;z-index:300}
-  .music-btn{width:46px;height:46px;border-radius:50%;background:#4A6080;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform 300ms,background 300ms;animation:rotateDisk 8s linear infinite;animation-play-state:paused;border:none;cursor:pointer}
-  .music-btn.playing{animation-play-state:running;background:#2D4060}
-  .music-btn:hover{transform:scale(1.1)}
-  .music-btn svg{width:18px;height:18px}
-  @keyframes rotateDisk{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-  /* FLOATING CHATBOT AI WIDGET (Right Aligned) */
-  #namun-chatbot-container{position:fixed;bottom:24px;right:24px;z-index:999;font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:flex-end}
-  .chatbot-toggle-btn{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2D4060,#4A6080);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(15,30,48,.3);transition:transform 300ms,background 300ms;position:relative;z-index:999;border:none;cursor:pointer}
-  .chatbot-toggle-btn:hover{transform:scale(1.08);background:#18273F}
-  .chatbot-toggle-btn .badge-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#C9A84C;border:2px solid #FFFFFF;border-radius:50%;animation:pulse-gold 2s infinite}
-  @keyframes pulse-gold{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(201,168,76,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0)}}
-  .chatbot-toggle-btn svg{width:24px;height:24px}
-  .chatbot-window{position:absolute;bottom:65px;right:0;width:350px;max-width:calc(100vw - 40px);height:480px;max-height:calc(100vh - 120px);background:#FFFFFF;border-radius:16px;box-shadow:0 8px 32px rgba(15,30,48,0.25);border:1.5px solid rgba(184,208,248,0.6);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(0.95);pointer-events:none;transition:opacity 300ms,transform 300ms;z-index:1000}
-  .chatbot-window.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
-  .chatbot-header{background:linear-gradient(135deg,#18273F,#2D4060);color:#FFFFFF;padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1)}
-  .chatbot-header-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:#FFFFFF;display:flex;align-items:center;gap:8px}
-  .chatbot-header-subtitle{font-size:0.68rem;color:#A8BCCE;letter-spacing:0.05em}
-  .chatbot-close-btn{color:rgba(255,255,255,0.7);font-size:1.5rem;line-height:1;transition:color 300ms;background:none;border:none;cursor:pointer}
-  .chatbot-close-btn:hover{color:#FFFFFF}
-  .chatbot-messages{flex:1;padding:16px;overflow-y:auto;background:#F7FAFF;display:flex;flex-direction:column;gap:12px}
-  .chat-msg{max-width:80%;padding:12px 16px;border-radius:8px;font-size:0.85rem;line-height:1.5;text-align:left;word-break:break-word}
-  .chat-msg.bot{align-self:flex-start;background:#E4EDFF;color:#18273F;border-bottom-left-radius:4px}
-  .chat-msg.user{align-self:flex-end;background:#2D4060;color:#FFFFFF;border-bottom-right-radius:4px}
-  .chat-typing-indicator{align-self:flex-start;background:#E4EDFF;padding:12px 16px;border-radius:8px;display:none;align-items:center;gap:4px}
-  .chat-typing-indicator span{width:6px;height:6px;background:#4A6080;border-radius:50%;animation:typing-bubble 1.4s infinite ease-in-out}
-  .chat-typing-indicator span:nth-child(2){animation-delay:0.2s}
-  .chat-typing-indicator span:nth-child(3){animation-delay:0.4s}
-  @keyframes typing-bubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-  .chatbot-input-area{padding:12px;background:#FFFFFF;border-top:1.5px solid rgba(184,208,248,0.4);display:flex;gap:8px}
-  .chatbot-input{flex:1;border:1.5px solid rgba(184,208,248,0.6);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none}
-  .chatbot-input:focus{border-color:#4A6080}
-  .chatbot-send-btn{width:36px;height:36px;background:#4A6080;color:#FFFFFF;border-radius:8px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
-  .chatbot-send-btn:hover{background:#2D4060}
-  .chatbot-send-btn svg{width:18px;height:18px}
-</style>
 
 <!-- MUSIC PLAYER ELEMENT -->
 <div id="music-player">
@@ -464,36 +442,78 @@ function switchRoute(id, btn) {
   </div>
 </div>
 
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index.html" class="footer-home-link">#NaMun2026</a>
+</footer>
+
 <script>
+  /* ── Switch Route Panel ── */
+  function switchRoute(id, btn) {
+    document.querySelectorAll('.route-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ── Safe Storage Wrapper ── */
   const SafeStorage = {
     getItem(key) { try { return localStorage.getItem(key); } catch(e) { return null; } },
     setItem(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
   };
 
+  /* ── Query Parameter Sync ── */
   let guestName = "Tamu Undangan";
   (function(){
-    const p=new URLSearchParams(window.location.search),name=p.get('to');
-    if(name) guestName = decodeURIComponent(name);
+    const p=new URLSearchParams(window.location.search), name=p.get('to');
+    if(name) {
+      guestName = decodeURIComponent(name);
+      const backBtn = document.getElementById('back-to-invitation');
+      if (backBtn) backBtn.href = `./index.html?to=${encodeURIComponent(guestName)}`;
+      document.querySelectorAll('a.footer-home-link').forEach(link => {
+        link.href = `./index.html?to=${encodeURIComponent(guestName)}`;
+      });
+    }
   })();
 
-  // ── Auto-unlocked music and session restoration ──
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedTime = SafeStorage.getItem('bg_music_time');
-    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+  /* ── SINKRONISASI AUDIO YANG MULUS & AUTO-UNLOCK ── */
+  function tryPlayMusic() {
     const bgMusic = document.getElementById('bg-music');
-    if (bgMusic && isPlaying) {
-      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+    if (!bgMusic) return;
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    if (isPlaying && bgMusic.paused) {
       bgMusic.play().then(() => {
         document.getElementById('music-btn').classList.add('playing');
         updateMusicIcon(true);
+        removeUnlockEvents();
       }).catch(() => {});
     }
+  }
 
+  function unlockAudio() {
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    if (isPlaying) tryPlayMusic();
+  }
+
+  function removeUnlockEvents() {
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('scroll', unlockAudio);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedTime = SafeStorage.getItem('bg_music_time');
+    const bgMusic = document.getElementById('bg-music');
     if (bgMusic) {
+      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+      tryPlayMusic();
       bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
       bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
       bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
     }
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('scroll', unlockAudio, { once: true });
 
     const greetingMsg = document.getElementById('chat-greeting-msg');
     if (greetingMsg) {
@@ -502,21 +522,25 @@ function switchRoute(id, btn) {
   });
 
   function toggleMusic(){
-    const audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');
+    const audio=document.getElementById('bg-music'), btn=document.getElementById('music-btn');
+    if(!audio) return;
     if(audio.paused){
-      audio.play().then(()=>{
+      audio.play().then(() => {
         btn.classList.add('playing');
         updateMusicIcon(true);
+        removeUnlockEvents();
       }).catch(()=>{});
     } else {
       audio.pause();
       btn.classList.remove('playing');
       updateMusicIcon(false);
+      removeUnlockEvents();
     }
   }
 
   function updateMusicIcon(isPlaying) {
     const btn = document.getElementById('music-btn');
+    if (!btn) return;
     if (isPlaying) {
       btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>`;
     } else {
@@ -524,7 +548,29 @@ function switchRoute(id, btn) {
     }
   }
 
-  /* ── Chat Persistence & Fallback Models AI Pipeline ── */
+  /* ── CLIENT-SIDE CHATBOT WIDGET (Ditenagai Groq + KB Terpusat) ── */
+  const GITHUB_KB_RAW_URL = "https://raw.githubusercontent.com/maasmoon/NaMun2026/main/wedding_kb.md";
+  const FALLBACK_SYSTEM_INSTRUCTION = `
+    Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
+    Layani dan jawab pertanyaan tamu secara ramah dan sopan dalam Bahasa Indonesia.
+    - Lokasi: House of Gelati, Bandar Lampung.
+    - Tanggal: Minggu, 07 Juni 2026 (Akad: 08.00-09.30, Resepsi: 09.30-11.30).
+    - Dress Code: Outdoor Garden (nyaman, warna bebas).
+    - RSVP: Sebelum 31 Mei 2026.
+  `;
+  let systemInstruction = FALLBACK_SYSTEM_INSTRUCTION;
+
+  async function loadExternalKB() {
+    try {
+      const res = await fetch(GITHUB_KB_RAW_URL);
+      if (res.ok) {
+        const text = await res.text();
+        if (text && text.trim().length > 0) systemInstruction = text;
+      }
+    } catch(e) {}
+  }
+  loadExternalKB();
+
   let chatHistory = [];
   (function restoreChat() {
     const savedHistory = SafeStorage.getItem('namun_chat_history');
@@ -535,7 +581,7 @@ function switchRoute(id, btn) {
         if (msgContainer) {
           msgContainer.innerHTML = '';
           chatHistory.forEach(msg => {
-            appendMessage(msg.parts[0].text, msg.role === 'user' ? 'user' : 'bot');
+            appendMessage(msg.content, msg.role === 'user' ? 'user' : 'bot');
           });
         }
       });
@@ -568,6 +614,15 @@ function switchRoute(id, btn) {
     }
   }
 
+  const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
+  const GROQ_MODELS = ["llama-3.3-70b-versatile", "mixtral-8x7b-32768", "gemma2-9b-it", "llama3-8b-8192"];
+  let currentModelIndex = 0;
+
+  function getDecryptedApiKey() {
+    if (!ENCODED_OPENROUTER_KEY) return "";
+    try { return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join(''); } catch (e) { return ""; }
+  }
+
   async function sendChat(e) {
     e.preventDefault();
     const inputEl = document.getElementById('chatbot-input');
@@ -581,41 +636,40 @@ function switchRoute(id, btn) {
     if (typingIndicator) typingIndicator.style.display = 'flex';
     scrollChatBottom();
 
-    chatHistory.push({ role: "user", parts: [{ text: text }] });
+    chatHistory.push({ role: "user", content: text });
     SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
 
-    const apiKey = "AIzaSyC_6SYyAc9V3H-nZCtj_bAxsTRJsakBwo8";
-    const models = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
+    const apiKey = getDecryptedApiKey();
     let success = false, replyText = "";
 
-    for (const model of models) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    for (let attempts = 0; attempts < GROQ_MODELS.length; attempts++) {
+      const currentModel = GROQ_MODELS[currentModelIndex];
+      const url = "https://api.groq.com/openai/v1/chat/completions";
       try {
         const res = await fetchWithRetry(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
           body: JSON.stringify({
-            contents: chatHistory,
-            systemInstruction: { parts: [{ text: `
-              Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
-              Layani dan jawab pertanyaan tamu secara ramah dan sopan dalam Bahasa Indonesia.
-              - Lokasi: House of Gelati, Bandar Lampung.
-              - Tanggal: Minggu, 07 Juni 2026 (Akad: 08.00-09.30, Resepsi: 09.30-11.30).
-              - Dress Code: Outdoor Garden (nyaman, warna bebas).
-              - RSVP: Sebelum 31 Mei 2026.
-            ` }] }
+            model: currentModel,
+            messages: [{ role: "system", content: systemInstruction }, ...chatHistory]
           })
         });
-        replyText = res.candidates?.[0]?.content?.parts?.[0]?.text;
+        replyText = res.choices?.[0]?.message?.content;
         if (replyText) { success = true; break; }
-      } catch(err) { console.warn(`Model ${model} failed, trying next fallback...`); }
+      } catch(err) {
+        console.warn(`Model ${currentModel} failed, trying next fallback...`);
+        currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
+      }
     }
 
     if (typingIndicator) typingIndicator.style.display = 'none';
 
     if (success && replyText) {
       appendMessage(replyText, 'bot');
-      chatHistory.push({ role: "model", parts: [{ text: replyText }] });
+      chatHistory.push({ role: "assistant", content: replyText });
       SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
     } else {
       appendMessage("Maaf, Asisten NaMun sedang menerima terlalu banyak pertanyaan. Silakan kirim pesan Anda sekali lagi ya. 🙏", 'bot');
@@ -623,12 +677,56 @@ function switchRoute(id, btn) {
     scrollChatBottom();
   }
 
+  function formatResponse(text) {
+    let escaped = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const savedLinks = [];
+    escaped = escaped.replace(/&lt;a\s+[^&]*href=["']([^"']+)["'][^&]*&gt;([\s\S]*?)&lt;\/a&gt;/gi, function(match, url, linkText) {
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/(https?:\/\/[^\s\)\],;]+)/g, function(match, url) {
+      if (url.startsWith('___LINK_PH_')) return match;
+      const cleanUrl = url.replace(/&amp;/g, "&");
+      const placeholder = `___LINK_PH_${savedLinks.length}___`;
+      savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
+      return placeholder;
+    });
+    escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    const lines = escaped.split('\n');
+    let inList = false, formattedHtml = '';
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i].trim();
+      if (line.startsWith('- ') || line.startsWith('* ')) {
+        if (!inList) { formattedHtml += '<ul>'; inList = true; }
+        formattedHtml += `<li>${line.substring(2)}</li>`;
+      } else {
+        if (inList) { formattedHtml += '</ul>'; inList = false; }
+        if (line === '') formattedHtml += '<br>';
+        else formattedHtml += `<p>${line}</p>`;
+      }
+    }
+    if (inList) formattedHtml += '</ul>';
+    for (let i = 0; i < savedLinks.length; i++) {
+      formattedHtml = formattedHtml.replace(`___LINK_PH_${i}___`, savedLinks[i]);
+    }
+    return formattedHtml;
+  }
+
   function appendMessage(text, sender) {
     const msgContainer = document.getElementById('chatbot-messages');
     if (!msgContainer) return;
     const msgDiv = document.createElement('div');
     msgDiv.className = `chat-msg ${sender}`;
-    msgDiv.textContent = text;
+    if (sender === 'bot') msgDiv.innerHTML = formatResponse(text);
+    else msgDiv.textContent = text;
     msgContainer.appendChild(msgDiv);
   }
 
