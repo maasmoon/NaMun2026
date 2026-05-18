@@ -1664,8 +1664,8 @@
   }
 
   /* ================================================================
-     FLYING CHATBOT AI LOGIC & GEMINI INTEGRATION
-     (Asisten NaMun — Google Gemini API Connection)
+     FLYING CHATBOT AI LOGIC & OPENROUTER INTEGRATION
+     (Asisten NaMun — OpenRouter API Connection)
   ================================================================ */
   const SYSTEM_INSTRUCTION = `
     Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
@@ -1687,6 +1687,19 @@
     - Fitur sub-page yang ada di website: FAQ (Pertanyaan Umum), Menuju Venue (Petunjuk Google Maps), Wisata Lampung (Destinasi Rekomendasi), Tanya Asisten NaMun (Halaman Asisten AI), Menginap (Rekomendasi Hotel/Penginapan di Bandar Lampung), dan Wedding Gift (Tanda Kasih/Kado digital).
     Harap jawab setiap pertanyaan tamu dengan singkat, jelas, penuh kesopanan, dan seakan Anda adalah perwakilan keluarga mempelai yang menyambut mereka dengan senyum. Jangan membuat fakta baru di luar informasi di atas. Jika ditanya kado, katakan bisa diakses via sub-menu "Wedding Gift".
   `;
+
+  // ── KONFIGURASI OPENROUTER ─────────────────────────────────────
+  // Masukkan OpenRouter API Key Anda di bawah ini (contoh: "sk-or-v1-xxxx...")
+  const OPENROUTER_API_KEY = "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"; 
+  
+  // Daftar model gratis OpenRouter sebagai cadangan jika kuota/limit salah satu model habis
+  const OPENROUTER_MODELS = [
+    "google/gemini-2.5-flash:free",
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "deepseek/deepseek-r1:free",
+    "nvidia/llama-3.1-nemotron-70b-instruct:free"
+  ];
+  let currentModelIndex = 0;
 
   let chatHistory = [];
 
@@ -1718,9 +1731,17 @@
   async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
     try {
       const response = await fetch(url, options);
-      if (!response.ok) throw new Error('API Request Failed');
+      if (!response.ok) {
+        const errBody = await response.text();
+        throw new Error(`API Request Failed: ${response.status} - ${errBody}`);
+      }
       return await response.json();
     } catch (error) {
+      // Jika error disebabkan oleh rate limit (429) atau kuota habis (402/403)
+      // Jangan tunggu retry eksponensial terlalu lama, langsung beralih ke model fallback
+      if (error.message.includes("429") || error.message.includes("402") || error.message.includes("403")) {
+        throw error;
+      }
       if (retries > 1) {
         await new Promise(resolve => setTimeout(resolve, delay));
         return fetchWithRetry(url, options, retries - 1, delay * 2);
@@ -1745,36 +1766,68 @@
     typingIndicator.style.display = 'flex';
     scrollChatBottom();
 
-    // Prepare history payload for API
-    chatHistory.push({ role: "user", parts: [{ text: text }] });
+    // Validasi pengisian API Key
+    if (OPENROUTER_API_KEY === "YOUR_OPENROUTER_API_KEY" || !OPENROUTER_API_KEY) {
+      setTimeout(() => {
+        typingIndicator.style.display = 'none';
+        appendMessage("Halo! Asisten NaMun belum bisa menjawab karena OpenRouter API Key belum dimasukkan ke kode JavaScript (variabel `OPENROUTER_API_KEY`). Silakan isi terlebih dahulu ya! 😊", 'bot');
+        scrollChatBottom();
+      }, 800);
+      return;
+    }
 
-    const apiKey = "AIzaSyC_6SYyAc9V3H-nZCtj_bAxsTRJsakBwo8"; 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    // Masukkan ke history chat (Format OpenAI compatible)
+    chatHistory.push({ role: "user", content: text });
 
-    const payload = {
-      contents: chatHistory,
-      systemInstruction: {
-        parts: [{ text: SYSTEM_INSTRUCTION }]
+    const url = "https://openrouter.ai/api/v1/chat/completions";
+    let attempts = 0;
+    let success = false;
+    let reply = "";
+
+    // Loop mencoba memanggil model, jika gagal/limit habis, otomatis pindah ke model berikutnya
+    while (attempts < OPENROUTER_MODELS.length && !success) {
+      const currentModel = OPENROUTER_MODELS[currentModelIndex];
+      const payload = {
+        model: currentModel,
+        messages: [
+          { role: "system", content: SYSTEM_INSTRUCTION },
+          ...chatHistory
+        ]
+      };
+
+      try {
+        const res = await fetchWithRetry(url, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+            'HTTP-Referer': window.location.origin || "https://maasmoon.github.io",
+            'X-Title': 'Asisten NaMun Wedding Assistant'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.choices?.[0]?.message?.content) {
+          reply = res.choices[0].message.content;
+          success = true;
+        } else {
+          throw new Error("Format respons tidak valid");
+        }
+      } catch (err) {
+        console.warn(`Gagal menggunakan model ${currentModel}. Mencoba model cadangan berikutnya...`, err);
+        // Pindah indeks model ke berikutnya di array OPENROUTER_MODELS
+        currentModelIndex = (currentModelIndex + 1) % OPENROUTER_MODELS.length;
+        attempts++;
       }
-    };
+    }
 
-    try {
-      const res = await fetchWithRetry(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+    typingIndicator.style.display = 'none';
 
-      const reply = res.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, terjadi sedikit gangguan koneksi. Bisa tolong ulangi pertanyaan Anda? 🙏";
-      
-      // Hide typing & Append Bot reply
-      typingIndicator.style.display = 'none';
+    if (success) {
       appendMessage(reply, 'bot');
-      chatHistory.push({ role: "model", parts: [{ text: reply }] });
-
-    } catch (err) {
-      typingIndicator.style.display = 'none';
-      appendMessage("Maaf, Asisten NaMun sedang kesulitan menjangkau server. Mohon coba beberapa saat lagi ya. 🙏", 'bot');
+      chatHistory.push({ role: "assistant", content: reply });
+    } else {
+      appendMessage("Maaf, semua model AI cadangan kami sedang sibuk atau kehabisan limit saat ini. Mohon coba beberapa saat lagi ya. 🙏", 'bot');
     }
     scrollChatBottom();
   }
