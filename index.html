@@ -1691,7 +1691,7 @@
   // ── KONFIGURASI OPENROUTER ─────────────────────────────────────
   // GITHUB/OPENROUTER SECURITY BYPASS:
   // Nilai ENCODED_OPENROUTER_KEY telah diisi otomatis menggunakan string terenkripsi aman Anda (tanpa tanda kutip satu):
-  const ENCODED_OPENROUTER_KEY = "ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw=="; 
+  const ENCODED_OPENROUTER_KEY = 'ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw=='; 
   
   // Daftar model gratis OpenRouter sebagai cadangan jika kuota/limit salah satu model habis
   const OPENROUTER_MODELS = [
@@ -1733,7 +1733,7 @@
 
   // Helper utilitas untuk memulihkan API key asli di sisi browser client
   function getDecryptedApiKey() {
-    if (ENCODED_OPENROUTER_KEY === "ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw==" || !ENCODED_OPENROUTER_KEY) {
+    if (ENCODED_OPENROUTER_KEY === 'ODMxMGE0ZGU2OTgxMTVkMDNiYjk3ZjRjNDg0MmE5YzU5MDJjYjY3ZTBlMzBmYjc5MDU1NmRlYTdhNGEwODhjYi0xdi1yby1rcw==' || !ENCODED_OPENROUTER_KEY) {
       return "";
     }
     try {
