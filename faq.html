@@ -70,11 +70,84 @@
       border-top:1px solid var(--blue-pale);margin-top:2rem;
     }
     footer a{color:var(--blue);text-decoration:underline}
+
+    .faq-item{
+      background:var(--white);border-radius:var(--r-lg);margin-bottom:.7rem;
+      border:1.5px solid transparent;overflow:hidden;
+      box-shadow:0 2px 8px rgba(15,30,60,.05);
+      transition:border-color var(--ease);
+    }
+    .faq-item.open{border-color:var(--blue-pale)}
+    .faq-q{
+      width:100%;text-align:left;background:none;border:none;
+      padding:1rem 1.25rem;cursor:pointer;
+      display:flex;align-items:flex-start;gap:.75rem;
+      font-family:var(--font-body);font-size:.9rem;font-weight:500;
+      color:var(--text);transition:color var(--ease);line-height:1.5;
+    }
+    .faq-q:hover{color:var(--blue-deep)}
+    .faq-icon{
+      width:22px;height:22px;border-radius:50%;
+      background:var(--surface);flex-shrink:0;margin-top:.1rem;
+      display:flex;align-items:center;justify-content:center;font-size:.8rem;
+    }
+    .faq-item.open .faq-icon{background:var(--blue-deep);color:white}
+    .faq-chevron{
+      margin-left:auto;flex-shrink:0;transition:transform var(--ease);
+      color:var(--text-faint);
+    }
+    .faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--blue)}
+    .faq-a{
+      max-height:0;overflow:hidden;transition:max-height .35s ease, padding .25s ease;
+      font-size:.85rem;color:var(--text-muted);line-height:1.8;padding:0 1.25rem 0 3.3rem;
+    }
+    .faq-item.open .faq-a{max-height:400px;padding:0 1.25rem 1rem 3.3rem}
+
+    /* FLOATING MUSIC BTN */
+    #music-player{position:fixed;bottom:24px;left:24px;right:auto;z-index:300}
+    .music-btn{width:46px;height:46px;border-radius:50%;background:#4A6080;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform 300ms,background 300ms;animation:rotateDisk 8s linear infinite;animation-play-state:paused;border:none;cursor:pointer}
+    .music-btn.playing{animation-play-state:running;background:#2D4060}
+    .music-btn:hover{transform:scale(1.1)}
+    .music-btn svg{width:18px;height:18px}
+    @keyframes rotateDisk{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+    /* FLOATING CHATBOT WIDGET */
+    #namun-chatbot-container{position:fixed;bottom:24px;right:24px;z-index:999;font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:flex-end}
+    .chatbot-toggle-btn{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2D4060,#4A6080);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(15,30,48,.3);transition:transform 300ms,background 300ms;position:relative;z-index:999;border:none;cursor:pointer}
+    .chatbot-toggle-btn:hover{transform:scale(1.08);background:#18273F}
+    .chatbot-toggle-btn .badge-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#C9A84C;border:2px solid #FFFFFF;border-radius:50%;animation:pulse-gold 2s infinite}
+    @keyframes pulse-gold{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(201,168,76,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0)}}
+    .chatbot-toggle-btn svg{width:24px;height:24px}
+    .chatbot-window{position:absolute;bottom:65px;right:0;width:350px;max-width:calc(100vw - 40px);height:480px;max-height:calc(100vh - 120px);background:#FFFFFF;border-radius:16px;box-shadow:0 8px 32px rgba(15,30,48,0.25);border:1.5px solid rgba(184,208,248,0.6);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(0.95);pointer-events:none;transition:opacity 300ms,transform 300ms;z-index:1000}
+    .chatbot-window.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+    .chatbot-header{background:linear-gradient(135deg,#18273F,#2D4060);color:#FFFFFF;padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1)}
+    .chatbot-header-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:#FFFFFF;display:flex;align-items:center;gap:8px}
+    .chatbot-header-subtitle{font-size:0.68rem;color:#A8BCCE;letter-spacing:0.05em}
+    .chatbot-close-btn{color:rgba(255,255,255,0.7);font-size:1.5rem;line-height:1;transition:color 300ms;background:none;border:none;cursor:pointer}
+    .chatbot-close-btn:hover{color:#FFFFFF}
+    .chatbot-messages{flex:1;padding:16px;overflow-y:auto;background:#F7FAFF;display:flex;flex-direction:column;gap:12px}
+    .chat-msg{max-width:80%;padding:12px 16px;border-radius:8px;font-size:0.85rem;line-height:1.5;text-align:left;word-break:break-word}
+    .chat-msg.bot{align-self:flex-start;background:#E4EDFF;color:#18273F;border-bottom-left-radius:4px}
+    .chat-msg.bot ul { padding-left: 1rem; margin-top: 8px; }
+    .chat-msg.bot strong { font-weight: 600; }
+    .chat-msg.bot a { color: var(--blue); font-weight: 500; text-decoration: underline; }
+    .chat-msg.user{align-self:flex-end;background:#2D4060;color:#FFFFFF;border-bottom-right-radius:4px}
+    .chat-typing-indicator{align-self:flex-start;background:#E4EDFF;padding:12px 16px;border-radius:8px;display:none;align-items:center;gap:4px}
+    .chat-typing-indicator span{width:6px;height:6px;background:#4A6080;border-radius:50%;animation:typing-bubble 1.4s infinite ease-in-out}
+    .chat-typing-indicator span:nth-child(2){animation-delay:0.2s}
+    .chat-typing-indicator span:nth-child(3){animation-delay:0.4s}
+    @keyframes typing-bubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    .chatbot-input-area{padding:12px;background:#FFFFFF;border-top:1.5px solid rgba(184,208,248,0.4);display:flex;gap:8px}
+    .chatbot-input{flex:1;border:1.5px solid rgba(184,208,248,0.6);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none}
+    .chatbot-input:focus{border-color:#4A6080}
+    .chatbot-send-btn{width:36px;height:36px;background:#4A6080;color:#FFFFFF;border-radius:8px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
+    .chatbot-send-btn:hover{background:#2D4060}
+    .chatbot-send-btn svg{width:18px;height:18px}
   </style>
 </head>
 <body>
 <div class="page-header">
-  <a class="back-link" href="./index.html">
+  <a class="back-link" id="back-to-invitation" href="./index-10.html">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M19 12H5M12 5l-7 7 7 7"/>
     </svg>
@@ -83,40 +156,6 @@
   <h1 class="page-header-title">❓ FAQ</h1>
   <div class="page-header-spacer"></div>
 </div>
-
-<style>
-  .faq-item{
-    background:var(--white);border-radius:var(--r-lg);margin-bottom:.7rem;
-    border:1.5px solid transparent;overflow:hidden;
-    box-shadow:0 2px 8px rgba(15,30,60,.05);
-    transition:border-color var(--ease);
-  }
-  .faq-item.open{border-color:var(--blue-pale)}
-  .faq-q{
-    width:100%;text-align:left;background:none;border:none;
-    padding:1rem 1.25rem;cursor:pointer;
-    display:flex;align-items:flex-start;gap:.75rem;
-    font-family:var(--font-body);font-size:.9rem;font-weight:500;
-    color:var(--text);transition:color var(--ease);line-height:1.5;
-  }
-  .faq-q:hover{color:var(--blue-deep)}
-  .faq-icon{
-    width:22px;height:22px;border-radius:50%;
-    background:var(--surface);flex-shrink:0;margin-top:.1rem;
-    display:flex;align-items:center;justify-content:center;font-size:.8rem;
-  }
-  .faq-item.open .faq-icon{background:var(--blue-deep);color:white}
-  .faq-chevron{
-    margin-left:auto;flex-shrink:0;transition:transform var(--ease);
-    color:var(--text-faint);
-  }
-  .faq-item.open .faq-chevron{transform:rotate(180deg);color:var(--blue)}
-  .faq-a{
-    max-height:0;overflow:hidden;transition:max-height .35s ease, padding .25s ease;
-    font-size:.85rem;color:var(--text-muted);line-height:1.8;padding:0 1.25rem 0 3.3rem;
-  }
-  .faq-item.open .faq-a{max-height:400px;padding:0 1.25rem 1rem 3.3rem}
-</style>
 
 <div class="container">
   <p style="font-size:.88rem;color:var(--text-muted);line-height:1.8;text-align:center;max-width:500px;margin:1.5rem auto 2rem">
@@ -203,65 +242,11 @@
 
   <div style="margin-top:2rem;background:var(--surface);border-radius:var(--r-lg);padding:1.25rem;text-align:center">
     <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:.75rem">Masih ada pertanyaan lain?</p>
-    <a href="./asisten-namun.html" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;background:var(--blue-deep);color:white;border-radius:var(--r-full);font-size:.82rem;font-weight:500;text-decoration:none;transition:background 280ms">
+    <a href="./asisten-namun-2.html" id="chat-page-link" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;background:var(--blue-deep);color:white;border-radius:var(--r-full);font-size:.82rem;font-weight:500;text-decoration:none;transition:background 280ms">
       ✨ Tanya Asisten NaMun
     </a>
   </div>
 </div>
-
-<script>
-function toggleFaq(btn){
-  const item = btn.closest('.faq-item');
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
-</script>
-
-<footer>
-  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
-  <a href="./index.html">#NaMun2026</a>
-</footer>
-  <!-- PERSISTENT MUSIC & CHATBOT CODE FOR SUBPAGES -->
-<style>
-  /* FLOATING MUSIC BTN (Left Aligned) */
-  #music-player{position:fixed;bottom:24px;left:24px;right:auto;z-index:300}
-  .music-btn{width:46px;height:46px;border-radius:50%;background:#4A6080;color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(30,59,138,.35);transition:transform 300ms,background 300ms;animation:rotateDisk 8s linear infinite;animation-play-state:paused;border:none;cursor:pointer}
-  .music-btn.playing{animation-play-state:running;background:#2D4060}
-  .music-btn:hover{transform:scale(1.1)}
-  .music-btn svg{width:18px;height:18px}
-  @keyframes rotateDisk{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-  /* FLOATING CHATBOT AI WIDGET (Right Aligned) */
-  #namun-chatbot-container{position:fixed;bottom:24px;right:24px;z-index:999;font-family:'Jost',sans-serif;display:flex;align-items:center;justify-content:flex-end}
-  .chatbot-toggle-btn{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2D4060,#4A6080);color:#FFFFFF;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(15,30,48,.3);transition:transform 300ms,background 300ms;position:relative;z-index:999;border:none;cursor:pointer}
-  .chatbot-toggle-btn:hover{transform:scale(1.08);background:#18273F}
-  .chatbot-toggle-btn .badge-dot{position:absolute;top:2px;right:2px;width:12px;height:12px;background:#C9A84C;border:2px solid #FFFFFF;border-radius:50%;animation:pulse-gold 2s infinite}
-  @keyframes pulse-gold{0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0.7)}70%{transform:scale(1);box-shadow:0 0 0 6px rgba(201,168,76,0)}100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(201,168,76,0)}}
-  .chatbot-toggle-btn svg{width:24px;height:24px}
-  .chatbot-window{position:absolute;bottom:65px;right:0;width:350px;max-width:calc(100vw - 40px);height:480px;max-height:calc(100vh - 120px);background:#FFFFFF;border-radius:16px;box-shadow:0 8px 32px rgba(15,30,48,0.25);border:1.5px solid rgba(184,208,248,0.6);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(0.95);pointer-events:none;transition:opacity 300ms,transform 300ms;z-index:1000}
-  .chatbot-window.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
-  .chatbot-header{background:linear-gradient(135deg,#18273F,#2D4060);color:#FFFFFF;padding:16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.1)}
-  .chatbot-header-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:#FFFFFF;display:flex;align-items:center;gap:8px}
-  .chatbot-header-subtitle{font-size:0.68rem;color:#A8BCCE;letter-spacing:0.05em}
-  .chatbot-close-btn{color:rgba(255,255,255,0.7);font-size:1.5rem;line-height:1;transition:color 300ms;background:none;border:none;cursor:pointer}
-  .chatbot-close-btn:hover{color:#FFFFFF}
-  .chatbot-messages{flex:1;padding:16px;overflow-y:auto;background:#F7FAFF;display:flex;flex-direction:column;gap:12px}
-  .chat-msg{max-width:80%;padding:12px 16px;border-radius:8px;font-size:0.85rem;line-height:1.5;text-align:left;word-break:break-word}
-  .chat-msg.bot{align-self:flex-start;background:#E4EDFF;color:#18273F;border-bottom-left-radius:4px}
-  .chat-msg.user{align-self:flex-end;background:#2D4060;color:#FFFFFF;border-bottom-right-radius:4px}
-  .chat-typing-indicator{align-self:flex-start;background:#E4EDFF;padding:12px 16px;border-radius:8px;display:none;align-items:center;gap:4px}
-  .chat-typing-indicator span{width:6px;height:6px;background:#4A6080;border-radius:50%;animation:typing-bubble 1.4s infinite ease-in-out}
-  .chat-typing-indicator span:nth-child(2){animation-delay:0.2s}
-  .chat-typing-indicator span:nth-child(3){animation-delay:0.4s}
-  @keyframes typing-bubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-  .chatbot-input-area{padding:12px;background:#FFFFFF;border-top:1.5px solid rgba(184,208,248,0.4);display:flex;gap:8px}
-  .chatbot-input{flex:1;border:1.5px solid rgba(184,208,248,0.6);border-radius:8px;padding:8px 12px;font-size:0.85rem;outline:none}
-  .chatbot-input:focus{border-color:#4A6080}
-  .chatbot-send-btn{width:36px;height:36px;background:#4A6080;color:#FFFFFF;border-radius:8px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer}
-  .chatbot-send-btn:hover{background:#2D4060}
-  .chatbot-send-btn svg{width:18px;height:18px}
-</style>
 
 <!-- MUSIC PLAYER ELEMENT -->
 <div id="music-player">
@@ -278,7 +263,7 @@ function toggleFaq(btn){
   </button>
 </div>
 
-<!-- CHATBOT ELEMENT -->
+<!-- CHATBOT LAYANG WIDGET -->
 <div id="namun-chatbot-container">
   <button class="chatbot-toggle-btn" onclick="toggleChatbot()" aria-label="Tanya Asisten NaMun">
     <span class="badge-dot" id="chatbot-badge"></span>
@@ -313,217 +298,299 @@ function toggleFaq(btn){
   </div>
 </div>
 
+<footer>
+  Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
+  <a href="./index-10.html" class="footer-home-link">#NaMun2026</a>
+</footer>
+
 <script>
-  const SafeStorage = {
-    getItem(key) { try { return localStorage.getItem(key); } catch(e) { return null; } },
-    setItem(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
-  };
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
 
-  let guestName = "Tamu Undangan";
-  (function(){
-    const p=new URLSearchParams(window.location.search),name=p.get('to');
-    if(name) guestName = decodeURIComponent(name);
-  })();
+/* ── Safe Storage Wrapper ── */
+const SafeStorage = {
+  getItem(key) { try { return localStorage.getItem(key); } catch(e) { return null; } },
+  setItem(key, val) { try { localStorage.setItem(key, val); } catch(e) {} }
+};
 
-  // Fungsi mencoba memutar musik latar
-  function tryPlayMusic() {
-    const bgMusic = document.getElementById('bg-music');
-    if (!bgMusic) return;
+let guestName = "Tamu Undangan";
+(function(){
+  const p=new URLSearchParams(window.location.search), name=p.get('to');
+  if(name) {
+    guestName = decodeURIComponent(name);
+    // Sinkronkan back button dan link chat page
+    const backBtn = document.getElementById('back-to-invitation');
+    if (backBtn) backBtn.href = `./index-10.html?to=${encodeURIComponent(guestName)}`;
+    const chatBtn = document.getElementById('chat-page-link');
+    if (chatBtn) chatBtn.href = `./asisten-namun-2.html?to=${encodeURIComponent(guestName)}`;
+    document.querySelectorAll('a.footer-home-link').forEach(link => {
+      link.href = `./index-10.html?to=${encodeURIComponent(guestName)}`;
+    });
+  }
+})();
 
+/* ── SINKRONISASI AUDIO YANG MULUS & AUTO-UNLOCK ── */
+function tryPlayMusic() {
+  const bgMusic = document.getElementById('bg-music');
+  if (!bgMusic) return;
+  const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+  if (isPlaying && bgMusic.paused) {
     bgMusic.play().then(() => {
       document.getElementById('music-btn').classList.add('playing');
       updateMusicIcon(true);
-      // Bersihkan trigger penangkap interaksi jika pemutaran berhasil
       removeUnlockEvents();
-    }).catch((err) => {
-      console.warn("Autoplay diblokir oleh kebijakan browser. Menunggu interaksi pengguna untuk memutar musik.");
+    }).catch(() => {});
+  }
+}
+
+function unlockAudio() {
+  const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+  if (isPlaying) tryPlayMusic();
+}
+
+function removeUnlockEvents() {
+  document.removeEventListener('click', unlockAudio);
+  document.removeEventListener('touchstart', unlockAudio);
+  document.removeEventListener('scroll', unlockAudio);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTime = SafeStorage.getItem('bg_music_time');
+  const bgMusic = document.getElementById('bg-music');
+  if (bgMusic) {
+    if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+    tryPlayMusic();
+    bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
+    bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
+    bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
+  }
+  document.addEventListener('click', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+  document.addEventListener('scroll', unlockAudio, { once: true });
+
+  const greetingMsg = document.getElementById('chat-greeting-msg');
+  if (greetingMsg) {
+    greetingMsg.textContent = `Hi ${guestName}, apa kamu ada pertanyaan mengenai acara pernikahan Nadia & Munjin?`;
+  }
+});
+
+function toggleMusic(){
+  const audio=document.getElementById('bg-music'), btn=document.getElementById('music-btn');
+  if(!audio) return;
+  if(audio.paused){
+    audio.play().then(()=>{
+      btn.classList.add('playing');
+      updateMusicIcon(true);
+      removeUnlockEvents();
+    }).catch(()=>{});
+  } else {
+    audio.pause();
+    btn.classList.remove('playing');
+    updateMusicIcon(false);
+    removeUnlockEvents();
+  }
+}
+
+function updateMusicIcon(isPlaying) {
+  const btn = document.getElementById('music-btn');
+  if (!btn) return;
+  if (isPlaying) {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>`;
+  } else {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13" opacity="0.4"></path><circle cx="6" cy="18" r="3" opacity="0.4"></circle><circle cx="18" cy="16" r="3" opacity="0.4"></circle><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"></line></svg>`;
+  }
+}
+
+/* ── CLIENT-SIDE CHATBOT WIDGET (Ditenagai Groq + KB Terpusat) ── */
+const GITHUB_KB_RAW_URL = "https://raw.githubusercontent.com/maasmoon/NaMun2026/main/wedding_kb.md";
+const FALLBACK_SYSTEM_INSTRUCTION = `
+  Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
+  Layani dan jawab pertanyaan tamu secara ramah dan sopan dalam Bahasa Indonesia.
+  - Lokasi: House of Gelati, Bandar Lampung.
+  - Tanggal: Minggu, 07 Juni 2026 (Akad: 08.00-09.30, Resepsi: 09.30-11.30).
+  - Dress Code: Outdoor Garden (nyaman, warna bebas).
+  - RSVP: Sebelum 31 Mei 2026.
+`;
+let systemInstruction = FALLBACK_SYSTEM_INSTRUCTION;
+
+async function loadExternalKB() {
+  try {
+    const res = await fetch(GITHUB_KB_RAW_URL);
+    if (res.ok) {
+      const text = await res.text();
+      if (text && text.trim().length > 0) systemInstruction = text;
+    }
+  } catch(e) {}
+}
+loadExternalKB();
+
+let chatHistory = [];
+(function restoreChat() {
+  const savedHistory = SafeStorage.getItem('namun_chat_history');
+  if (savedHistory) {
+    chatHistory = JSON.parse(savedHistory);
+    document.addEventListener("DOMContentLoaded", () => {
+      const msgContainer = document.getElementById('chatbot-messages');
+      if (msgContainer) {
+        msgContainer.innerHTML = '';
+        chatHistory.forEach(msg => {
+          appendMessage(msg.content, msg.role === 'user' ? 'user' : 'bot');
+        });
+      }
     });
   }
+})();
 
-  // Event handler untuk membuka kunci audio dari interaksi pengguna pertama kali
-  function unlockAudio() {
-    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
-    if (isPlaying) {
-      tryPlayMusic();
-    }
+function toggleChatbot() {
+  const chatWindow = document.getElementById('chatbot-window');
+  const badge = document.getElementById('chatbot-badge');
+  if (chatWindow) {
+    chatWindow.classList.toggle('open');
+    if (badge && chatWindow.classList.contains('open')) badge.style.display = 'none';
   }
+}
 
-  function removeUnlockEvents() {
-    document.removeEventListener('click', unlockAudio);
-    document.removeEventListener('touchstart', unlockAudio);
-    document.removeEventListener('scroll', unlockAudio);
+async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      if (response.status === 429) throw new Error('RATE_LIMIT');
+      throw new Error('API_ERR');
+    }
+    return await response.json();
+  } catch (error) {
+    if (error.message === 'RATE_LIMIT') throw error;
+    if (retries > 1) {
+      await new Promise(res => setTimeout(res, delay));
+      return fetchWithRetry(url, options, retries - 1, delay * 2);
+    } else { throw error; }
   }
+}
 
-  // ── Auto-unlocked music and session restoration ──
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedTime = SafeStorage.getItem('bg_music_time');
-    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
-    const bgMusic = document.getElementById('bg-music');
-    
-    if (bgMusic) {
-      if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-      
-      // Jika sebelumnya musik menyala, daftarkan listener interaksi di dokumen subhalaman
-      if (isPlaying) {
-        // Coba putar langsung (beberapa browser modern mengizinkan jika ada interaksi di tab yang sama)
-        tryPlayMusic();
+const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
+const GROQ_MODELS = ["llama-3.3-70b-versatile", "mixtral-8x7b-32768", "gemma2-9b-it", "llama3-8b-8192"];
+let currentModelIndex = 0;
 
-        // Antisipasi pemblokiran: pasang listener interaksi pertama di layar apa saja
-        document.addEventListener('click', unlockAudio, { once: true });
-        document.addEventListener('touchstart', unlockAudio, { once: true });
-        document.addEventListener('scroll', unlockAudio, { once: true });
-      }
+function getDecryptedApiKey() {
+  if (!ENCODED_OPENROUTER_KEY) return "";
+  try { return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join(''); } catch (e) { return ""; }
+}
 
-      // Pemantau posisi detik musik & status play/pause secara berkala
-      bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
-      bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
-      bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
-    }
+async function sendChat(e) {
+  e.preventDefault();
+  const inputEl = document.getElementById('chatbot-input');
+  const text = inputEl.value.trim();
+  if (!text) return;
 
-    const greetingMsg = document.getElementById('chat-greeting-msg');
-    if (greetingMsg) {
-      greetingMsg.textContent = `Hi ${guestName}, apa kamu ada pertanyaan mengenai acara pernikahan Nadia & Munjin?`;
-    }
-  });
+  appendMessage(text, 'user');
+  inputEl.value = '';
 
-  function toggleMusic(){
-    const audio=document.getElementById('bg-music'),btn=document.getElementById('music-btn');
-    if(!audio) return;
-    if(audio.paused){
-      audio.play().then(()=>{
-        btn.classList.add('playing');
-        updateMusicIcon(true);
-        removeUnlockEvents(); // Pastikan listener interaksi dibersihkan
-      }).catch(()=>{});
-    } else {
-      audio.pause();
-      btn.classList.remove('playing');
-      updateMusicIcon(false);
-      removeUnlockEvents(); // Batalkan auto-unlock jika pengguna sengaja mematikan musik
-    }
-  }
+  const typingIndicator = document.getElementById('chat-typing-indicator');
+  if (typingIndicator) typingIndicator.style.display = 'flex';
+  scrollChatBottom();
 
-  function updateMusicIcon(isPlaying) {
-    const btn = document.getElementById('music-btn');
-    if (isPlaying) {
-      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>`;
-    } else {
-      btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13" opacity="0.4"></path><circle cx="6" cy="18" r="3" opacity="0.4"></circle><circle cx="18" cy="16" r="3" opacity="0.4"></circle><line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"></line></svg>`;
-    }
-  }
+  chatHistory.push({ role: "user", content: text });
+  SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
 
-  /* ── Chat Persistence & Fallback Models AI Pipeline ── */
-  let chatHistory = [];
-  (function restoreChat() {
-    const savedHistory = SafeStorage.getItem('namun_chat_history');
-    if (savedHistory) {
-      chatHistory = JSON.parse(savedHistory);
-      document.addEventListener("DOMContentLoaded", () => {
-        const msgContainer = document.getElementById('chatbot-messages');
-        if (msgContainer) {
-          msgContainer.innerHTML = '';
-          chatHistory.forEach(msg => {
-            appendMessage(msg.parts[0].text, msg.role === 'user' ? 'user' : 'bot');
-          });
-        }
-      });
-    }
-  })();
+  const apiKey = getDecryptedApiKey();
+  let success = false, replyText = "";
 
-  function toggleChatbot() {
-    const chatWindow = document.getElementById('chatbot-window');
-    const badge = document.getElementById('chatbot-badge');
-    if (chatWindow) {
-      chatWindow.classList.toggle('open');
-      if (badge && chatWindow.classList.contains('open')) badge.style.display = 'none';
-    }
-  }
-
-  async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+  for (let attempts = 0; attempts < GROQ_MODELS.length; attempts++) {
+    const currentModel = GROQ_MODELS[currentModelIndex];
+    const url = "https://api.groq.com/openai/v1/chat/completions";
     try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        if (response.status === 429) throw new Error('RATE_LIMIT');
-        throw new Error('API_ERR');
-      }
-      return await response.json();
-    } catch (error) {
-      if (error.message === 'RATE_LIMIT') throw error;
-      if (retries > 1) {
-        await new Promise(res => setTimeout(res, delay));
-        return fetchWithRetry(url, options, retries - 1, delay * 2);
-      } else { throw error; }
+      const res = await fetchWithRetry(url, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: currentModel,
+          messages: [{ role: "system", content: systemInstruction }, ...chatHistory]
+        })
+      });
+      replyText = res.choices?.[0]?.message?.content;
+      if (replyText) { success = true; break; }
+    } catch(err) {
+      console.warn(`Model ${currentModel} failed, trying next fallback...`);
+      currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
     }
   }
 
-  async function sendChat(e) {
-    e.preventDefault();
-    const inputEl = document.getElementById('chatbot-input');
-    const text = inputEl.value.trim();
-    if (!text) return;
+  if (typingIndicator) typingIndicator.style.display = 'none';
 
-    appendMessage(text, 'user');
-    inputEl.value = '';
-
-    const typingIndicator = document.getElementById('chat-typing-indicator');
-    if (typingIndicator) typingIndicator.style.display = 'flex';
-    scrollChatBottom();
-
-    chatHistory.push({ role: "user", parts: [{ text: text }] });
+  if (success && replyText) {
+    appendMessage(replyText, 'bot');
+    chatHistory.push({ role: "assistant", content: replyText });
     SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
+  } else {
+    appendMessage("Maaf, Asisten NaMun sedang menerima terlalu banyak pertanyaan. Silakan kirim pesan Anda sekali lagi ya. 🙏", 'bot');
+  }
+  scrollChatBottom();
+}
 
-    const apiKey = "AIzaSyC_6SYyAc9V3H-nZCtj_bAxsTRJsakBwo8";
-    const models = ["gemini-2.5-flash", "gemini-1.5-flash", "gemini-1.5-pro"];
-    let success = false, replyText = "";
-
-    for (const model of models) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      try {
-        const res = await fetchWithRetry(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: chatHistory,
-            systemInstruction: { parts: [{ text: `
-              Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
-              Layani dan jawab pertanyaan tamu secara ramah dan sopan dalam Bahasa Indonesia.
-              - Lokasi: House of Gelati, Bandar Lampung.
-              - Tanggal: Minggu, 07 Juni 2026 (Akad: 08.00-09.30, Resepsi: 09.30-11.30).
-              - Dress Code: Outdoor Garden (nyaman, warna bebas).
-              - RSVP: Sebelum 31 Mei 2026.
-            ` }] }
-          })
-        });
-        replyText = res.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (replyText) { success = true; break; }
-      } catch(err) { console.warn(`Model ${model} failed, trying next fallback...`); }
-    }
-
-    if (typingIndicator) typingIndicator.style.display = 'none';
-
-    if (success && replyText) {
-      appendMessage(replyText, 'bot');
-      chatHistory.push({ role: "model", parts: [{ text: replyText }] });
-      SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
+function formatResponse(text) {
+  let escaped = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const savedLinks = [];
+  escaped = escaped.replace(/&lt;a\s+[^&]*href=["']([^"']+)["'][^&]*&gt;([\s\S]*?)&lt;\/a&gt;/gi, function(match, url, linkText) {
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${linkText}</a>`);
+    return placeholder;
+  });
+  escaped = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, function(match, label, url) {
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+    return placeholder;
+  });
+  escaped = escaped.replace(/(https?:\/\/[^\s\)\],;]+)/g, function(match, url) {
+    if (url.startsWith('___LINK_PH_')) return match;
+    const cleanUrl = url.replace(/&amp;/g, "&");
+    const placeholder = `___LINK_PH_${savedLinks.length}___`;
+    savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
+    return placeholder;
+  });
+  escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  const lines = escaped.split('\n');
+  let inList = false, formattedHtml = '';
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i].trim();
+    if (line.startsWith('- ') || line.startsWith('* ')) {
+      if (!inList) { formattedHtml += '<ul>'; inList = true; }
+      formattedHtml += `<li>${line.substring(2)}</li>`;
     } else {
-      appendMessage("Maaf, Asisten NaMun sedang menerima terlalu banyak pertanyaan. Silakan kirim pesan Anda sekali lagi ya. 🙏", 'bot');
+      if (inList) { formattedHtml += '</ul>'; inList = false; }
+      if (line === '') formattedHtml += '<br>';
+      else formattedHtml += `<p>${line}</p>`;
     }
-    scrollChatBottom();
   }
+  if (inList) formattedHtml += '</ul>';
+  for (let i = 0; i < savedLinks.length; i++) {
+    formattedHtml = formattedHtml.replace(`___LINK_PH_${i}___`, savedLinks[i]);
+  }
+  return formattedHtml;
+}
 
-  function appendMessage(text, sender) {
-    const msgContainer = document.getElementById('chatbot-messages');
-    if (!msgContainer) return;
-    const msgDiv = document.createElement('div');
-    msgDiv.className = `chat-msg ${sender}`;
-    msgDiv.textContent = text;
-    msgContainer.appendChild(msgDiv);
-  }
+function appendMessage(text, sender) {
+  const msgContainer = document.getElementById('chatbot-messages');
+  if (!msgContainer) return;
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `chat-msg ${sender}`;
+  if (sender === 'bot') msgDiv.innerHTML = formatResponse(text);
+  else msgDiv.textContent = text;
+  msgContainer.appendChild(msgDiv);
+}
 
-  function scrollChatBottom() {
-    const msgContainer = document.getElementById('chatbot-messages');
-    if (msgContainer) msgContainer.scrollTop = msgContainer.scrollHeight;
-  }
+function scrollChatBottom() {
+  const msgContainer = document.getElementById('chatbot-messages');
+  if (msgContainer) msgContainer.scrollTop = msgContainer.scrollHeight;
+}
 </script>
 </body>
 </html>
