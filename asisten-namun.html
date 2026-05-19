@@ -146,7 +146,7 @@
 
 <!-- Header -->
 <div class="chat-header">
-  <a class="chat-header-back" href="./index-11.html" id="back-to-invitation" aria-label="Kembali ke undangan">
+  <a class="chat-header-back" href="./index.html#sub-links" id="back-to-invitation" aria-label="Kembali ke undangan">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Undangan
   </a>
@@ -224,11 +224,15 @@ let guestName = "Tamu Undangan";
 (function(){
   const p = new URLSearchParams(window.location.search);
   const name = p.get('to');
+  const backBtn = document.getElementById('back-to-invitation');
   if (name) {
     guestName = decodeURIComponent(name);
-    const backBtn = document.getElementById('back-to-invitation');
     if (backBtn) {
-      backBtn.href = `./index-11.html?to=${encodeURIComponent(guestName)}`;
+      backBtn.href = `./index.html?to=${encodeURIComponent(guestName)}#sub-links`;
+    }
+  } else {
+    if (backBtn) {
+      backBtn.href = `./index.html#sub-links`;
     }
   }
 })();
