@@ -137,7 +137,7 @@ Tamu wajib mencicipi cita rasa kuliner khas Lampung berikut:
 
 Doa restu adalah hadiah terindah. Namun, jika ingin memberikan tanda kasih berupa hadiah digital, tamu dapat mentransfer melalui rekening pengantin:
 
-* **Bank BNI**: No. Rekening `9800005015` atas nama Nadia Putri Lingga.  
+* **Bank BNI**: No. Rekening `980000515` atas nama Nadia Putri Lingga.  
 * **Bank BCA**: No. Rekening `1400682441` atas nama Ahmad Munjin.  
 * **Hadiah Fisik**: Dapat dikirimkan ke alamat rumah pengantin di: *Jl. Krakatau I, No. 236, Perumnas Way Halim, Bandar Lampung, 35141*.
 
