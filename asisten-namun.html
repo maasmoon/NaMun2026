@@ -195,7 +195,7 @@
     </button>
   </div>
 </div>
-<p class="disclaimer">Asisten NaMun menjawab pertanyaan seputar pernikahan #NaMun2026. Powered by Groq AI.</p>
+<p class="disclaimer">Asisten NaMun menjawab pertanyaan seputar pernikahan #NaMun2026. Powered by Google Gemini AI.</p>
 
 <!-- MUSIC PLAYER ELEMENT -->
 <div id="music-player">
@@ -271,25 +271,23 @@ async function loadExternalKB() {
   }
 }
 
-// API CONFIGURATION FOR DECRYPTION (GROQ CLOUD API)
-const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c=";
+// API CONFIGURATION FOR DECRYPTION (GEMINI API)
+// Masukkan API Key Gemini Terenkripsi Anda (Reversed-Base64) di bawah ini
+const ENCODED_GEMINI_KEY = "WXZlTFFOV3YyNjBCNmRicFBWTWpyN0d3ZWZ0TUVDaFZBeVNheklB"; 
 
-const GROQ_MODELS = [
-  "llama-3.3-70b-versatile",
-  "mixtral-8x7b-32768",
-  "gemma2-9b-it",
-  "llama3-8b-8192"
-];
-let currentModelIndex = 0;
 let conversationHistory = [];
 
 function getDecryptedApiKey() {
-  if (!ENCODED_OPENROUTER_KEY) return "";
+  const key = ENCODED_GEMINI_KEY.trim();
+  if (!key) return "";
+  if (key.startsWith("AIzaSy")) {
+    return key;
+  }
   try {
-    return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join('');
+    return atob(key).split('').reverse().join('');
   } catch (e) {
-    console.error("Gagal melakukan dekripsi API Key:", e);
-    return "";
+    console.error("Gagal melakukan dekripsi kunci API Gemini:", e);
+    return key;
   }
 }
 
@@ -378,7 +376,7 @@ function updateMusicIcon(isPlaying) {
   }
 }
 
-/* ── Chat Persistence Restoration & Robust Format Migration ── */
+/* ── Chat Persistence Restoration & Robust Format Migration (Groq -> Gemini) ── */
 (function restoreChat() {
   const savedHistory = SafeStorage.getItem('namun_fullpage_chat_history');
   if (savedHistory) {
@@ -386,22 +384,31 @@ function updateMusicIcon(isPlaying) {
       const rawHistory = JSON.parse(savedHistory);
       conversationHistory = rawHistory.map(msg => {
         let role = msg.role;
-        if (role === 'model') role = 'assistant';
-        let content = msg.content;
-        if (!content && msg.parts && msg.parts[0]) {
-          content = msg.parts[0].text;
+        if (role === 'assistant') role = 'model';
+        
+        let textVal = "";
+        if (msg.content) {
+          textVal = msg.content;
+        } else if (msg.parts && msg.parts[0]) {
+          textVal = msg.parts[0].text;
         }
-        return { role, content: content || "" };
+        
+        return {
+          role: role,
+          parts: [{ text: textVal }]
+        };
       });
+
       document.addEventListener("DOMContentLoaded", () => {
         const messagesContainer = document.getElementById('chat-messages');
         if (messagesContainer) {
           messagesContainer.innerHTML = '';
           conversationHistory.forEach(msg => {
+            const txt = msg.parts?.[0]?.text || "";
             if (msg.role === 'user') {
-              addUserMessage(msg.content);
-            } else if (msg.role === 'assistant') {
-              addBotMessage(msg.content);
+              addUserMessage(txt);
+            } else if (msg.role === 'model') {
+              addBotMessage(txt);
             }
           });
         }
@@ -460,6 +467,7 @@ function formatResponse(text) {
     return placeholder;
   });
 
+  escaped = escaped.replace(/\*\frac{.*?}{.*?}/g, ""); // strip math errors if any
   escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 
   const lines = escaped.split('\n');
@@ -551,7 +559,7 @@ async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
     }
     return await response.json();
   } catch (error) {
-    if (error.message.includes("429") || error.message.includes("402") || error.message.includes("403") || error.message.includes("401")) {
+    if (error.message.includes("400") || error.message.includes("401") || error.message.includes("403")) {
       throw error; 
     }
     if (retries > 1) {
@@ -575,7 +583,7 @@ async function sendMessage() {
   addUserMessage(text);
   showTyping();
 
-  conversationHistory.push({ role: 'user', content: text });
+  conversationHistory.push({ role: 'user', parts: [{ text: text }] });
   SafeStorage.setItem('namun_fullpage_chat_history', JSON.stringify(conversationHistory));
 
   const apiKey = getDecryptedApiKey();
@@ -583,57 +591,53 @@ async function sendMessage() {
   if (!apiKey) {
     hideTyping();
     document.getElementById('btn-send').disabled = false;
-    addBotMessage(`<strong>⚠️ ERROR: API Key belum dikonfigurasi!</strong><br>Silakan ganti nilai variabel <code>ENCODED_OPENROUTER_KEY</code> di dalam skrip menggunakan API Key terenkripsi Anda.`);
+    addBotMessage(`<strong>⚠️ ERROR: API Key belum dikonfigurasi!</strong><br>Silakan ganti nilai variabel <code>ENCODED_GEMINI_KEY</code> di dalam skrip menggunakan API Key terenkripsi Anda.`);
     return;
   }
 
-  const url = "https://api.groq.com/openai/v1/chat/completions";
-  let attempts = 0;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   let success = false;
   let replyText = "";
 
-  while (attempts < GROQ_MODELS.length && !success) {
-    const currentModel = GROQ_MODELS[currentModelIndex];
-    const payload = {
-      model: currentModel,
-      messages: [
-        { role: "system", content: systemInstruction },
-        ...conversationHistory
-      ]
-    };
-
-    try {
-      const res = await fetchWithRetry(url, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (res.choices?.[0]?.message?.content) {
-        replyText = res.choices[0].message.content;
-        success = true;
-      } else {
-        throw new Error("Format respons tidak valid");
-      }
-    } catch (err) {
-      console.warn(`Gagal menggunakan model ${currentModel}:`, err.message || err);
-      currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
-      attempts++;
+  const payload = {
+    contents: conversationHistory,
+    systemInstruction: {
+      parts: [{ text: systemInstruction }]
+    },
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: 1000
     }
+  };
+
+  try {
+    const res = await fetchWithRetry(url, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.candidates?.[0]?.content?.parts?.[0]?.text) {
+      replyText = res.candidates[0].content.parts[0].text;
+      success = true;
+    } else {
+      throw new Error("Format respons tidak valid");
+    }
+  } catch (err) {
+    console.error("Gagal memanggil Gemini API:", err.message || err);
   }
 
   hideTyping();
   document.getElementById('btn-send').disabled = false;
 
   if (success && replyText) {
-    conversationHistory.push({ role: 'assistant', content: replyText });
+    conversationHistory.push({ role: 'model', parts: [{ text: replyText }] });
     SafeStorage.setItem('namun_fullpage_chat_history', JSON.stringify(conversationHistory));
     addBotMessage(replyText);
   } else {
-    addBotMessage(`Maaf, sepertinya asisten mengalami masalah koneksi saat menghubungi server. Silakan kirim pesan Anda sekali lagi ya. 🙏`);
+    addBotMessage(`Maaf, sepertinya asisten mengalami masalah koneksi saat menghubungi server Gemini. Silakan kirim pesan Anda sekali lagi ya. 🙏`);
   }
 }
 </script>
