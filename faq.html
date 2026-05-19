@@ -147,7 +147,7 @@
 </head>
 <body>
 <div class="page-header">
-  <a class="back-link" id="back-to-invitation" href="./index.html">
+  <a class="back-link" id="back-to-invitation" href="./index.html#sub-links">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M19 12H5M12 5l-7 7 7 7"/>
     </svg>
@@ -242,7 +242,7 @@
 
   <div style="margin-top:2rem;background:var(--surface);border-radius:var(--r-lg);padding:1.25rem;text-align:center">
     <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:.75rem">Masih ada pertanyaan lain?</p>
-    <a href="./asisten-namun-2.html" id="chat-page-link" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;background:var(--blue-deep);color:white;border-radius:var(--r-full);font-size:.82rem;font-weight:500;text-decoration:none;transition:background 280ms">
+    <a href="./asisten-namun-3.html" id="chat-page-link" style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1.25rem;background:var(--blue-deep);color:white;border-radius:var(--r-full);font-size:.82rem;font-weight:500;text-decoration:none;transition:background 280ms">
       ✨ Tanya Asisten NaMun
     </a>
   </div>
@@ -300,7 +300,7 @@
 
 <footer>
   Dengan cinta dari <strong>Nadia &amp; Munjin</strong> · 
-  <a href="./index.html" class="footer-home-link">#NaMun2026</a>
+  <a href="./index.html#sub-links" class="footer-home-link">#NaMun2026</a>
 </footer>
 
 <script>
@@ -324,11 +324,19 @@ let guestName = "Tamu Undangan";
     guestName = decodeURIComponent(name);
     // Sinkronkan back button dan link chat page
     const backBtn = document.getElementById('back-to-invitation');
-    if (backBtn) backBtn.href = `./index.html?to=${encodeURIComponent(guestName)}`;
+    if (backBtn) backBtn.href = `./index.html?to=${encodeURIComponent(guestName)}#sub-links`;
     const chatBtn = document.getElementById('chat-page-link');
-    if (chatBtn) chatBtn.href = `./asisten-namun-2.html?to=${encodeURIComponent(guestName)}`;
+    if (chatBtn) chatBtn.href = `./asisten-namun-3.html?to=${encodeURIComponent(guestName)}`;
     document.querySelectorAll('a.footer-home-link').forEach(link => {
-      link.href = `./index.html?to=${encodeURIComponent(guestName)}`;
+      link.href = `./index.html?to=${encodeURIComponent(guestName)}#sub-links`;
+    });
+  } else {
+    const backBtn = document.getElementById('back-to-invitation');
+    if (backBtn) backBtn.href = `./index.html#sub-links`;
+    const chatBtn = document.getElementById('chat-page-link');
+    if (chatBtn) chatBtn.href = `./asisten-namun-3.html`;
+    document.querySelectorAll('a.footer-home-link').forEach(link => {
+      link.href = `./index.html#sub-links`;
     });
   }
 })();
@@ -405,7 +413,7 @@ function updateMusicIcon(isPlaying) {
   }
 }
 
-/* ── CLIENT-SIDE CHATBOT WIDGET (Ditenagai Groq + KB Terpusat) ── */
+/* ── CLIENT-SIDE CHATBOT WIDGET (Ditenagai Gemini + KB Terpusat) ── */
 const GITHUB_KB_RAW_URL = "https://raw.githubusercontent.com/maasmoon/NaMun2026/main/wedding_kb.md";
 const FALLBACK_SYSTEM_INSTRUCTION = `
   Anda adalah Asisten Virtual resmi dari acara pernikahan Nadia & Munjin (Asisten NaMun).
@@ -428,20 +436,52 @@ async function loadExternalKB() {
 }
 loadExternalKB();
 
+const ENCODED_GEMINI_KEY = "WXZlTFFOV3YyNjBCNmRicFBWTWpyN0d3ZWZ0TUVDaFZBeVNheklB"; // Masukkan API Key Gemini Terenkripsi Anda (Reversed-Base64) di sini
 let chatHistory = [];
+
+function getDecryptedApiKey() {
+  const key = ENCODED_GEMINI_KEY.trim();
+  if (!key) return "";
+  if (key.startsWith("AIzaSy")) {
+    return key;
+  }
+  try { return atob(key).split('').reverse().join(''); } catch (e) { return key; }
+}
+
 (function restoreChat() {
   const savedHistory = SafeStorage.getItem('namun_chat_history');
   if (savedHistory) {
-    chatHistory = JSON.parse(savedHistory);
-    document.addEventListener("DOMContentLoaded", () => {
-      const msgContainer = document.getElementById('chatbot-messages');
-      if (msgContainer) {
-        msgContainer.innerHTML = '';
-        chatHistory.forEach(msg => {
-          appendMessage(msg.content, msg.role === 'user' ? 'user' : 'bot');
-        });
-      }
-    });
+    try {
+      const rawHistory = JSON.parse(savedHistory);
+      chatHistory = rawHistory.map(msg => {
+        let role = msg.role;
+        if (role === 'assistant') role = 'model';
+        
+        let textVal = "";
+        if (msg.content) {
+          textVal = msg.content;
+        } else if (msg.parts && msg.parts[0]) {
+          textVal = msg.parts[0].text;
+        }
+        
+        return {
+          role: role,
+          parts: [{ text: textVal }]
+        };
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const msgContainer = document.getElementById('chatbot-messages');
+        if (msgContainer) {
+          msgContainer.innerHTML = '';
+          chatHistory.forEach(msg => {
+            const txt = msg.parts?.[0]?.text || "";
+            appendMessage(txt, msg.role === 'user' ? 'user' : 'bot');
+          });
+        }
+      });
+    } catch (e) {
+      console.error("Gagal melakukan migrasi riwayat obrolan layang:", e);
+    }
   }
 })();
 
@@ -454,30 +494,23 @@ function toggleChatbot() {
   }
 }
 
-async function fetchWithRetry(url, options, retries = 3, delay = 1000) {
+async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
-      if (response.status === 429) throw new Error('RATE_LIMIT');
-      throw new Error('API_ERR');
+      const errBody = await response.text();
+      throw new Error(`API Request Failed: ${response.status} - ${errBody}`);
     }
     return await response.json();
   } catch (error) {
-    if (error.message === 'RATE_LIMIT') throw error;
+    if (error.message.includes("400") || error.message.includes("401") || error.message.includes("403")) {
+      throw error;
+    }
     if (retries > 1) {
       await new Promise(res => setTimeout(res, delay));
       return fetchWithRetry(url, options, retries - 1, delay * 2);
     } else { throw error; }
   }
-}
-
-const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
-const GROQ_MODELS = ["llama-3.3-70b-versatile", "mixtral-8x7b-32768", "gemma2-9b-it", "llama3-8b-8192"];
-let currentModelIndex = 0;
-
-function getDecryptedApiKey() {
-  if (!ENCODED_OPENROUTER_KEY) return "";
-  try { return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join(''); } catch (e) { return ""; }
 }
 
 async function sendChat(e) {
@@ -493,43 +526,55 @@ async function sendChat(e) {
   if (typingIndicator) typingIndicator.style.display = 'flex';
   scrollChatBottom();
 
-  chatHistory.push({ role: "user", content: text });
+  chatHistory.push({ role: "user", parts: [{ text: text }] });
   SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
 
   const apiKey = getDecryptedApiKey();
+  if (!apiKey) {
+    if (typingIndicator) typingIndicator.style.display = 'none';
+    appendMessage("Halo! Silakan masukkan kunci API Gemini Anda di dalam kode terlebih dahulu agar saya bisa membantu.", 'bot');
+    scrollChatBottom();
+    return;
+  }
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   let success = false, replyText = "";
 
-  for (let attempts = 0; attempts < GROQ_MODELS.length; attempts++) {
-    const currentModel = GROQ_MODELS[currentModelIndex];
-    const url = "https://api.groq.com/openai/v1/chat/completions";
-    try {
-      const res = await fetchWithRetry(url, {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: currentModel,
-          messages: [{ role: "system", content: systemInstruction }, ...chatHistory]
-        })
-      });
-      replyText = res.choices?.[0]?.message?.content;
-      if (replyText) { success = true; break; }
-    } catch(err) {
-      console.warn(`Model ${currentModel} failed, trying next fallback...`);
-      currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
+  const payload = {
+    contents: chatHistory,
+    systemInstruction: {
+      parts: [{ text: systemInstruction }]
+    },
+    generationConfig: {
+      temperature: 0.7,
+      maxOutputTokens: 1000
     }
+  };
+
+  try {
+    const res = await fetchWithRetry(url, {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (res.candidates?.[0]?.content?.parts?.[0]?.text) {
+      replyText = res.candidates[0].content.parts[0].text;
+      success = true;
+    } else { throw new Error("Format respons tidak valid"); }
+  } catch(err) {
+    console.error("Gagal memanggil Gemini API:", err.message || err);
   }
 
   if (typingIndicator) typingIndicator.style.display = 'none';
 
   if (success && replyText) {
     appendMessage(replyText, 'bot');
-    chatHistory.push({ role: "assistant", content: replyText });
+    chatHistory.push({ role: "model", parts: [{ text: replyText }] });
     SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
   } else {
-    appendMessage("Maaf, Asisten NaMun sedang menerima terlalu banyak pertanyaan. Silakan kirim pesan Anda sekali lagi ya. 🙏", 'bot');
+    appendMessage("Maaf, Asisten NaMun sedang mengalami gangguan koneksi. Silakan kirim pesan Anda sekali lagi ya. 🙏", 'bot');
   }
   scrollChatBottom();
 }
