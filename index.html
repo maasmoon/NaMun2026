@@ -116,7 +116,7 @@
 
     .opening-sup{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:var(--sp-4);font-family:var(--font-body)}
     .opening-names{font-family:var(--font-display);font-size:clamp(2.8rem,9vw,5.5rem);font-weight:300;color:var(--white);line-height:1;position:relative;z-index:1}
-    .opening-amp{font-family:var(--font-display);font-style:italic;font-size:clamp(1.6rem,4.5vw,3rem);color:var(--gold-light);font-weight:400;display:block;margin:var(--sp-2) 0}
+    .opening-amp{font-family:var(--font-display);font-style:italic;font-size:clamp(1.4rem,4.5vw,3rem);color:var(--gold-light);font-weight:400;display:block;margin:var(--sp-2) 0}
     .opening-to{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:var(--sp-6);margin-bottom:var(--sp-1)}
     .opening-guest{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,3.5vw,1.8rem);color:var(--gold-light);margin-bottom:var(--sp-8);position:relative;z-index:1}
 
@@ -237,7 +237,7 @@
     .event-card::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:linear-gradient(90deg,var(--blue-pale),var(--gold),var(--blue-pale));border-radius:0 0 var(--r-full) var(--r-full)}
     .event-card::after{content:'✦';position:absolute;top:var(--sp-3);right:var(--sp-3);font-size:.9rem;color:var(--gold);opacity:.6}
     .event-type{font-size:.63rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:var(--sp-4)}
-    .event-day{font-family:var(--font-display);font-size:clamp(2.8rem,8vw,4rem);font-weight:300;color:var(--blue);line-height:1}
+    .event-day{font-family:var(--font-display);font-size:clamp(1.6rem,4.5vw,2.5rem);letter-spacing:.02em;line-height:1.2;}
     .event-month{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted);margin-bottom:var(--sp-4)}
     .event-time{font-size:.83rem;color:var(--text-muted);margin-bottom:var(--sp-5)}
     .event-venue{font-family:var(--font-display);font-size:1.1rem;font-weight:500;color:var(--text);margin-bottom:var(--sp-2)}
@@ -933,7 +933,7 @@
   <section id="our-story" aria-label="Our Story">
     <div class="container">
       <p class="section-label reveal">Our Story</p>
-      <h2 class="section-title reveal">Perjalanan Kami</h2>
+      <h2 class="section-title reveal">Perjalanan Kisah Kami</h2>
       <div class="divider-ornament reveal" aria-hidden="true">
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="3.5" fill="#2563EB"/><circle cx="11" cy="3" r="2.5" fill="#7BA7EC"/><circle cx="11" cy="19" r="2.5" fill="#7BA7EC"/><circle cx="3" cy="11" r="2.5" fill="#7BA7EC"/><circle cx="19" cy="11" r="2.5" fill="#7BA7EC"/></svg>
       </div>
@@ -945,7 +945,7 @@
         <div class="story-col story-text-cell">
           <span class="story-year">2020</span>
           <p class="story-title">Awal Pertemuan</p>
-          <p class="story-desc">Kami pertama kali bertemu di kantor program yang sama sebagai dua orang dengan semangat yang sejalan. Kami mulai mengenal dalam kesibukan kerja masing-masing.</p>
+          <p class="story-desc">Kami pertama kali bertemu di kantor program yang sama — dua orang dengan semangat yang sejalan, mulai saling mengenal dalam kesibukan kerja masing-masing.</p>
         </div>
         
         <div class="story-col story-col-middle">
@@ -965,7 +965,7 @@
         <div class="story-col story-text-cell">
           <span class="story-year">2024</span>
           <p class="story-title">Jalan yang Berbeda</p>
-          <p class="story-desc">Program berakhir dan kami melanjutkan perjalanan masing-masing. Nadia melanjutkan passion-nya sebagai travel content creator ke berbagai penjuru dunia, sementara Munjin bertani di rumah kaca di Yogyakarta.</p>
+          <p class="story-desc">Kantor program tutup, dan kami melanjutkan perjalanan masing-masing. Nadia bertualang ke China dan berbagai penjuru dunia, sementara Munjin bertani di rumah kaca Yogyakarta.</p>
         </div>
         
         <div class="story-col story-col-middle">
@@ -985,7 +985,7 @@
         <div class="story-col story-text-cell">
           <span class="story-year">2025</span>
           <p class="story-title">Bertemu Kembali</p>
-          <p class="story-desc">Takdir mempertemukan kami kembali di 2025. Obrolan ringan berubah jadi hubungan yang lebih dalam — dan kami pun mulai sering menjalani aktivitas bersama, termasuk bertani dan hiking berdua.</p>
+          <p class="story-desc">Takdir mempertemukan kami kembali di 2025. Obrolan ringan berubah jadi hubungan yang lebih dalam — dan kami pun mulai menjalani keseharian bersama, termasuk bertani berdua.</p>
         </div>
         
         <div class="story-col story-col-middle">
@@ -1185,7 +1185,7 @@
   </button>
 </div>
 
-<!-- CHATBOT LAYANG WIDGET (Ditenagai Groq + KB Dinamis) -->
+<!-- CHATBOT LAYANG WIDGET (Ditenagai Gemini + KB Dinamis) -->
 <div id="namun-chatbot-container">
   <div class="chatbot-proactive-bubble" id="chatbot-proactive-bubble" onclick="toggleChatbot()">
     <span>Apa Anda ada pertanyaan terkait acara pernikahan NaMun?</span>
@@ -1434,6 +1434,30 @@
   loadWishes();
 
   /* ── Music logic ── */
+  function tryPlayMusic() {
+    const bgMusic = document.getElementById('bg-music');
+    if (!bgMusic) return;
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    if (isPlaying && bgMusic.paused) {
+      bgMusic.play().then(() => {
+        document.getElementById('music-btn').classList.add('playing');
+        updateMusicIcon(true);
+        removeUnlockEvents();
+      }).catch(() => {});
+    }
+  }
+
+  function unlockAudio() {
+    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
+    if (isPlaying) tryPlayMusic();
+  }
+
+  function removeUnlockEvents() {
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('scroll', unlockAudio);
+  }
+
   function toggleMusic(){
     const audio=document.getElementById('bg-music'), btn=document.getElementById('music-btn');
     if(!audio) return;
@@ -1441,11 +1465,13 @@
       audio.play().then(()=>{
         btn.classList.add('playing');
         updateMusicIcon(true);
+        removeUnlockEvents();
       }).catch(()=>{});
     } else {
       audio.pause();
       btn.classList.remove('playing');
       updateMusicIcon(false);
+      removeUnlockEvents();
     }
   }
 
@@ -1461,20 +1487,17 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const savedTime = SafeStorage.getItem('bg_music_time');
-    const isPlaying = SafeStorage.getItem('bg_music_playing') !== 'false';
     const bgMusic = document.getElementById('bg-music');
     if (bgMusic) {
       if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
-      if (isPlaying) {
-        bgMusic.play().then(() => {
-          document.getElementById('music-btn').classList.add('playing');
-          updateMusicIcon(true);
-        }).catch(() => {});
-      }
+      tryPlayMusic();
       bgMusic.addEventListener('timeupdate', () => { SafeStorage.setItem('bg_music_time', bgMusic.currentTime); });
       bgMusic.addEventListener('play', () => { SafeStorage.setItem('bg_music_playing', 'true'); });
       bgMusic.addEventListener('pause', () => { SafeStorage.setItem('bg_music_playing', 'false'); });
     }
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('scroll', unlockAudio, { once: true });
   });
 
   /* ── CHATBOT AI LOGIC WITH DYNAMIC KB FETCH ── */
@@ -1485,7 +1508,7 @@
     Tugas Anda adalah melayani dan menjawab pertanyaan tamu undangan secara ramah, sopan, hangat, santun, dan informatif menggunakan bahasa Indonesia.
     - Lokasi: House of Gelati, Bandar Lampung.
     - Tanggal: Minggu, 07 Juni 2026.
-    - Waktu: Akad 08.00-09.00 WIB, Resepsi 09.30-11.30 WIB.
+    - Waktu: Akad 08.00-09.30 WIB, Resepsi 09.30-11.30 WIB.
     - Dress Code: Outdoor Garden (nyaman, pastel/earth tone).
     - RSVP: Paling lambat 31 Mei 2026.
     Arahkan kado ke menu "Wedding Gift". Jawab dengan santun, hangat, dan beri emoji yang sesuai (💙, ✨, 😊).
@@ -1508,14 +1531,8 @@
     }
   }
 
-  const ENCODED_OPENROUTER_KEY = "Sm42bzlLWHpHaklScGxLeHk3YkFUS1lBWUYzYnlkR1dyTVI4UldOTVVIRkw4MDhmb2VSQl9rc2c="; 
-  const GROQ_MODELS = [
-    "mixtral-8x7b-32768",
-    "llama-3.3-70b-versatile",
-    "gemma2-9b-it",
-    "llama3-8b-8192"
-  ];
-  let currentModelIndex = 0;
+  // Masukkan API Key Gemini Terenkripsi Anda (Reversed-Base64) di bawah ini
+  const ENCODED_GEMINI_KEY = "WXZlTFFOV3YyNjBCNmRicFBWTWpyN0d3ZWZ0TUVDaFZBeVNheklB"; 
   let chatHistory = [];
  
   function toggleChatbot() {
@@ -1539,8 +1556,12 @@
   }
  
   function getDecryptedApiKey() {
-    if (!ENCODED_OPENROUTER_KEY) return "";
-    try { return atob(ENCODED_OPENROUTER_KEY).split('').reverse().join(''); } catch (e) { return ""; }
+    const key = ENCODED_GEMINI_KEY.trim();
+    if (!key) return "";
+    if (key.startsWith("AIzaSy")) {
+      return key;
+    }
+    try { return atob(key).split('').reverse().join(''); } catch (e) { return key; }
   }
  
   async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
@@ -1552,7 +1573,7 @@
       }
       return await response.json();
     } catch (error) {
-      if (error.message.includes("429") || error.message.includes("402") || error.message.includes("403") || error.message.includes("401")) {
+      if (error.message.includes("400") || error.message.includes("401") || error.message.includes("403")) {
         throw error;
       }
       if (retries > 1) {
@@ -1579,52 +1600,55 @@
     if (!apiKey) {
       setTimeout(() => {
         typingIndicator.style.display = 'none';
-        appendMessage("Halo! Asisten NaMun belum terhubung karena API Key Groq belum siap.", 'bot');
+        appendMessage("Halo! Silakan masukkan kunci API Gemini Anda di dalam kode terlebih dahulu agar saya bisa membantu.", 'bot');
         scrollChatBottom();
       }, 800);
       return;
     }
  
-    chatHistory.push({ role: "user", content: text });
+    chatHistory.push({ role: "user", parts: [{ text: text }] });
+    SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
  
-    const url = "https://api.groq.com/openai/v1/chat/completions";
-    let attempts = 0, success = false, reply = "";
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    let success = false;
+    let reply = "";
  
-    while (attempts < GROQ_MODELS.length && !success) {
-      const currentModel = GROQ_MODELS[currentModelIndex];
-      const payload = {
-        model: currentModel,
-        messages: [{ role: "system", content: systemInstruction }, ...chatHistory]
-      };
- 
-      try {
-        const res = await fetchWithRetry(url, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-          },
-          body: JSON.stringify(payload)
-        });
- 
-        if (res.choices?.[0]?.message?.content) {
-          reply = res.choices[0].message.content;
-          success = true;
-        } else { throw new Error("Format respons tidak valid"); }
-      } catch (err) {
-        console.error(`Gagal menggunakan model ${currentModel}:`, err.message || err);
-        currentModelIndex = (currentModelIndex + 1) % GROQ_MODELS.length;
-        attempts++;
+    const payload = {
+      contents: chatHistory,
+      systemInstruction: {
+        parts: [{ text: systemInstruction }]
+      },
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 1000
       }
+    };
+
+    try {
+      const res = await fetchWithRetry(url, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+ 
+      if (res.candidates?.[0]?.content?.parts?.[0]?.text) {
+        reply = res.candidates[0].content.parts[0].text;
+        success = true;
+      } else { throw new Error("Format respons tidak valid"); }
+    } catch (err) {
+      console.error("Gagal memanggil Gemini API:", err.message || err);
     }
  
     typingIndicator.style.display = 'none';
  
-    if (success) {
+    if (success && reply) {
       appendMessage(reply, 'bot');
-      chatHistory.push({ role: "assistant", content: reply });
+      chatHistory.push({ role: "model", parts: [{ text: reply }] });
+      SafeStorage.setItem('namun_chat_history', JSON.stringify(chatHistory));
     } else {
-      appendMessage("Maaf, asisten kami sedang menerima volume pertanyaan yang tinggi. Silakan coba kembali ya Kak. 🙏", 'bot');
+      appendMessage("Maaf, asisten kami sedang mengalami gangguan koneksi. Silakan coba beberapa saat lagi ya Kak. 🙏", 'bot');
     }
     scrollChatBottom();
   }
@@ -1651,6 +1675,7 @@
       savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
       return placeholder;
     });
+    escaped = escaped.replace(/\*\*(.*?)\*\"/g, "<strong>$1</strong>");
     escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
     const lines = escaped.split('\n');
     let inList = false, formattedHtml = '';
@@ -1686,6 +1711,44 @@
     const msgContainer = document.getElementById('chatbot-messages');
     if (msgContainer) msgContainer.scrollTop = msgContainer.scrollHeight;
   }
+
+  /* ── Chat Persistence Restoration & Robust Format Migration (Groq -> Gemini) ── */
+  (function restoreChat() {
+    const savedHistory = SafeStorage.getItem('namun_chat_history');
+    if (savedHistory) {
+      try {
+        const rawHistory = JSON.parse(savedHistory);
+        chatHistory = rawHistory.map(msg => {
+          let role = msg.role;
+          if (role === 'assistant') role = 'model';
+          
+          let textVal = "";
+          if (msg.content) {
+            textVal = msg.content;
+          } else if (msg.parts && msg.parts[0]) {
+            textVal = msg.parts[0].text;
+          }
+          
+          return {
+            role: role,
+            parts: [{ text: textVal }]
+          };
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+          const msgContainer = document.getElementById('chatbot-messages');
+          if (msgContainer) {
+            msgContainer.innerHTML = '';
+            chatHistory.forEach(msg => {
+              const txt = msg.parts?.[0]?.text || "";
+              appendMessage(txt, msg.role === 'user' ? 'user' : 'bot');
+            });
+          }
+        });
+      } catch (e) {
+        console.error("Gagal melakukan migrasi riwayat obrolan layang:", e);
+      }
+    }
+  })();
 
   document.addEventListener("DOMContentLoaded", () => {
     loadExternalKB();
