@@ -116,7 +116,7 @@
 
     .opening-sup{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:var(--sp-4);font-family:var(--font-body)}
     .opening-names{font-family:var(--font-display);font-size:clamp(2.8rem,9vw,5.5rem);font-weight:300;color:var(--white);line-height:1;position:relative;z-index:1}
-    .opening-amp{font-family:var(--font-display);font-style:italic;font-size:clamp(1.4rem,4.5vw,3rem);color:var(--gold-light);font-weight:400;display:block;margin:var(--sp-2) 0}
+    .opening-amp{font-family:var(--font-display);font-style:italic;font-size:clamp(1.6rem,4.5vw,3rem);color:var(--gold-light);font-weight:400;display:block;margin:var(--sp-2) 0}
     .opening-to{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:var(--sp-6);margin-bottom:var(--sp-1)}
     .opening-guest{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,3.5vw,1.8rem);color:var(--gold-light);margin-bottom:var(--sp-8);position:relative;z-index:1}
 
@@ -468,15 +468,66 @@
     .form-success.show{display:block}
 
     /* ================================================================
-       WISHES
+       WISHES & COMMENT SCROLLBOX (VERTICAL SCROLLY WITH ALL COMMENTS)
     ================================================================ */
     #wishes{background:var(--white)}
     .wish-form{max-width:460px;margin-inline:auto;text-align:left}
-    .wishes-list{max-width:460px;margin:var(--sp-10) auto 0;text-align:left;display:flex;flex-direction:column;gap:var(--sp-4)}
-    .wish-item{background:var(--surface);border-radius:var(--r-md);padding:var(--sp-4) var(--sp-5);border-left:2.5px solid var(--gold)}
-    .wish-name{font-family:var(--font-display);font-size:1.05rem;font-weight:500;color:var(--blue);margin-bottom:var(--sp-1)}
-    .wish-text{font-size:.88rem;color:var(--text-muted);line-height:1.65}
-    .wish-date{font-size:.65rem;color:var(--text-faint);margin-top:var(--sp-2)}
+    
+    .wishes-list {
+      max-width: 480px;
+      margin: var(--sp-10) auto 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      max-height: 420px; /* Bounded height corresponding to ~3-4 visible comments, scrolling down reveals more */
+      overflow-y: auto;
+      padding-right: var(--sp-3);
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue-pale) transparent;
+    }
+    .wishes-list::-webkit-scrollbar {
+      width: 5px;
+    }
+    .wishes-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .wishes-list::-webkit-scrollbar-thumb {
+      background-color: var(--blue-pale);
+      border-radius: var(--r-full);
+    }
+    .wish-item {
+      background: var(--surface);
+      border-radius: var(--r-md);
+      padding: var(--sp-4) var(--sp-5);
+      border-left: 2.5px solid var(--gold);
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(30,59,138,0.04);
+      transition: transform var(--ease);
+    }
+    .wish-item:hover {
+      transform: translateY(-2px);
+    }
+    .wish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--sp-2);
+    }
+    .wish-name{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--gold);text-align:left}
+    .wish-text{font-size:.88rem;color:var(--text-muted);line-height:1.65;text-align:left}
+    .wish-date{font-size:.72rem;color:var(--text-faint);text-align:right}
+    .slider-hint {
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      margin-top: var(--sp-3);
+      text-align: center;
+      animation: pulseHint 2s infinite ease-in-out;
+    }
+    @keyframes pulseHint {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
 
     /* ================================================================
        CLOSING
@@ -965,7 +1016,7 @@
         <div class="story-col story-text-cell">
           <span class="story-year">2024</span>
           <p class="story-title">Jalan yang Berbeda</p>
-          <p class="story-desc">Program selesai, dan kami melanjutkan perjalanan masing-masing. Nadia mengejar passion-nya sebagai travel content creator dan bertualang ke berbagai penjuru dunia, sementara Munjin bertani di rumah kaca Jogja.</p>
+          <p class="story-desc">Kantor program tutup, dan kami melanjutkan perjalanan masing-masing. Nadia bertualang ke China dan berbagai penjuru dunia, sementara Munjin bertani di rumah kaca Yogyakarta.</p>
         </div>
         
         <div class="story-col story-col-middle">
@@ -985,7 +1036,7 @@
         <div class="story-col story-text-cell">
           <span class="story-year">2025</span>
           <p class="story-title">Bertemu Kembali</p>
-          <p class="story-desc">Takdir mempertemukan kami kembali di Jogja pada 2025. Obrolan ringan berubah jadi hubungan yang lebih dekat dan kami pun mulai sering melakukan aktivitas bersama, termasuk jalan-jalan di alam berdua.</p>
+          <p class="story-desc">Takdir mempertemukan kami kembali di 2025. Obrolan ringan berubah jadi hubungan yang lebih dalam — dan kami pun mulai menjalani keseharian bersama, termasuk bertani berdua.</p>
         </div>
         
         <div class="story-col story-col-middle">
@@ -1006,7 +1057,7 @@
         <div class="story-text">
           <span class="story-year">2026</span>
           <p class="story-title">Menuju Pernikahan</p>
-          <p class="story-desc">Di tahun 2026 ini, kami memutuskan untuk mengambil satu langkah besar: menikah dan membangun kehidupan bersama untuk selamanya.</p>
+          <p class="story-desc">Di tahun 2026 ini, kami memutuskan untuk mengambil satu langkah besar — menikah dan membangun kehidupan bersama untuk selamanya.</p>
         </div>
         <img class="timeline-photo last-photo" src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/Foto_2026Namun.png" alt="Menuju Pernikahan 2026">
       </div>
@@ -1100,7 +1151,10 @@
           💙 Terima kasih atas doa dan ucapannya!
         </div>
       </form>
+      
+      <!-- Vertical Scroll Container -->
       <div class="wishes-list" id="wishes-list"></div>
+      <p class="slider-hint" id="slider-hint">Gulir ke bawah untuk melihat ucapan lainnya 💙</p>
     </div>
   </section>
 
@@ -1378,21 +1432,52 @@
       });
   }
 
+  function formatWishDate(dateStr) {
+    if (!dateStr) return "";
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}-${month}-${year}`;
+    } catch (e) {
+      return dateStr;
+    }
+  }
+
   function renderWishes(list) {
     const el = document.getElementById('wishes-list');
+    const hintEl = document.getElementById('slider-hint');
     if (!el) return;
     el.innerHTML = '';
     if (!list || list.length === 0) {
       el.innerHTML = '<p style="font-size:.82rem;color:var(--text-faint);text-align:center;padding:var(--sp-4)">Belum ada ucapan. Jadilah yang pertama! 💙</p>';
+      if (hintEl) hintEl.style.display = 'none';
       return;
     }
+
+    // Tampilkan hint gulir jika ucapan berjumlah banyak
+    if (list.length <= 3) {
+      if (hintEl) hintEl.style.display = 'none';
+    } else {
+      if (hintEl) {
+        hintEl.textContent = 'Gulir ke bawah untuk melihat ucapan lainnya 💙';
+        hintEl.style.display = 'block';
+      }
+    }
+
+    // Tampilkan semua komentar di dalam list (tidak dibatasi .slice(0, 5) lagi)
     list.forEach(w => {
       const d = document.createElement('div');
       d.className = 'wish-item';
+      const formattedDate = formatWishDate(w.date);
       d.innerHTML = `
-        <p class="wish-name">${escHtml(w.name)}</p>
-        <p class="wish-text">${escHtml(w.message)}</p>
-        <p class="wish-date">${escHtml(w.date)}</p>`;
+        <div class="wish-header">
+          <span class="wish-name">${escHtml(w.name)}</span>
+          <span class="wish-date">${escHtml(formattedDate)}</span>
+        </div>
+        <p class="wish-text">${escHtml(w.message)}</p>`;
       el.appendChild(d);
     });
   }
@@ -1452,6 +1537,7 @@
     if (isPlaying) tryPlayMusic();
   }
 
+  // Auto-unlock audio restriction on first swipe/touch/click
   function removeUnlockEvents() {
     document.removeEventListener('click', unlockAudio);
     document.removeEventListener('touchstart', unlockAudio);
@@ -1508,7 +1594,7 @@
     Tugas Anda adalah melayani dan menjawab pertanyaan tamu undangan secara ramah, sopan, hangat, santun, dan informatif menggunakan bahasa Indonesia.
     - Lokasi: House of Gelati, Bandar Lampung.
     - Tanggal: Minggu, 07 Juni 2026.
-    - Waktu: Akad 08.00-09.30 WIB, Resepsi 09.30-11.30 WIB.
+    - Waktu: Akad 08.00-09.00 WIB, Resepsi 09.30-11.30 WIB.
     - Dress Code: Outdoor Garden (nyaman, pastel/earth tone).
     - RSVP: Paling lambat 31 Mei 2026.
     Arahkan kado ke menu "Wedding Gift". Jawab dengan santun, hangat, dan beri emoji yang sesuai (💙, ✨, 😊).
@@ -1531,8 +1617,7 @@
     }
   }
 
-  // Masukkan API Key Gemini Terenkripsi Anda (Reversed-Base64) di bawah ini
-  const ENCODED_GEMINI_KEY = "WXZlTFFOV3YyNjBCNmRicFBWTWpyN0d3ZWZ0TUVDaFZBeVNheklB"; 
+  const ENCODED_GEMINI_KEY = "WXZlTFFOV3YyNjBCNmRicFBWTWpyN0d3ZWZ0TUVDaFZBeVNheklB"; // Masukkan API Key Gemini Terenkripsi Anda (Reversed-Base64) di sini
   let chatHistory = [];
  
   function toggleChatbot() {
@@ -1675,7 +1760,7 @@
       savedLinks.push(`<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer">${cleanUrl}</a>`);
       return placeholder;
     });
-    escaped = escaped.replace(/\*\*(.*?)\*\"/g, "<strong>$1</strong>");
+    escaped = escaped.replace(/\*\frac{.*?}{.*?}/g, "");
     escaped = escaped.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
     const lines = escaped.split('\n');
     let inList = false, formattedHtml = '';
