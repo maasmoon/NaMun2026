@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngunduh Mantu | Nadia & Munjin</title>
+  <meta name="description" content="Ngunduh Mantu Nadia & Munjin - 14 Juni 2026, Kediaman Bapak Nur Wachid, Karanglo, Papar, Kediri.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Sama seperti index-14 */
+      --bg: #F0F5FF;
+      --surface: #E4EDFF;
+      --surface-2: #D0DEFF;
+      --white: #FFFFFF;
+      --divider: rgba(30,59,138,.15);
+      --blue-pale: #A8BCCE;
+      --blue-light: #7B9BB8;
+      --blue: #4A6080;
+      --blue-deep: #2D4060;
+      --blue-darkest: #18273F;
+      --royal: #2D4060;
+      --gold: #C9A84C;
+      --gold-light: #E2C97E;
+      --gold-pale: #FDF6DF;
+      --text: #0F1E30;
+      --text-muted: #3A5068;
+      --text-faint: #7B9BB8;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Jost", "Helvetica Neue", sans-serif;
+      --sp-1: .25rem;
+      --sp-2: .5rem;
+      --sp-3: .75rem;
+      --sp-4: 1rem;
+      --sp-5: 1.25rem;
+      --sp-6: 1.5rem;
+      --sp-8: 2rem;
+      --sp-10: 2.5rem;
+      --sp-12: 3rem;
+      --sp-16: 4rem;
+      --sp-20: 5rem;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --r-lg: 16px;
+      --r-full: 9999px;
+      --ease: 300ms cubic-bezier(0.16,1,0.3,1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    img { max-width: 100%; display: block; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+    }
+    ::selection {
+      background: rgba(37,99,235,.15);
+    }
+
+    section {
+      padding: clamp(var(--sp-12), 9vw, var(--sp-20)) var(--sp-4);
+      position: relative;
+    }
+
+    .container {
+      max-width: 700px;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: .68rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--blue);
+      display: block;
+      margin-bottom: var(--sp-3);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: var(--sp-4);
+    }
+
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      margin: var(--sp-6) auto;
+      opacity: .7;
+    }
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: "";
+      flex: 1;
+      max-width: 80px;
+      height: 1px;
+      background: var(--blue-pale);
+    }
+
+    /* HERO KHUSUS KEDIRI */
+    #hero-kediri {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: var(--sp-16) var(--sp-4);
+    }
+
+    .hero-kediri-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(160deg,#101C2E,#2D4060 55%,#4A6080 100%);
+    }
+
+    /* Motif batik / ukiran wayang sederhana */
+    .hero-kediri-bg::before,
+    .hero-kediri-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 0 0, rgba(201,168,76,.10) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(201,168,76,.12) 0, transparent 55%);
+      mix-blend-mode: soft-light;
+      opacity: .8;
+    }
+
+    .hero-kediri-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-size: .7rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: var(--sp-4);
+    }
+
+    .hero-names {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 4.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .hero-amp {
+      font-style: italic;
+      color: var(--gold-light);
+      font-size: .9em;
+    }
+
+    .hero-tagline {
+      margin-top: var(--sp-4);
+      font-size: .95rem;
+      color: rgba(255,255,255,.78);
+    }
+
+    .hero-badge {
+      margin-top: var(--sp-6);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-6);
+      border-radius: var(--r-full);
+      background: rgba(15,30,48,.7);
+      border: 1px solid rgba(201,168,76,.6);
+      backdrop-filter: blur(10px);
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .hero-badge span {
+      display: block;
+    }
+
+    .hero-badge .date {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+    }
+
+    .hero-badge .label {
+      color: rgba(255,255,255,.72);
+    }
+
+    .hero-badge .place {
+      font-size: .7rem;
+      color: rgba(255,255,255,.65);
+    }
+
+    /* SECTION ACARA */
+    #events-kediri {
+      background: var(--bg);
+    }
+
+    .events-grid {
+      display: grid;
+      gap: var(--sp-6);
+      max-width: 660px;
+      margin-inline: auto;
+    }
+
+    .event-card {
+      background: var(--white);
+      border: 1.5px solid rgba(184,208,248,.65);
+      border-radius: var(--r-lg);
+      padding: var(--sp-8) var(--sp-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(37,99,235,.12);
+    }
+
+    .event-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg,var(--blue-pale),var(--gold),var(--blue-pale));
+      border-radius: 0 0 var(--r-full) var(--r-full);
+    }
+
+    .event-type {
+      font-size: .7rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: var(--sp-4);
+    }
+
+    .event-day {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem,4.5vw,2.5rem);
+      letter-spacing: .03em;
+      line-height: 1.2;
+    }
+
+    .event-subtitle {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--text-faint);
+      margin-top: var(--sp-2);
+      margin-bottom: var(--sp-4);
+    }
+
+    .event-time {
+      font-size: .9rem;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-5);
+    }
+
+    .event-venue {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: var(--sp-2);
+    }
+
+    .event-address {
+      font-size: .8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: var(--sp-5);
+    }
+
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-5);
+      border: 1.5px solid var(--blue);
+      border-radius: var(--r-full);
+      color: var(--blue);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      transition: all var(--ease);
+      background: #fff;
+    }
+
+    .btn-maps:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .btn-maps svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* DRESS CODE */
+    #dresscode {
+      background: linear-gradient(150deg,#101C2E 0,#18273F 30%,#2D4060 65%,#4A6080 100%);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #dresscode::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--bg);
+      clip-path: ellipse(55% 60px at 50% 100%);
+      opacity: .6;
+    }
+
+    #dresscode .section-label {
+      color: var(--gold-light);
+    }
+
+    .dresscode-box {
+      position: relative;
+      max-width: 420px;
+      margin: var(--sp-4) auto 0;
+      padding: var(--sp-8) var(--sp-6);
+      border-radius: var(--r-lg);
+      background: linear-gradient(135deg,rgba(228,237,255,.15),rgba(208,222,255,.05));
+      border: 1px solid rgba(228,237,255,.5);
+      backdrop-filter: blur(14px);
+      text-align: center;
+    }
+
+    .dresscode-label {
+      font-size: .7rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: var(--sp-4);
+    }
+
+    .dresscode-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: var(--sp-3);
+    }
+
+    .dresscode-note {
+      font-size: .86rem;
+      color: rgba(255,255,255,.86);
+      line-height: 1.8;
+    }
+
+    .swatches {
+      display: flex;
+      justify-content: center;
+      gap: var(--sp-2);
+      margin: var(--sp-4) 0 var(--sp-2);
+    }
+
+    .swatch {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-full);
+      border: 2px solid rgba(255,255,255,.7);
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    }
+
+    .swatch-1 { background: #F5F1E3; }
+    .swatch-2 { background: #C3A368; }
+    .swatch-3 { background: #4A6080; }
+
+    /* QUOTE */
+    #quote {
+      background: var(--white);
+    }
+
+    .quote-wrap {
+      max-width: 540px;
+      margin-inline: auto;
+      padding: var(--sp-10) var(--sp-6);
+      position: relative;
+    }
+
+    .quote-text {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.2rem,3.8vw,1.8rem);
+      font-weight: 400;
+      color: var(--blue-deep);
+      line-height: 1.7;
+    }
+
+    .quote-mark {
+      font-size: 3.5rem;
+      color: var(--gold);
+      line-height: 0;
+      vertical-align: -.45em;
+      margin-right: .08em;
+      font-style: normal;
+    }
+
+    .quote-source {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-top: var(--sp-5);
+    }
+
+    /* ORANG TUA */
+    #family {
+      background: var(--surface);
+    }
+
+    .family-text {
+      font-size: .9rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .family-names {
+      margin-top: var(--sp-5);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .family-names span {
+      display: block;
+    }
+
+    /* FAQ (accordion) */
+    #faq {
+      background: var(--bg);
+    }
+
+    .faq-list {
+      max-width: 640px;
+      margin-inline: auto;
+      text-align: left;
+      margin-top: var(--sp-4);
+    }
+
+    .faq-item {
+      border-radius: var(--r-md);
+      background: var(--white);
+      border: 1px solid rgba(184,208,248,.7);
+      margin-bottom: var(--sp-3);
+      overflow: hidden;
+    }
+
+    .faq-header {
+      padding: var(--sp-3) var(--sp-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .faq-toggle {
+      font-size: 1.4rem;
+      color: var(--text-faint);
+      transition: transform var(--ease);
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--ease);
+      padding: 0 var(--sp-4);
+    }
+
+    .faq-body-inner {
+      padding-bottom: var(--sp-4);
+      font-size: .86rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--divider);
+      padding-top: var(--sp-3);
+    }
+
+    .faq-item.open .faq-body {
+      max-height: 260px; /* cukup, bisa disesuaikan */
+    }
+    .faq-item.open .faq-toggle {
+      transform: rotate(90deg);
+    }
+
+    /* ASISTEN NAMUN */
+    #assistant {
+      background: var(--white);
+      border-top: 1px solid var(--divider);
+    }
+
+    .assistant-intro {
+      font-size: .9rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto var(--sp-6);
+      line-height: 1.8;
+    }
+
+    .assistant-console {
+      max-width: 540px;
+      margin-inline: auto;
+      border-radius: var(--r-lg);
+      border: 1.5px solid rgba(184,208,248,.8);
+      background: var(--bg);
+      padding: var(--sp-4);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+
+    .assistant-label {
+      font-size: .76rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .assistant-textarea {
+      width: 100%;
+      min-height: 90px;
+      border-radius: var(--r-md);
+      border: 1.5px solid rgba(184,208,248,.9);
+      padding: var(--sp-3);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      resize: vertical;
+      outline: none;
+      background: #fff;
+      transition: border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .assistant-textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 1px rgba(37,99,235,.18);
+    }
+
+    .assistant-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .assistant-btn {
+      padding: var(--sp-2) var(--sp-5);
+      border-radius: var(--r-full);
+      background: var(--blue-deep);
+      color: #fff;
+      font-size: .8rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+      border: none;
+    }
+
+    .assistant-btn:hover {
+      background: #101C2E;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(15,30,48,.35);
+    }
+
+    .assistant-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .assistant-hint {
+      font-size: .78rem;
+      color: var(--text-faint);
+      margin-top: var(--sp-2);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: var(--sp-6) var(--sp-4) var(--sp-8);
+      text-align: center;
+      font-size: .75rem;
+      color: var(--text-faint);
+      background: var(--bg);
+    }
+
+    footer span {
+      display: block;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      #hero-kediri {
+        padding-block: var(--sp-16);
+      }
+      .assistant-console {
+        padding: var(--sp-3);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO KEDIRI -->
+  <section id="hero-kediri" aria-label="Hero Ngunduh Mantu Kediri">
+    <div class="hero-kediri-bg" aria-hidden="true"></div>
+
+    <!-- Ornamen floral/batik kiri-kanan (ganti URL gambar jika ada) -->
+    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border20left.png"
+         alt="" aria-hidden="true"
+         style="position:absolute;bottom:0;left:0;width:clamp(140px,22vw,240px);opacity:.85;pointer-events:none;">
+    <img src="https://raw.githubusercontent.com/maasmoon/NaMun2026/main/foto-story/border20right.png"
+         alt="" aria-hidden="true"
+         style="position:absolute;top:0;right:0;width:clamp(140px,22vw,240px);opacity:.85;pointer-events:none;">
+
+    <div class="hero-kediri-inner">
+      <p class="hero-eyebrow">Ngunduh Mantu</p>
+      <h1 class="hero-names">
+        Nadia <span class="hero-amp">&amp;</span> Munjin
+      </h1>
+      <p class="hero-tagline">
+        Dengan memohon rahmat dan ridho Allah SWT, kami memohon doa restu panjenengan
+        dalam rangka tasyakuran Ngunduh Mantu di Kediri.
+      </p>
+
+      <div class="hero-badge" aria-label="Tanggal dan lokasi acara">
+        <span class="label">Minggu</span>
+        <span class="date">14 Juni 2026</span>
+        <span class="label">Jam rileks &mdash; hingga selesai</span>
+        <span class="place">Dusun Karanglo, Desa Ngampel, Kec. Papar, Kediri</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACARA -->
+  <section id="events-kediri" aria-label="Acara Ngunduh Mantu">
+    <div class="container">
+      <span class="section-label">Rangkaian Acara</span>
+      <h2 class="section-title">Walimatul 'Ursy &amp; Ngunduh Mantu</h2>
+
+      <div class="divider-ornament" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="11" r="3.5" fill="#2563EB"></circle>
+          <circle cx="11" cy="3" r="2.5" fill="#7BA7EC"></circle>
+          <circle cx="11" cy="19" r="2.5" fill="#7BA7EC"></circle>
+          <circle cx="3" cy="11" r="2.5" fill="#7BA7EC"></circle>
+          <circle cx="19" cy="11" r="2.5" fill="#7BA7EC"></circle>
+        </svg>
+      </div>
+
+      <div class="events-grid">
+        <article class="event-card">
+          <p class="event-type">Ngunduh Mantu</p>
+          <p class="event-day">Minggu, 14 Juni 2026</p>
+          <p class="event-subtitle">Keluarga Besar Mempelai Pria</p>
+          <p class="event-time">Jam rileks &mdash; hadirlah di waktu yang nyaman bagi panjenengan.</p>
+          <p class="event-venue">Kediaman Bapak Nur Wachid</p>
+          <p class="event-address">
+            Toko Satu Sembilan Karanglo,<br>
+            Dusun Karanglo, Desa Ngampel,<br>
+            Kecamatan Papar, Kabupaten Kediri.
+          </p>
+          <a class="btn-maps"
+             href="https://maps.app.goo.gl/GCTYdkKVqQb1esvp9"
+             target="_blank" rel="noopener"
+             aria-label="Lihat lokasi Ngunduh Mantu di Google Maps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+              <circle cx="12" cy="9" r="2.5"></circle>
+            </svg>
+            <span>Google Maps</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRESS CODE -->
+  <section id="dresscode" aria-label="Dress Code">
+    <div class="container">
+      <span class="section-label">Dress Code</span>
+      <h2 class="section-title" style="color:#fff;">Nuansa Biru &amp; Emas Jawa</h2>
+
+      <div class="dresscode-box">
+        <p class="dresscode-label">Saran Busana</p>
+        <p class="dresscode-name">Anggun Jawa Santai</p>
+        <div class="swatches" aria-hidden="true">
+          <div class="swatch swatch-1"></div>
+          <div class="swatch swatch-2"></div>
+          <div class="swatch swatch-3"></div>
+        </div>
+        <p class="dresscode-note">
+          Panjenengan dipun aturi ngangge busana rapi, nyaman, kanthi
+          nuansa biru, krem, utawa emas lembut. Batik, lurik, kebaya,
+          utawa setelan kasual-rapi ingkang nggampangke gerak pribadi
+          punika sangat dipun aturi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE ISLAMI -->
+  <section id="quote" aria-label="Ayat pengingat">
+    <div class="container">
+      <div class="quote-wrap">
+        <p class="quote-text">
+          <span class="quote-mark">&ldquo;</span>
+          Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+          untukmu pasangan hidup dari jenismu sendiri, supaya kamu
+          cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya
+          di antaramu rasa kasih dan sayang.
+        </p>
+        <p class="quote-source">Q.S. Ar-Rum: 21</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORANG TUA & DOA RESTU -->
+  <section id="family" aria-label="Keluarga & Doa Restu">
+    <div class="container">
+      <span class="section-label">Mohon Doa Restu</span>
+      <h2 class="section-title">Kediaman Mempelai Pria</h2>
+      <p class="family-text">
+        Atas kehadiran lan doa restu panjenengan sedaya, keluarga besar
+        mengucapkan matur nuwun sanget. Mugi-mugi Allah SWT paring
+        keberkahan, kelancaran, lan kebahagiaan kang langgeng tumrap
+        keluarga anyar punika.
+      </p>
+      <div class="family-names">
+        <span>Kami yang berbahagia,</span>
+        <span>Bapak Nur Wachid &amp; Ibu Siti Rofi'ah</span>
+        <span>Keluarga Toko Satu Sembilan Karanglo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (AKAN DIISI BELAKANGAN) -->
+  <section id="faq" aria-label="Pertanyaan yang sering diajukan">
+    <div class="container">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Pertanyaan Singkat seputar Acara</h2>
+      <p style="font-size:.9rem;color:var(--text-muted);max-width:520px;margin:0 auto var(--sp-4);">
+        Berikut beberapa informasi singkat yang sering ditanyakan terkait
+        Ngunduh Mantu di Kediri. Panjenengan saged mbukak setiap poin
+        menawi kersa mangertos langkung rinci.
+      </p>
+
+      <div class="faq-list" id="faq-list">
+        <!-- Contoh struktur; isi teks nanti saja -->
+        <div class="faq-item">
+          <button class="faq-header" type="button">
+            <span class="faq-question">[Nanti diisi: Misalnya, jam tepat acara dimulai?]</span>
+            <span class="faq-toggle">&rsaquo;</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              [Isi jawaban FAQ akan ditambahkan kemudian.]
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-header" type="button">
+            <span class="faq-question">[Nanti diisi: Apakah tersedia area parkir?]</span>
+            <span class="faq-toggle">&rsaquo;</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-body-inner">
+              [Isi jawaban FAQ akan ditambahkan kemudian.]
+            </div>
+          </div>
+        </div>
+
+        <!-- Tambah/ubah item sesuai kebutuhan -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ASISTEN NAMUN - OPEN QUERY LANGSUNG -->
+  <section id="assistant" aria-label="Asisten NaMun Kediri">
+    <div class="container">
+      <span class="section-label">Asisten Namun</span>
+      <h2 class="section-title">Tanyakan Apa Saja tentang Acara Kediri</h2>
+      <p class="assistant-intro">
+        Yen panjenengan gadhah pitakon: arah menyang lokasi, parkir,
+        jam rawuh sing pas, utawa kabutuhan khusus sajrone acara,
+        mangga tulis kados ing ngandhap. Pesan punika saged dipun terusake
+        menyang Asisten NaMun supados saged nyiapke jawaban lan panduan
+        kang paling trep.
+      </p>
+
+      <form class="assistant-console" id="assistant-form" onsubmit="handleAssistantSubmit(event)">
+        <div>
+          <p class="assistant-label">Pesan Panjenengan</p>
+          <textarea id="assistant-message"
+                    class="assistant-textarea"
+                    name="message"
+                    placeholder="Tuliske pitakon utawa informasi sing panjenengan perlukeun bab Ngunduh Mantu ing Kediri..."
+                    required></textarea>
+          <p class="assistant-hint">
+            Conto: &ldquo;Aku teka nganggo kereta jam piro sing pas kanggo rawuh?&rdquo;
+            utawa &ldquo;Menawi nggawa sepuh, lokasi cedhak parkir endi?&rdquo;
+          </p>
+        </div>
+
+        <div class="assistant-actions">
+          <button type="submit" class="assistant-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+            <span>Kirim ke Asisten</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <span>NaMun2026 &middot; Ngunduh Mantu &middot; Kediri</span>
+    <span>Minggu, 14 Juni 2026</span>
+  </footer>
+
+  <script>
+    // Simple accordion FAQ
+    document.querySelectorAll('.faq-header').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('open');
+      });
+    });
+
+    // Handler Asisten Namun (dummy; sambungkan ke backend atau Apps Script)
+    function handleAssistantSubmit(e) {
+      e.preventDefault();
+      const textarea = document.getElementById('assistant-message');
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      // TODO: ganti URL endpoint dengan Apps Script / backend Anda
+      const endpoint = "https://script.google.com/macros/s/AKfyxxxxxxxxxxxxxxxxxxxxxxxx/exec";
+
+      // Kirim via fetch non-blocking; sementara tampilkan alert sederhana
+      fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ type: "assistant-kediri", message: text }).toString()
+      }).catch(() => {});
+
+      alert("Matur nuwun, pitakon panjenengan sampun kacathet. Asisten NaMun bakal paring jawaban sak cepete.");
+      textarea.value = "";
+    }
+  </script>
+</body>
+</html>
